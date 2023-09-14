@@ -1,0 +1,28 @@
+.vertical-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.field {
+    text-align: start;
+}
+
+#login-painel .column{
+    min-width: 300px;
+}
+
+#login-painel h2{
+    margin: 15px 0;
+}
+
+#login-painel h6{
+    font-weight: 300;
+    margin: 10px 0 0 0;
+}
+
+#login-painel button{
+    width: 100%;
+    margin-top: 10px;
+}
