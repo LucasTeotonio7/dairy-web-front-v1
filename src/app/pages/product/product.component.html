@@ -1,0 +1,24 @@
+<table id="table-products" class="ui very basic collapsing celled table">
+    <thead>
+        <tr>
+            <th>Descrição</th>
+            <th>Marca</th>
+            <th>Categoria</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let product of products">
+            <td>
+                <h4 class="ui image header">
+                    <img [src]="product.image ? product.image : 'assets/image-404.png'" class="ui rounded image">
+                    <div class="content">
+                        {{ product.description }}
+                        <div class="sub header">{{ product.unit_quantity|number: '1.0-0' }} {{ product.measure_unit }}</div>
+                    </div>
+                </h4>
+            </td>
+            <td>{{ product.brand }}</td>
+            <td>{{ product.category }}</td>
+        </tr>
+    </tbody>
+</table>
