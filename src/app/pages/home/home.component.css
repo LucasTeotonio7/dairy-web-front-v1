@@ -18,3 +18,9 @@ nav {
 .ui.segment {
     box-shadow: none;
 }
+
+@media(max-width:800px) {
+    .item span:last-child {
+        display: none !important;
+    }
+}

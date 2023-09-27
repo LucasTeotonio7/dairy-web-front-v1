@@ -16,13 +16,13 @@
 <nav class="ui grid">
     <div class="four wide column">
         <div class="ui vertical fluid tabular menu">
-            <a class="item active">
+            <a class="item active" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" routerLink="/">
                 <span>
                     <i class="chart bar icon"></i>
                 </span>
                 <span>Indicadores</span>
             </a>
-            <a class="item">
+            <a class="item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" routerLink="/products">
                 <span>
                     <i class="box icon"></i>
                 </span>
