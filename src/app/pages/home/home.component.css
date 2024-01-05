@@ -1,26 +1,4 @@
-header {
-    background-color: #3BA30F !important;
-}
-
-nav {
-    margin: 10px !important;
-    margin-right: 10px !important;
-}
-
-.item span:last-child {
-    padding-left: 10px;
-}
-
-.right.menu a {
-    margin-right: 20px;
-}
-
-.ui.segment {
-    box-shadow: none;
-}
-
-@media(max-width:800px) {
-    .item span:last-child {
-        display: none !important;
-    }
+.sidebar-brand-text {
+    font-size: 12px;
+    text-wrap: nowrap;
 }

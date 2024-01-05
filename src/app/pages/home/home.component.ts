@@ -11,6 +11,9 @@ import { AuthService } from '../auth/services/auth.service';
 })
 export class HomeComponent {
 
+  date: Date = new Date();
+  FullYear = this.date.getFullYear();
+
   constructor(private authService: AuthService, private router: Router){}
 
   logout(): void {
