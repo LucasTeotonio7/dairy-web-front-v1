@@ -6,8 +6,8 @@
         <thead>
             <tr>
                 <th>Descrição</th>
-                <th>Marca</th>
-                <th>Categoria</th>
+                <th class="d-none d-md-table-cell">Marca</th>
+                <th class="d-none d-md-table-cell">Categoria</th>
                 <th>Ações</th>
             </tr>
         </thead>
@@ -24,13 +24,16 @@
                         </div>
                     </div>
                 </td>
-                <td>{{ product.brand.description }}</td>
-                <td>{{ product.category.description }}</td>
+                <td class="d-none d-md-table-cell">{{ product.brand.description }}</td>
+                <td class="d-none d-md-table-cell">{{ product.category.description }}</td>
                 <td>
-                    <div class="btn-group" role="group">
-                        <a href="/products/{{product.id}}/" class="btn btn-primary"><i class="far fa-edit"></i>
-                            Editar</a>
-                        <button type="button" class="btn btn-danger"><i class="fas fa-trash"></i> Excluir</button>
+                    <div role="group">
+                        <button type="button" routerLink="/products/{{product.id}}/" class="btn btn-primary btn-action">
+                            <i class="far fa-edit"></i> <span> Editar</span> 
+                        </button>
+                        <button type="button" class="btn btn-danger btn-action">
+                            <i class="fas fa-trash"></i> <span> Excluir</span> 
+                        </button>
                     </div>
                 </td>
             </tr>
