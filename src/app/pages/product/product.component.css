@@ -1,3 +1,20 @@
-#table-products {
-    width: 100%;
+.image-product {
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
+    margin-right: 10px;
+}
+
+.product-info .description {
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.product-info .measure_unit {
+    font-size: 10px;
+}
+
+table tbody td {
+    padding: 0.2rem;
+    vertical-align: middle;
 }
