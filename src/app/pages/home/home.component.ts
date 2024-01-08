@@ -20,4 +20,7 @@ export class HomeComponent {
     this.authService.logout();
     this.router.navigateByUrl('/login');
   }
+  scrollToTop(): void {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
 }

@@ -2,3 +2,8 @@
     font-size: 12px;
     text-wrap: nowrap;
 }
+
+
+.scroll-to-top {
+    cursor: pointer;
+}
