@@ -7,3 +7,7 @@
 .scroll-to-top {
     cursor: pointer;
 }
+
+.sticky-footer {
+    margin-top: auto;
+}
