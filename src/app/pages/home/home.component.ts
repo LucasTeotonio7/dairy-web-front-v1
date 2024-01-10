@@ -23,4 +23,10 @@ export class HomeComponent {
   scrollToTop(): void {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
+
+  toggle(): void {
+    const sidebarToggle = document.getElementById('accordionSidebar');
+    sidebarToggle?.classList.toggle('toggled');
+  }
+
 }

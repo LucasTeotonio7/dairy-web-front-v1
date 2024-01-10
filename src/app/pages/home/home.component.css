@@ -11,3 +11,7 @@
 .sticky-footer {
     margin-top: auto;
 }
+
+#accordionSidebar {
+    transition: 0.5s;
+}
