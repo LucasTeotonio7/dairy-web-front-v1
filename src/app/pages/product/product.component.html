@@ -31,7 +31,12 @@
                         <button type="button" routerLink="/products/{{product.id}}/" class="btn btn-primary btn-action">
                             <i class="far fa-edit"></i> <span> Editar</span> 
                         </button>
-                        <button type="button" class="btn btn-danger btn-action">
+                        <button id="{{ product.id }}" 
+                                type="button" 
+                                class="btn btn-danger btn-action" 
+                                data-bs-toggle="modal" 
+                                data-bs-target="#deleteProductModal"
+                                (click)="setProductId($event)"> 
                             <i class="fas fa-trash"></i> <span> Excluir</span> 
                         </button>
                     </div>
@@ -39,4 +44,29 @@
             </tr>
         </tbody>
     </table>
+</div>
+
+
+<div id="deleteProductModal" class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Excluir Produto</h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Fechar">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Tem certeza de que deseja excluir este produto?</p>
+                <i class="fas fa-exclamation-circle text-danger me-1"></i>
+                <strong>Esta ação não pode ser desfeita.</strong>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="deleteProduct()">
+                    <i class="fas fa-check me-1"></i> Excluir
+                </button>
+            </div>
+        </div>
+    </div>
 </div>
