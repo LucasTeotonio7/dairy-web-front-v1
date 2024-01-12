@@ -1,10 +1,13 @@
+import { Brand, Category, MeasureUnit } from "./general_models";
+
 export interface Product {
-  id: string;
-  description: string | null;
-  brand: string;
-  category: string;
-  measure_unit: string;
+  id?: string;
+  description: string;
+  brand: Brand;
+  category: Category;
+  measure_unit: MeasureUnit;
   unit_quantity: number;
-  created_by: string;
-  image: string | null;
+  created_by?: string;
+  active: boolean;
+  image?: string;
 }
