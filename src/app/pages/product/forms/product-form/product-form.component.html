@@ -1,0 +1,70 @@
+<form class="container" [formGroup]="productForm">
+    <h5>Atualizar produto</h5>
+    <div class="field">
+        <div>
+            <div class="d-flex mb-4">
+                <img id="selectedAvatar" src="{{ image }}" alt="example placeholder" />
+                <label class="btn-edit-image" for="imageFile" data-bs-toggle="tooltip" data-bs-placement="top"
+                    data-bs-title="Selecionar imagem"><i class="far fa-edit"></i></label>
+                <input type="file" class="form-control d-none" id="imageFile"
+                    (change)="displaySelectedImage($event, 'selectedAvatar')" />
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="form-group">
+            <label class="form-label">Descrição</label>
+            <input type="text" class="form-control" name="description" formControlName="description">
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="form-group col-12 col-md-6">
+            <label for="brands">Marca</label>
+            <select class="form-control" name="brand" id="brands" formControlName="brand">
+                <option *ngFor="let brand of brands" value="{{ brand.id }}">{{ brand.description }}</option>
+            </select>
+        </div>
+        <div class="form-group col-12 col-md-6">
+            <label for="brands">Categoria</label>
+            <select class="form-control" name="category" id="categories" formControlName="category">
+                <option *ngFor="let category of categories" value="{{ category.id }}">{{ category.description }}
+                </option>
+            </select>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="form-group col-12 col-md-6">
+            <label>Unidade</label>
+            <select class="form-control" name="measure_unit" formControlName="measure_unit"
+                (change)="onOptionChange($event)">
+                <option *ngFor="let measureUnit of measureUnits" value="{{ measureUnit.id }}"
+                    attr.data-abbreviation="{{ measureUnit.abbreviation }}">
+                    ({{ measureUnit.abbreviation }}) {{ measureUnit.description }}
+                </option>
+            </select>
+        </div>
+        <div class="form-group col-12 col-md-6">
+            <label>Quantidade por unidade</label>
+            <div class="input-group">
+                <input type="text" class="form-control" type="text" name="unit_quantity" formControlName="unit_quantity">
+                <div class="input-group-append">
+                    <span class="input-group-text" [textContent]="labelValue">Un</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-check ms-1 col-12">
+        <input class="form-check-input" type="checkbox" tabindex="0" name="active" formControlName="active" checked>
+        <label class="form-check-label">Ativo</label>
+    </div>
+
+    <div class="button-area">
+        <button type="button" (click)="back()" class="btn btn-secondary me-1">cancelar</button>
+        <button type="button" (click)="save()" class="btn btn-primary">Salvar</button>
+    </div>
+</form>
+
