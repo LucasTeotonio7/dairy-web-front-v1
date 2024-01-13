@@ -80,7 +80,7 @@ export class ProductService {
       'Authorization': `Token ${this.tokenService.getToken()}`
     });
     const requestOptions = { headers: headers };
-    return this.http.get<MeasureUnit[]>(`${this.apiUrl}/api/measure_unit/`, requestOptions);
+    return this.http.get<MeasureUnit[]>(`${this.apiUrl}/api/measure-unit/`, requestOptions);
   }
 
 }
