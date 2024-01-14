@@ -46,10 +46,10 @@ export class ProductFormComponent {
   // TODO:  refactor methods to avoid code repetition => setBrands(), setCategories(), setMeasureUnits();
   setBrands(): void {
     this.productService.getBrands().subscribe({
-      next: (response) => {
-        this.brands = response
+      next: (brands: Brand[]) => {
+        this.brands = brands
       },
-      error: (error) => {
+      error: (error: any) => {
         console.error(error);
       },
       complete: () => {}
@@ -58,10 +58,10 @@ export class ProductFormComponent {
 
   setCategories(): void {
     this.productService.getCategories().subscribe({
-      next: (response) => {
-        this.categories = response
+      next: (categories: Category[]) => {
+        this.categories = categories
       },
-      error: (error) => {
+      error: (error: any) => {
         console.error(error);
       },
       complete: () => {}
@@ -70,10 +70,10 @@ export class ProductFormComponent {
 
   setMeasureUnits(): void {
     this.productService.getMeasureUnit().subscribe({
-      next: (response) => {
-        this.measureUnits = response
+      next: (measureUnits: MeasureUnit[]) => {
+        this.measureUnits = measureUnits
       },
-      error: (error) => {
+      error: (error: any) => {
         console.error(error);
       },
       complete: () => {}
@@ -92,7 +92,7 @@ export class ProductFormComponent {
       if (this.product_id) {
 
         this.productService.get(this.product_id).subscribe({
-          next: (product) => {
+          next: (product: Product) => {
             this.productForm.setValue({
               description: product.description,
               brand: product.brand.id,
@@ -104,7 +104,7 @@ export class ProductFormComponent {
             });
             this.setImageProduct(product)
           },
-          error: (error) => {
+          error: (error: any) => {
             console.error(error);
           },
           complete: () => {}
@@ -142,10 +142,10 @@ export class ProductFormComponent {
 
       if(this.product_id){
         this.productService.put(this.product_id, formData).subscribe({
-          next: (response) => {
+          next: (response: any) => {
             console.log(response);
           },
-          error: (error) => {
+          error: (error: any) => {
             console.log(error);
           },
           complete: () => {
@@ -155,10 +155,10 @@ export class ProductFormComponent {
       } 
       else{
         this.productService.post(formData).subscribe({
-          next: (response) => {
+          next: (response: any) => {
             console.log(response);
           },
-          error: (error) => {
+          error: (error: any) => {
             console.log(error);
           },
           complete: () => {

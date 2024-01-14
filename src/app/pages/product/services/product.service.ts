@@ -1,3 +1,4 @@
+import { CrudService } from './../../../shared/crud.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { TokenService } from '../../auth/services/token.service';
@@ -8,54 +9,15 @@ import { Brand, Category, MeasureUnit } from '../models/general_models';
 @Injectable({
   providedIn: 'root'
 })
-export class ProductService {
+export class ProductService extends CrudService<Product> {
 
   readonly apiUrl = "http://localhost:8100";
 
   constructor(
-    private http: HttpClient, 
-    private tokenService: TokenService
-  ) { }
-
-  get(id: string): Observable<Product> {
-    const headers = new HttpHeaders({
-      'Authorization': `Token ${this.tokenService.getToken()}`
-    });
-    const requestOptions = { headers: headers };
-    return this.http.get<Product>(`${this.apiUrl}/api/product/${id}`, requestOptions);
-  }
-
-  list(): Observable<Product[]> {
-    const headers = new HttpHeaders({
-      'Authorization': `Token ${this.tokenService.getToken()}`
-    });
-    const requestOptions = { headers: headers };
-    return this.http.get<Product[]>(`${this.apiUrl}/api/product/`, requestOptions);
-  }
-
-  post(productForm: FormData): Observable<any> {
-    console.log(productForm)
-    const headers = new HttpHeaders({
-      'Authorization': `Token ${this.tokenService.getToken()}`
-    });
-    const requestOptions = { headers: headers };
-    return this.http.post(`${this.apiUrl}/api/product/`, productForm, requestOptions);
-  }
-
-  put(id: string, productForm: FormData): Observable<any> {
-    const headers = new HttpHeaders({
-      'Authorization': `Token ${this.tokenService.getToken()}`
-    });
-    const requestOptions = { headers: headers };
-    return this.http.put(`${this.apiUrl}/api/product/${id}/`, productForm, requestOptions);
-  }
-
-  delete(id: string): Observable<any> {
-    const headers = new HttpHeaders({
-      'Authorization': `Token ${this.tokenService.getToken()}`
-    });
-    const requestOptions = { headers: headers };
-    return this.http.delete(`${this.apiUrl}/api/product/${id}/`, requestOptions);
+    http: HttpClient, 
+    tokenService: TokenService
+  ) {
+    super(http, tokenService, 'product/');
   }
 
   //TODO: refactor in new service -------------------------------------------------------------------------------------

@@ -16,7 +16,7 @@ export class ProductComponent {
   constructor(private productService: ProductService, private router: Router) { }
 
   ngOnInit(): void {
-    this.productService.list().subscribe((products) => {
+    this.productService.list().subscribe((products: Product[]) => {
       this.products = products;
     });
   }
