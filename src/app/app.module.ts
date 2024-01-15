@@ -13,6 +13,7 @@ import { LoginComponent } from './pages/auth/login.component';
 import { ProductComponent } from './pages/product/product.component';
 import { ProductFormComponent } from './pages/product/forms/product-form/product-form.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { DeleteModalComponent } from './shared/components/delete-modal/delete-modal.component';
 
 registerLocaleData(ptBr)
 
@@ -24,7 +25,8 @@ registerLocaleData(ptBr)
     LoginComponent,
     ProductComponent,
     ProductFormComponent,
-    DashboardComponent
+    DashboardComponent,
+    DeleteModalComponent
   ],
   imports: [
     BrowserModule,
