@@ -2,6 +2,12 @@
     float: right;
 }
 
+.button-area.update-product {
+    float: none;
+    display: flex;
+    justify-content: space-between;
+}
+
 #selectedAvatar {
     width: 200px; 
     height: 200px; 
@@ -25,4 +31,8 @@
 .btn-edit-image i {
     font-size: 12px;
     color: var(--white);
+}
+
+.button-area .btn i {
+    font-size: 14px;
 }

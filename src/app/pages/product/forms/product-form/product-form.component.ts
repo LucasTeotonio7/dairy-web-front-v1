@@ -19,7 +19,7 @@ export class ProductFormComponent {
   categories: Category[] = [];
   measureUnits: MeasureUnit[] = [];
 
-  product_id: string | any = '';
+  productId: string | any = '';
   labelValue: string = 'Un';
   image: string = '/assets/image-404.png';
 
@@ -88,10 +88,10 @@ export class ProductFormComponent {
 
   setProduct() {
     this.route.paramMap.subscribe(params => {
-      this.product_id = params.get('id');
-      if (this.product_id) {
+      this.productId = params.get('id');
+      if (this.productId) {
 
-        this.productService.get(this.product_id).subscribe({
+        this.productService.get(this.productId).subscribe({
           next: (product: Product) => {
             this.productForm.setValue({
               description: product.description,
@@ -140,8 +140,8 @@ export class ProductFormComponent {
       formData.append('measure_unit', productForm.measure_unit);
       formData.append('unit_quantity', productForm.unit_quantity);
 
-      if(this.product_id){
-        this.productService.put(this.product_id, formData).subscribe({
+      if(this.productId){
+        this.productService.put(this.productId, formData).subscribe({
           next: (response: any) => {
             console.log(response);
           },
@@ -172,6 +172,20 @@ export class ProductFormComponent {
       //TODO: implement msg error in front 
       alert('Formulário inválido');
     }
+  }
+
+  deleteProduct() {
+    this.productService.delete(this.productId).subscribe({
+      next: (response) => {
+        alert('produto excluído!');
+      },
+      error: (error) => {
+        console.error(error);
+      },
+      complete: () => {
+        this.back();
+      }
+    });
   }
 
   back() {
