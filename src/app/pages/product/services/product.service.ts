@@ -1,4 +1,4 @@
-import { CrudService } from './../../../shared/crud.service';
+import { CrudService } from '../../../shared/services/crud.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { TokenService } from '../../auth/services/token.service';

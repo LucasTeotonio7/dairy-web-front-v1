@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 
 import { Observable } from 'rxjs';
-import { TokenService } from '../pages/auth/services/token.service';
+import { TokenService } from '../../pages/auth/services/token.service';
 
 @Injectable({
   providedIn: 'root'
