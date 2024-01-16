@@ -1,15 +1,7 @@
 <form class="container" [formGroup]="productForm">
     <h5>Atualizar produto</h5>
     <div class="field">
-        <div>
-            <div class="d-flex mb-4">
-                <img id="selectedAvatar" src="{{ image }}" alt="example placeholder" />
-                <label class="btn-edit-image" for="imageFile" data-bs-toggle="tooltip" data-bs-placement="top"
-                    data-bs-title="Selecionar imagem"><i class="far fa-edit"></i></label>
-                <input type="file" class="form-control d-none" id="imageFile"
-                    (change)="displaySelectedImage($event, 'selectedAvatar')" />
-            </div>
-        </div>
+        <app-image-upload [image]="image" (imageFileChange)="onImageFileChange($event)"></app-image-upload>
     </div>
 
     <div class="row">

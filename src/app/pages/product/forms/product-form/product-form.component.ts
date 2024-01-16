@@ -192,20 +192,8 @@ export class ProductFormComponent {
     this.router.navigate(['/products']);
   }
 
-  displaySelectedImage(event: Event, elementId: string): void {
-      const selectedImage = document.getElementById(elementId) as HTMLImageElement;
-      const fileInput = event.target as HTMLInputElement;
-
-      if (fileInput.files && fileInput.files[0]) {
-          const reader = new FileReader();
-
-          reader.onload = function (e: ProgressEvent<FileReader>): void {
-              selectedImage.src = e.target?.result as string;
-          };
-
-          reader.readAsDataURL(fileInput.files[0]);
-          this.imageFile = fileInput.files[0];
-      }
+  onImageFileChange(file: File): void {
+    this.imageFile = file;
   }
   
 }
