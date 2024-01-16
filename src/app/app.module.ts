@@ -14,6 +14,7 @@ import { ProductComponent } from './pages/product/product.component';
 import { ProductFormComponent } from './pages/product/forms/product-form/product-form.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { DeleteModalComponent } from './shared/components/delete-modal/delete-modal.component';
+import { ImageUploadComponent } from './shared/components/image-upload/image-upload.component';
 
 registerLocaleData(ptBr)
 
@@ -26,7 +27,8 @@ registerLocaleData(ptBr)
     ProductComponent,
     ProductFormComponent,
     DashboardComponent,
-    DeleteModalComponent
+    DeleteModalComponent,
+    ImageUploadComponent
   ],
   imports: [
     BrowserModule,
