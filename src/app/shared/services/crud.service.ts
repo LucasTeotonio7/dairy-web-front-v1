@@ -1,10 +1,11 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 import { environment } from 'src/environments/environment';
 
 import { Observable } from 'rxjs';
 import { TokenService } from '../../pages/auth/services/token.service';
+import { Paginator } from '../models/paginator';
 
 @Injectable({
   providedIn: 'root'
@@ -25,8 +26,8 @@ export class CrudService<Type> {
       return this.http.get<Type>(`${this.BASE_URL}${id}`, this.getRequestOptions());
   }
 
-  list(): Observable<Type[]> {
-    return this.http.get<Type[]>(`${this.BASE_URL}`, this.getRequestOptions());
+  list(page: number): Observable<Paginator<Type>> {
+    return this.http.get<Paginator<Type>>(`${this.BASE_URL}`, this.getRequestOptions(page));
   }
 
   post(formData: FormData): Observable<any> {
@@ -41,11 +42,16 @@ export class CrudService<Type> {
     return this.http.delete(`${this.BASE_URL}${id}/`, this.getRequestOptions());
   }
 
-  private getRequestOptions(): { headers: HttpHeaders } {
+  private getRequestOptions(page?: number): { headers: HttpHeaders; params?: HttpParams} {
+
+    let params: HttpParams | undefined;
+    if (page !== undefined) {
+        params = new HttpParams().set('page', page.toString());
+    }
     const headers = new HttpHeaders({
       'Authorization': `Token ${this.tokenService.getToken()}`
     });
-    return { headers };
+    return { headers, params };
   }
 
 }
