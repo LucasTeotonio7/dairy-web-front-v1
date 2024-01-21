@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { Product } from './models/product';
 import { ProductService } from './services/product.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
+import { Paginator } from 'src/app/shared/models/paginator';
 
 @Component({
   selector: 'app-product',
@@ -12,12 +13,21 @@ export class ProductComponent {
 
   products: Product[] = [];
   productId!: string;
+  paginator!: Paginator<Product>;
 
-  constructor(private productService: ProductService, private router: Router) { }
+  constructor(private productService: ProductService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.productService.list().subscribe((products: Product[]) => {
-      this.products = products;
+    this.route.queryParams.subscribe(params => {
+        const page = params['page'] || 1;
+        this.loadProducts(page);
+    });
+  }
+
+  loadProducts(page: number) {
+    this.productService.list(page).subscribe((paginator: Paginator<Product>) => {
+        this.paginator = paginator;
+        this.products = paginator.results;
     });
   }
 
