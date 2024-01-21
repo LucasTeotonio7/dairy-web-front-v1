@@ -1,0 +1,41 @@
+<div class="paginator" *ngIf="canDisplayPagination()">
+   <div class="total-desc">
+        <div class="dataTables_info" id="dataTable_info" role="status" aria-live="polite">
+            {{ getShowingRange() }}
+        </div>
+    </div>
+        <div class="pages">
+        <div class="dataTables_paginate paging_simple_numbers" id="dataTable_paginate">
+            <ul class="pagination">
+
+                <!-- button left -->
+                <li class="paginate_button page-item previous" [ngClass]="{'disabled': !paginator.previous}" id="dataTable_previous">
+                    <a [routerLink]="['/products']" [queryParams]="{ page: currentPage - 1 }" aria-controls="dataTable" data-dt-idx="0" tabindex="0" class="page-link">
+                        <i class="fas fa-chevron-left"></i>
+                    </a>
+                </li>
+
+                <!-- pages -->
+                <li *ngFor="let i of [].constructor(paginator.total_pages); let index = index" 
+                    class="paginate_button page-item active" 
+                    [ngClass]="{'active': paginator.page_number == index + 1}">
+                        <a [routerLink]="['/products']" 
+                           [queryParams]="{ page: index + 1 }"
+                           aria-controls="dataTable" 
+                           data-dt-idx="1" 
+                           tabindex="0" 
+                           class="page-link">
+                            {{ index + 1 }}
+                        </a>
+                </li>
+
+                <!-- button right -->
+                <li class="paginate_button page-item next" [ngClass]="{'disabled': !paginator.next}" id="dataTable_next">
+                    <a [routerLink]="['/products']" [queryParams]="{ page: currentPage + 1 }" aria-controls="dataTable" data-dt-idx="7" tabindex="0" class="page-link">
+                        <i class="fas fa-chevron-right"></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
