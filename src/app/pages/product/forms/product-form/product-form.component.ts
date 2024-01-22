@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, Renderer2 } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { ProductService } from '../../services/product.service';
@@ -29,7 +29,9 @@ export class ProductFormComponent {
     private productService: ProductService,
     private formBuilder: FormBuilder,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private renderer: Renderer2,
+    private el: ElementRef 
   ) {
     this.productForm = this.formBuilder.group({
       description: ['', Validators.required], 
@@ -38,8 +40,10 @@ export class ProductFormComponent {
       image: [''],
       active: [true, Validators.required],
       measure_unit: ['', Validators.required],
-      unit_quantity: [1, Validators.required],
+      unit_quantity: ['', Validators.required],
     });
+
+    this.observeAllControlChanges();
 
   }
   
@@ -169,8 +173,28 @@ export class ProductFormComponent {
       
       
     } else {
-      //TODO: implement msg error in front 
-      alert('Formulário inválido');
+      for (const controlName in this.productForm.controls) {
+        if (this.productForm.controls.hasOwnProperty(controlName)) {
+          const control = this.productForm.get(controlName);
+          if (control?.hasError('required')) {
+            const inputElement = this.el.nativeElement.querySelector(`[formcontrolname="${controlName}"]`);
+            this.renderer.addClass(inputElement, 'is-invalid');
+          }
+        }
+      }
+    }
+  }
+
+  private observeAllControlChanges() {
+
+    for (const controlName in this.productForm.controls) {
+        const control = this.productForm.get(controlName);
+        if (control) {
+          control.valueChanges.subscribe(() => {
+            const inputElement = this.el.nativeElement.querySelector(`[formcontrolname="${controlName}"].form-control`);
+            this.renderer.removeClass(inputElement, 'is-invalid');
+          });
+        }
     }
   }
 

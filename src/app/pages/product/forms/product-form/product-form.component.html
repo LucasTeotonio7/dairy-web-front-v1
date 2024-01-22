@@ -7,7 +7,8 @@
     <div class="row">
         <div class="form-group">
             <label class="form-label">Descrição</label>
-            <input type="text" class="form-control" name="description" formControlName="description">
+            <input type="text" class="form-control" name="description" formControlName="description" required>
+            <div class="invalid-feedback">Campo obrigatório</div>
         </div>
     </div>
 
@@ -17,6 +18,7 @@
             <select class="form-control" name="brand" id="brands" formControlName="brand">
                 <option *ngFor="let brand of brands" value="{{ brand.id }}">{{ brand.description }}</option>
             </select>
+            <div class="invalid-feedback">Campo obrigatório</div>
         </div>
         <div class="form-group col-12 col-md-6">
             <label for="brands">Categoria</label>
@@ -24,6 +26,7 @@
                 <option *ngFor="let category of categories" value="{{ category.id }}">{{ category.description }}
                 </option>
             </select>
+            <div class="invalid-feedback">Campo obrigatório</div>
         </div>
     </div>
 
@@ -37,6 +40,7 @@
                     ({{ measureUnit.abbreviation }}) {{ measureUnit.description }}
                 </option>
             </select>
+            <div class="invalid-feedback">Campo obrigatório</div>
         </div>
         <div class="form-group col-12 col-md-6">
             <label>Quantidade por unidade</label>
@@ -45,6 +49,7 @@
                 <div class="input-group-append">
                     <span class="input-group-text" [textContent]="labelValue">Un</span>
                 </div>
+                <div class="invalid-feedback">Campo obrigatório</div>
             </div>
         </div>
     </div>
