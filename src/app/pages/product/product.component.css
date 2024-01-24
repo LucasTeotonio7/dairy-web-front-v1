@@ -13,36 +13,3 @@
 .product-info .measure_unit {
     font-size: 10px;
 }
-
-.btn-action {
-    font-size: 10px;
-    margin: 2px;
-}
-
-.btn-action span{
-    display: inline;
-}
-
-table thead th {
-    text-transform: uppercase;
-    font-size: 12px;
-    font-weight: 700;
-    border: none;
-    background: #e3e6f0;
-    color: #000;
-}
-
-table tbody td {
-    vertical-align: middle;
-    font-size: 12px;
-}
-
-table {
-    border: 1px solid #f3f3f3b0;
-}
-
-@media (max-width: 767px) {
-    .btn-action span{
-        display: none;
-    }
-}
