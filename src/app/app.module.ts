@@ -16,6 +16,7 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { DeleteModalComponent } from './shared/components/delete-modal/delete-modal.component';
 import { ImageUploadComponent } from './shared/components/image-upload/image-upload.component';
 import { PaginatorComponent } from './shared/components/paginator/paginator.component';
+import { SupplierComponent } from './pages/supplier/supplier.component';
 
 registerLocaleData(ptBr)
 
@@ -30,7 +31,8 @@ registerLocaleData(ptBr)
     DashboardComponent,
     DeleteModalComponent,
     ImageUploadComponent,
-    PaginatorComponent
+    PaginatorComponent,
+    SupplierComponent
   ],
   imports: [
     BrowserModule,

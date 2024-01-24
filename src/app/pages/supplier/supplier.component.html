@@ -1,0 +1,38 @@
+<div class="container-fluid">
+    <button class="btn btn-primary mb-2" routerLink="supplier/">
+        Novo
+    </button>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Contato</th>
+                <th>Ativo</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let supplier of suppliers">
+                <td>{{ supplier.name}}</td>
+                <td>{{ supplier.cellphone}}</td>
+                <td class="active-column">
+                    <i *ngIf="supplier.active" class="fas fa-check-circle text-success"></i>
+                    <i *ngIf="!supplier.active" class="fas fa-times-circle text-danger"></i>
+                </td>
+                <td>
+                    <div role="group">
+                        <button type="button" routerLink="supplier/" class="btn btn-primary btn-action">
+                            <i class="far fa-edit"></i> <span> Editar</span> 
+                        </button>
+                        <button id="{{ supplier.id }}" 
+                                type="button" 
+                                class="btn btn-danger btn-action"> 
+                            <i class="fas fa-trash"></i> <span> Excluir</span> 
+                        </button>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <app-paginator [paginator]="paginator" listingName="Fornecedores"></app-paginator>
+</div>
