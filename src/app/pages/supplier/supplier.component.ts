@@ -12,6 +12,7 @@ import { ActivatedRoute } from '@angular/router';
 export class SupplierComponent {
 
     suppliers: Supplier[] = [];
+    supplierId!: string;
     paginator!: Paginator<Supplier>;
 
     constructor(private supplierService: SupplierService, private route: ActivatedRoute) { }
@@ -27,6 +28,25 @@ export class SupplierComponent {
         this.supplierService.list(page).subscribe((paginator: Paginator<Supplier>) => {
             this.paginator = paginator;
             this.suppliers = paginator.results;
+        });
+    }
+
+    setSupplierId($event: Event): void {
+        let button = $event.currentTarget as HTMLElement;
+        this.supplierId = button.id;
+    }
+
+    deleteSupplier() {
+        this.supplierService.delete(this.supplierId).subscribe({
+          next: (response) => {
+            alert('Fornecedor excluído!');
+          },
+          error: (error) => {
+            console.error(error);
+          },
+          complete: () => {
+            this.ngOnInit();
+          }
         });
     }
 
