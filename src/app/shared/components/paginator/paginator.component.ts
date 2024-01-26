@@ -10,6 +10,7 @@ import { ActivatedRoute } from '@angular/router';
 export class PaginatorComponent {
   @Input() paginator!: Paginator<any>;
   @Input() listingName: string = 'itens';
+  @Input() link!: string;
   currentPage!: number;
 
   constructor(private route: ActivatedRoute){}

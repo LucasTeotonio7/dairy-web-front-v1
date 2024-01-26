@@ -10,7 +10,7 @@
 
                 <!-- button left -->
                 <li class="paginate_button page-item previous" [ngClass]="{'disabled': !paginator.previous}" id="dataTable_previous">
-                    <a [routerLink]="['/products']" [queryParams]="{ page: currentPage - 1 }" aria-controls="dataTable" data-dt-idx="0" tabindex="0" class="page-link">
+                    <a [routerLink]="[link]" [queryParams]="{ page: currentPage - 1 }" aria-controls="dataTable" data-dt-idx="0" tabindex="0" class="page-link">
                         <i class="fas fa-chevron-left"></i>
                     </a>
                 </li>
@@ -19,7 +19,7 @@
                 <li *ngFor="let i of [].constructor(paginator.total_pages); let index = index" 
                     class="paginate_button page-item active" 
                     [ngClass]="{'active': paginator.page_number == index + 1}">
-                        <a [routerLink]="['/products']" 
+                        <a [routerLink]="[link]" 
                            [queryParams]="{ page: index + 1 }"
                            aria-controls="dataTable" 
                            data-dt-idx="1" 
@@ -31,7 +31,7 @@
 
                 <!-- button right -->
                 <li class="paginate_button page-item next" [ngClass]="{'disabled': !paginator.next}" id="dataTable_next">
-                    <a [routerLink]="['/products']" [queryParams]="{ page: currentPage + 1 }" aria-controls="dataTable" data-dt-idx="7" tabindex="0" class="page-link">
+                    <a [routerLink]="[link]" [queryParams]="{ page: currentPage + 1 }" aria-controls="dataTable" data-dt-idx="7" tabindex="0" class="page-link">
                         <i class="fas fa-chevron-right"></i>
                     </a>
                 </li>

@@ -1,5 +1,5 @@
 <div class="container-fluid">
-    <button class="btn btn-primary mb-2" routerLink="suppliers/">
+    <button class="btn btn-primary mb-2" routerLink="/suppliers/create">
         Novo
     </button>
     <table class="table">
@@ -37,7 +37,7 @@
             </tr>
         </tbody>
     </table>
-    <app-paginator [paginator]="paginator" listingName="Fornecedores"></app-paginator>
+    <app-paginator [paginator]="paginator" [link]="'/suppliers'" listingName="Fornecedores"></app-paginator>
 </div>
 
 
