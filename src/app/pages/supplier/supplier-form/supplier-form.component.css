@@ -1,0 +1,13 @@
+.button-area {
+    float: right;
+}
+
+.button-area.update-supplier {
+    float: none;
+    display: flex;
+    justify-content: space-between;
+}
+
+.button-area .btn i {
+    font-size: 14px;
+}

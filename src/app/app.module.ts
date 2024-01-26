@@ -17,6 +17,7 @@ import { DeleteModalComponent } from './shared/components/delete-modal/delete-mo
 import { ImageUploadComponent } from './shared/components/image-upload/image-upload.component';
 import { PaginatorComponent } from './shared/components/paginator/paginator.component';
 import { SupplierComponent } from './pages/supplier/supplier.component';
+import { SupplierFormComponent } from './pages/supplier/supplier-form/supplier-form.component';
 
 registerLocaleData(ptBr)
 
@@ -32,7 +33,8 @@ registerLocaleData(ptBr)
     DeleteModalComponent,
     ImageUploadComponent,
     PaginatorComponent,
-    SupplierComponent
+    SupplierComponent,
+    SupplierFormComponent
   ],
   imports: [
     BrowserModule,

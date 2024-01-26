@@ -8,6 +8,7 @@ import { LoginComponent } from './pages/auth/login.component';
 import { ProductFormComponent } from './pages/product/forms/product-form/product-form.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { SupplierComponent } from './pages/supplier/supplier.component';
+import { SupplierFormComponent } from './pages/supplier/supplier-form/supplier-form.component';
 
 const routes: Routes = [
   {
@@ -18,7 +19,9 @@ const routes: Routes = [
       { path: 'products', component: ProductComponent },
       { path: 'products/create', component: ProductFormComponent },
       { path: 'products/:id', component: ProductFormComponent },
-      { path: 'suppliers', component: SupplierComponent }
+      { path: 'suppliers', component: SupplierComponent },
+      { path: 'suppliers/create', component: SupplierFormComponent },
+      { path: 'suppliers/:id', component: SupplierFormComponent }
     ],
   },
   { path: 'login', component: LoginComponent, canActivate: [authGuard] },
