@@ -9,6 +9,7 @@ import { ProductFormComponent } from './pages/product/forms/product-form/product
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { SupplierComponent } from './pages/supplier/supplier.component';
 import { SupplierFormComponent } from './pages/supplier/supplier-form/supplier-form.component';
+import { WeeklyControlComponent } from './pages/weekly-control/weekly-control.component';
 
 const routes: Routes = [
   {
@@ -21,7 +22,8 @@ const routes: Routes = [
       { path: 'products/:id', component: ProductFormComponent },
       { path: 'suppliers', component: SupplierComponent },
       { path: 'suppliers/create', component: SupplierFormComponent },
-      { path: 'suppliers/:id', component: SupplierFormComponent }
+      { path: 'suppliers/:id', component: SupplierFormComponent },
+      { path: 'weekly-control', component: WeeklyControlComponent }
     ],
   },
   { path: 'login', component: LoginComponent, canActivate: [authGuard] },

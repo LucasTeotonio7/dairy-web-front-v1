@@ -18,6 +18,7 @@ import { ImageUploadComponent } from './shared/components/image-upload/image-upl
 import { PaginatorComponent } from './shared/components/paginator/paginator.component';
 import { SupplierComponent } from './pages/supplier/supplier.component';
 import { SupplierFormComponent } from './pages/supplier/supplier-form/supplier-form.component';
+import { WeeklyControlComponent } from './pages/weekly-control/weekly-control.component';
 
 registerLocaleData(ptBr)
 
@@ -34,7 +35,8 @@ registerLocaleData(ptBr)
     ImageUploadComponent,
     PaginatorComponent,
     SupplierComponent,
-    SupplierFormComponent
+    SupplierFormComponent,
+    WeeklyControlComponent
   ],
   imports: [
     BrowserModule,
