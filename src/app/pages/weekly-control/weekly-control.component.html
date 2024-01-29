@@ -1,1 +1,53 @@
-<p>weekly-control works!</p>
+<div class="container-fluid">
+    <button class="btn btn-primary mb-2" routerLink="/weekly-control/create">
+        Novo
+    </button>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Produto</th>
+                <th>Data inicial</th>
+                <th>Data final</th>
+                <th>Ativa</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let weeklyControl of weeklyControls">
+                <td>{{ weeklyControl.product }}</td>
+                <td>{{ weeklyControl.start_date | date:'dd/MM/yyyy' }}</td>
+                <td>{{ weeklyControl.end_date | date:'dd/MM/yyyy' }}</td>
+                <td class="active-column">
+                    <i *ngIf="!weeklyControl.is_closed" class="fas fa-check-circle text-success"></i>
+                    <i *ngIf="weeklyControl.is_closed" class="fas fa-times-circle text-danger"></i>
+                </td>
+                <td>
+                    <div role="group">
+                        <button type="button" routerLink="/weekly-control/{{ weeklyControl.id }}/" class="btn btn-primary btn-action">
+                            <i class="far fa-edit"></i> <span> Editar</span> 
+                        </button>
+                        <button id="{{ weeklyControl.id }}" 
+                                type="button" 
+                                class="btn btn-danger btn-action" 
+                                data-bs-toggle="modal" 
+                                data-bs-target="#deleteWeeklyControlModal"
+                                (click)="setWeeklyControlId($event)"> 
+                            <i class="fas fa-trash"></i> <span> Excluir</span> 
+                        </button>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <app-paginator [paginator]="paginator" [link]="'/weeklyControl'" listingName="Planilhas"></app-paginator>
+</div>
+
+
+<app-delete-modal
+    [id]="'deleteWeeklyControlModal'"
+    [title]="'Excluir planilha'"
+    [message]="'Tem certeza de que deseja excluir esta planilha?'"
+    [confirmationMessage]="'Esta ação não pode ser desfeita.'"
+    [confirmButtonText]="'Excluir'"
+    (delete)="deleteWeeklyControl()"
+></app-delete-modal>
