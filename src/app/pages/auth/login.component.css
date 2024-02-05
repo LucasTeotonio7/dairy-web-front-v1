@@ -1,28 +1,27 @@
-.vertical-center {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+.logo-image {
+    text-align: center;
+    margin-bottom: 10px;
 }
 
-.field {
-    text-align: start;
+.logo-image img {
+    width: 70px;
 }
 
-#login-painel .column{
-    min-width: 300px;
+.logo-image span {
+    font-size: 10px;
 }
 
-#login-painel h2{
-    margin: 15px 0;
+.bg-login-image {
+    background: url(src/assets/cow-background.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 
-#login-painel h6{
-    font-weight: 300;
-    margin: 10px 0 0 0;
+.msg-auth-fail {
+    height: 30px;
 }
 
-#login-painel button{
-    width: 100%;
-    margin-top: 10px;
+.msg-auth-fail label {
+    font-size: 12px;
+    margin: 0 0 10px 5px;
 }
