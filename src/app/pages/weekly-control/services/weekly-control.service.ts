@@ -22,6 +22,6 @@ export class WeeklyControlService extends CrudService<WeeklyControl>  {
         });
         const BASE_URL = environment.API;
         const requestOptions = { headers: headers };
-        return this.http.get<Product[]>(`${BASE_URL}product/?paginate=false`, requestOptions);
+        return this.http.get<Product[]>(`${BASE_URL}product/?no_paginate=1`, requestOptions);
     }
 }
