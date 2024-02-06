@@ -19,6 +19,7 @@ import { PaginatorComponent } from './shared/components/paginator/paginator.comp
 import { SupplierComponent } from './pages/supplier/supplier.component';
 import { SupplierFormComponent } from './pages/supplier/supplier-form/supplier-form.component';
 import { WeeklyControlComponent } from './pages/weekly-control/weekly-control.component';
+import { WeeklyControlFormComponent } from './pages/weekly-control/forms/weekly-control-form/weekly-control-form.component';
 
 registerLocaleData(ptBr)
 
@@ -36,7 +37,8 @@ registerLocaleData(ptBr)
     PaginatorComponent,
     SupplierComponent,
     SupplierFormComponent,
-    WeeklyControlComponent
+    WeeklyControlComponent,
+    WeeklyControlFormComponent
   ],
   imports: [
     BrowserModule,
