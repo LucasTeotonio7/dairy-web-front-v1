@@ -6,5 +6,6 @@ export interface WeeklyControl {
     end_date: string;
     is_closed: boolean;
     product: string;
+    product_description: string;
     created_by: string;
 }
