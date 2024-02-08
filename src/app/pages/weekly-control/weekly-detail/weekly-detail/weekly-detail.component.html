@@ -1,0 +1,25 @@
+<nav class="navbar navbar-light">
+    <div class="navbar-brand" href="#">
+        <img src="/assets/spreadsheet.png"
+            width="30" height="30"
+            class="d-inline-block align-top" alt="">
+        Planilha
+    </div>
+    <div><i class="fas fa-box"></i> {{ weeklyControl.product_description }}</div>
+    <div>
+        <i class="far fa-calendar-alt me-2"></i> 
+        <span>{{ weeklyControl.start_date|date:"dd/MM/YYYY" }}</span> ~ 
+        <span>{{ weeklyControl.end_date|date:"dd/MM/YYYY" }}</span>
+    </div>
+    <div>
+        <span *ngIf="weeklyControl.is_closed">
+            <i  class="fas fa-check-circle text-success"></i>
+            Finalizada
+        </span>
+
+        <span *ngIf="!weeklyControl.is_closed">
+            <i  class="far fa-circle text-info"></i>
+            Em aberto
+        </span>  
+    </div>
+</nav>
