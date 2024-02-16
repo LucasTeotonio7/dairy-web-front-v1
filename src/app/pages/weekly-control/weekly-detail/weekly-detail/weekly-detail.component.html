@@ -7,19 +7,42 @@
     </div>
     <div><i class="fas fa-box"></i> {{ weeklyControl.product_description }}</div>
     <div>
-        <i class="far fa-calendar-alt me-2"></i> 
+        <i class="far fa-calendar-alt me-2"></i>
         <span>{{ weeklyControl.start_date|date:"dd/MM/YYYY" }}</span> ~ 
         <span>{{ weeklyControl.end_date|date:"dd/MM/YYYY" }}</span>
     </div>
     <div>
         <span *ngIf="weeklyControl.is_closed">
-            <i  class="fas fa-check-circle text-success"></i>
+            <i class="fas fa-check-circle text-success"></i>
             Finalizada
         </span>
-
         <span *ngIf="!weeklyControl.is_closed">
-            <i  class="far fa-circle text-info"></i>
+            <i class="far fa-circle text-info"></i>
             Em aberto
-        </span>  
+        </span>
     </div>
+    <table class="table mt-2">
+        <thead>
+            <tr>
+                <th>Fornecedor</th>
+                <th>SEX</th>
+                <th>SAB</th>
+                <th>DOM</th>
+                <th>SEG</th>
+                <th>TER</th>
+                <th>QUA</th>
+                <th>QUI</th>
+                <th>QUANTIDADE</th>
+                <th>VALOR</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let wc_supplier of weeklyControl.suppliers">
+                <td>{{ wc_supplier.supplier }}</td>
+                <td *ngFor="let purchase of wc_supplier.purchases">{{ purchase.quantity }}</td>
+                <td>20 L</td>
+                <td>R$ 0,00 </td>
+            </tr>
+        </tbody>
+    </table>
 </nav>
