@@ -40,7 +40,7 @@
             <tr *ngFor="let wc_supplier of weeklyControl.suppliers">
                 <td>{{ wc_supplier.supplier }}</td>
                 <td *ngFor="let purchase of wc_supplier.purchases">{{ purchase.quantity }}</td>
-                <td>20 L</td>
+                <td>{{ wc_supplier.total_quantity }} L</td>
                 <td>R$ 0,00 </td>
             </tr>
         </tbody>
