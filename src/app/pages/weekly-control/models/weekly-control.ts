@@ -1,12 +1,13 @@
 interface Purchase {
     reference_day: string;
     quantity: number;
-    supplier: string;
+    weekday: number;
 }
 
 interface Supplier {
     supplier: string;
     purchases: Purchase[];
+    total_quantity: number;
 }
 
 export interface WeeklyControl {
