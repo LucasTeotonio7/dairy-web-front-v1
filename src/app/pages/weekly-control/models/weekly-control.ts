@@ -5,7 +5,8 @@ interface Purchase {
 }
 
 interface Supplier {
-    supplier: string;
+    id: string;
+    name: string;
     purchases: Purchase[];
     total_quantity: number;
 }
