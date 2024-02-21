@@ -1,0 +1,17 @@
+.price-tag {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.table-purchases td {
+    padding: 2px;
+}
+
+.table-purchases .form-control {
+    border: none;
+}
+
+.button-area {
+   float: right;
+}

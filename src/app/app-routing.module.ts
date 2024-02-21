@@ -12,6 +12,7 @@ import { SupplierFormComponent } from './pages/supplier/supplier-form/supplier-f
 import { WeeklyControlComponent } from './pages/weekly-control/weekly-control.component';
 import { WeeklyControlFormComponent } from './pages/weekly-control/forms/weekly-control-form/weekly-control-form.component';
 import { WeeklyDetailComponent } from './pages/weekly-control/weekly-detail/weekly-detail/weekly-detail.component';
+import { PurchaseComponent } from './pages/purchase/purchase.component';
 
 const routes: Routes = [
   {
@@ -28,7 +29,8 @@ const routes: Routes = [
       { path: 'weekly-control', component: WeeklyControlComponent },
       { path: 'weekly-control/create', component: WeeklyControlFormComponent },
       { path: 'weekly-control/:id/update', component: WeeklyControlFormComponent },
-      { path: 'weekly-control/:id/detail', component: WeeklyDetailComponent }
+      { path: 'weekly-control/:id/detail', component: WeeklyDetailComponent },
+      { path: 'weekly-control/:id/supplier/:supplier-id/purchases', component: PurchaseComponent }
     ],
   },
   { path: 'login', component: LoginComponent, canActivate: [authGuard] },
