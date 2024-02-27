@@ -6,10 +6,12 @@
 
 .table-purchases td {
     padding: 2px;
+    font-size: 14px;
 }
 
 .table-purchases .form-control {
     border: none;
+    max-width: 65px;
 }
 
 .button-area {

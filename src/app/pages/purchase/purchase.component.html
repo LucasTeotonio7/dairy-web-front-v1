@@ -33,16 +33,12 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td><input type="text" class="form-control" name="description" value="10"></td>
-                <td><input type="text" class="form-control" name="description" value="9"></td>
-                <td><input type="text" class="form-control" name="description" value="12"></td>
-                <td><input type="text" class="form-control" name="description" value="12"></td>
-                <td><input type="text" class="form-control" name="description" value="7"></td>
-                <td><input type="text" class="form-control" name="description" value="12"></td>
-                <td><input type="text" class="form-control" name="description" value="10"></td>
-                <td>72 L</td>
-                <td>R$ 144,00 </td>
+            <tr *ngIf="weeklyControl">
+                <td *ngFor="let purchase of weeklyControl.suppliers![0].purchases">
+                    <input type="text" class="form-control purchase-quantity" [attr.data-reference-day]="purchase.reference_day" value="{{ purchase.quantity }}">
+                </td>
+                <td>{{ weeklyControl.suppliers![0].total_quantity }} L</td>
+                <td>R$ {{ weeklyControl.suppliers![0].total_quantity * 2 }} </td>
             </tr>
         </tbody>
     </table>
@@ -50,7 +46,7 @@
     <div class="button-area">
         <div>
             <button type="button" (click)="back()" class="btn btn-light border me-2">Cancelar</button>
-            <button type="button" class="btn btn-primary"><i class="fas fa-check"></i> Salvar</button>
+            <button type="button" (click)="save()" class="btn btn-primary"><i class="fas fa-check"></i> Salvar</button>
         </div>
     </div>
 </div>
