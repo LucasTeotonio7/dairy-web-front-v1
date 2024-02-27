@@ -22,12 +22,13 @@ export class CrudService<Type> {
     this.BASE_URL += path;
   }
 
-  get(id: string): Observable<Type> {
-      return this.http.get<Type>(`${this.BASE_URL}${id}`, this.getRequestOptions());
+  get(id: string, params?: object): Observable<Type> {
+      return this.http.get<Type>(`${this.BASE_URL}${id}`, this.getRequestOptions(params));
   }
 
   list(page: number): Observable<Paginator<Type>> {
-    return this.http.get<Paginator<Type>>(`${this.BASE_URL}`, this.getRequestOptions(page));
+    let param = { page : page };
+    return this.http.get<Paginator<Type>>(`${this.BASE_URL}`, this.getRequestOptions(param));
   }
 
   post(formData: FormData): Observable<any> {
@@ -42,16 +43,19 @@ export class CrudService<Type> {
     return this.http.delete(`${this.BASE_URL}${id}/`, this.getRequestOptions());
   }
 
-  private getRequestOptions(page?: number): { headers: HttpHeaders; params?: HttpParams} {
+  private getRequestOptions(params?: { [key: string]: any }): { headers: HttpHeaders; params?: HttpParams} {
+    let httpParams: HttpParams | undefined;
 
-    let params: HttpParams | undefined;
-    if (page !== undefined) {
-        params = new HttpParams().set('page', page.toString());
+    if (params) {
+        httpParams = new HttpParams();
+        Object.keys(params).forEach(key => {
+            httpParams = httpParams!.set(key, params[key]);
+        });
     }
     const headers = new HttpHeaders({
       'Authorization': `Token ${this.tokenService.getToken()}`
     });
-    return { headers, params };
+    return { headers, params: httpParams };
   }
 
 }
