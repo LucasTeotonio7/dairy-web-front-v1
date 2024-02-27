@@ -25,4 +25,14 @@ export class ImageUploadComponent {
     }
   }
 
+  validateUploadImage(event: any): void {
+    const inputFile = event.target as HTMLInputElement;
+    const file = inputFile.files && inputFile.files[0];
+    const availableTypes = ['image/jpeg', 'image/png', 'image/svg+xml', 'image/webp'];
+    if (!(file && availableTypes.includes(file.type))) {
+      inputFile.value = '';
+      alert('Por favor, selecione apenas arquivos de imagem (JPEG, PNG, SVG, WEBP).');
+    }
+  } 
+
 }
