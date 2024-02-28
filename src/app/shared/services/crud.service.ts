@@ -39,6 +39,10 @@ export class CrudService<Type> {
     return this.http.put(`${this.BASE_URL}${id}/`, formData, this.getRequestOptions());
   }
 
+  patch(id: string, formData: FormData): Observable<any> {
+    return this.http.patch(`${this.BASE_URL}${id}/`, formData, this.getRequestOptions());
+  } 
+
   delete(id: string): Observable<any> {
     return this.http.delete(`${this.BASE_URL}${id}/`, this.getRequestOptions());
   }
