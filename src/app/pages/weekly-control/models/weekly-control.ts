@@ -1,4 +1,5 @@
 interface Purchase {
+    id: string;
     reference_day: string;
     quantity: number;
     weekday: number;

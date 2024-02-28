@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
+import { PurchaseService } from './services/purchase.service';
 import { WeeklyControlService } from './../weekly-control/services/weekly-control.service';
 import { WeeklyControl } from '../weekly-control/models/weekly-control';
 
@@ -16,7 +17,8 @@ export class PurchaseComponent {
   constructor(
     private router: Router, 
     private route: ActivatedRoute,
-    private weeklyControlService: WeeklyControlService
+    private weeklyControlService: WeeklyControlService,
+    private purchaseService: PurchaseService
   ) {}
 
   ngOnInit() {
@@ -43,26 +45,41 @@ export class PurchaseComponent {
   }
 
 
-  getInputValues() {
-
-    var purchases = [];
+  updatePurchaseValues() {
     var inputs = document.getElementsByClassName("purchase-quantity");
     for (let i = 0; i < inputs.length; i++) {
-      let input = inputs[i] as HTMLInputElement;;
-      purchases.push({
-        reference_day: input.dataset['referenceDay'],
-        quantity: parseFloat(input.value)
-      });
+      let input = inputs[i] as HTMLInputElement;
+      let quantity = parseFloat(input.value);
+      let referenceDay = input.dataset['referenceDay'];
+      const formData = new FormData();
+      formData.append('quantity', input.value);
+      
+      if(input.id) {
+        this.purchaseService.patch(input.id, formData).subscribe({
+          next: (response) => {},
+          error: (error) => {console.error(error)}
+        });
+      } 
+      else if (quantity > 0) {
+
+        formData.append('reference_day', referenceDay ? referenceDay: '');
+        formData.append('product', this.weeklyControl.product);
+        formData.append('supplier', this.weeklyControl.suppliers![0].id);
+        formData.append('weekly_control', this.weeklyControlId);
+
+        this.purchaseService.post(formData).subscribe({
+          next: (response) => {},
+          error: (error) => {console.error(error)}
+        });
+      }
+
     }
-
-    console.log(purchases)
-
-    //TODO - send to API
+  
   }
 
   save() {
+    this.updatePurchaseValues();
     this.back();
-    this.getInputValues();
   }
 
   back() {

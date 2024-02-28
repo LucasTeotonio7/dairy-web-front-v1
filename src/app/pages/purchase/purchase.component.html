@@ -35,7 +35,11 @@
         <tbody>
             <tr *ngIf="weeklyControl">
                 <td *ngFor="let purchase of weeklyControl.suppliers![0].purchases">
-                    <input type="text" class="form-control purchase-quantity" [attr.data-reference-day]="purchase.reference_day" value="{{ purchase.quantity }}">
+                    <input id="{{ purchase.id }}" 
+                           type="text" 
+                           class="form-control purchase-quantity" 
+                           [attr.data-reference-day]="purchase.reference_day" 
+                           value="{{ purchase.quantity }}"/>
                 </td>
                 <td>{{ weeklyControl.suppliers![0].total_quantity }} L</td>
                 <td>R$ {{ weeklyControl.suppliers![0].total_quantity * 2 }} </td>
