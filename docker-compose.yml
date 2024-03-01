@@ -16,3 +16,6 @@ services:
 
     networks:
       - shared
+
+    env_file:
+      - .env
