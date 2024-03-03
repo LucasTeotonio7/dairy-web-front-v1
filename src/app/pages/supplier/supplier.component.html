@@ -2,7 +2,7 @@
     <button class="btn btn-primary mb-2" routerLink="/suppliers/create">
         Novo
     </button>
-    <table class="table">
+    <table *ngIf="paginator && paginator.count > 0 else emptyList" class="table">
         <thead>
             <tr>
                 <th>Nome</th>
@@ -37,6 +37,9 @@
             </tr>
         </tbody>
     </table>
+    <ng-template #emptyList>
+        <app-empty-list [listingName]="'fornecedores'"></app-empty-list>
+    </ng-template>
     <app-paginator [paginator]="paginator" [link]="'/suppliers'" listingName="Fornecedores"></app-paginator>
 </div>
 

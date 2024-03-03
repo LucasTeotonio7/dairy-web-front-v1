@@ -2,7 +2,7 @@
     <button class="btn btn-primary mb-2" routerLink="/products/create/">
         Novo
     </button>
-    <table class="table">
+    <table *ngIf="paginator && paginator.count > 0 else emptyList" class="table">
         <thead>
             <tr>
                 <th>Descrição</th>
@@ -44,6 +44,9 @@
             </tr>
         </tbody>
     </table>
+    <ng-template #emptyList>
+        <app-empty-list [listingName]="'produtos'"></app-empty-list>
+    </ng-template>
     <app-paginator [paginator]="paginator" [link]="'/products'" listingName="produtos"></app-paginator>
 </div>
 
