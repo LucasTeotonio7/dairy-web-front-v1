@@ -39,6 +39,7 @@
                            type="text" 
                            class="form-control purchase-quantity" 
                            [attr.data-reference-day]="purchase.reference_day" 
+                           [attr.data-init-value]="purchase.quantity" 
                            value="{{ purchase.quantity }}"/>
                 </td>
                 <td>{{ weeklyControl.suppliers![0].total_quantity }} L</td>

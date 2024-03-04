@@ -55,10 +55,13 @@ export class PurchaseComponent {
       formData.append('quantity', input.value);
       
       if(input.id) {
-        this.purchaseService.patch(input.id, formData).subscribe({
-          next: (response) => {},
-          error: (error) => {console.error(error)}
-        });
+        let initValue = input.dataset['initValue'];
+        if(initValue !== input.value) {
+          this.purchaseService.patch(input.id, formData).subscribe({
+            next: (response) => {},
+            error: (error) => {console.error(error)}
+          });
+        }
       } 
       else if (quantity > 0) {
 
