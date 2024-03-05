@@ -1,0 +1,24 @@
+<div class="container-fluid">
+    <button class="btn btn-primary mb-2" routerLink="/">
+        Nova tabela
+    </button>
+    <table *ngIf="paginator && paginator.count > 0 else emptyList" class="table mt-2">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Produto</th>
+                <th>Valor</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let price of prices">
+                <td>{{ price.description }}</td>
+                <td>{{ price.product }}</td>
+                <td>{{ price.value }}</td>
+            </tr>
+        </tbody>
+    </table>
+    <ng-template #emptyList>
+        <app-empty-list [listingName]="'tabelas de preço'"></app-empty-list>
+    </ng-template>
+</div>

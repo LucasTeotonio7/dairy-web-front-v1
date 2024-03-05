@@ -23,6 +23,7 @@ import { WeeklyControlFormComponent } from './pages/weekly-control/forms/weekly-
 import { WeeklyDetailComponent } from './pages/weekly-control/weekly-detail/weekly-detail/weekly-detail.component';
 import { PurchaseComponent } from './pages/purchase/purchase.component';
 import { EmptyListComponent } from './shared/components/empty-list/empty-list.component';
+import { PriceComponent } from './pages/price/price.component';
 
 registerLocaleData(ptBr)
 
@@ -44,7 +45,8 @@ registerLocaleData(ptBr)
     WeeklyControlFormComponent,
     WeeklyDetailComponent,
     PurchaseComponent,
-    EmptyListComponent
+    EmptyListComponent,
+    PriceComponent
   ],
   imports: [
     BrowserModule,
