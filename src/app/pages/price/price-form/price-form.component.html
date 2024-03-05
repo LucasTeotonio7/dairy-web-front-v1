@@ -1,0 +1,59 @@
+<form class="container" [formGroup]="priceForm">
+    <h5 *ngIf="priceId; else elseBlock">Atualizar planilha</h5>
+    <ng-template #elseBlock>
+        <h5>Criar tabela de preço</h5>
+    </ng-template>
+
+    <hr>
+
+    <div class="row">
+        <div class="form-group col-12">
+            <label class="form-label">Descrição</label>
+            <input type="text" class="form-control" name="description" formControlName="description" required>
+            <div class="invalid-feedback">Campo obrigatório</div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="form-group col-12">
+            <label class="form-label">Valor</label>
+            <input type="text" class="form-control" name="value" formControlName="value">
+            <div class="invalid-feedback">Campo obrigatório</div>
+        </div>
+    </div>
+
+    <div class="form-group col-12 col-md-6 p-0">
+        <label for="product">Produto</label>
+        <select class="form-control" name="product" id="product" formControlName="product">
+            <option *ngFor="let product of products" value="{{ product.id }}">{{ product.description }}</option>
+        </select>
+        <div class="invalid-feedback">Campo obrigatório</div>
+    </div>
+
+    <div class="form-check ms-1 col-12">
+        <input class="form-check-input" type="checkbox" tabindex="0" name="default" formControlName="default">
+        <label class="form-check-label">Tabela padrão</label>
+    </div>
+
+    <hr>
+
+    <div class="button-area" [ngClass]="{'update': priceId}">
+        <button *ngIf="priceId" type="button" class="btn btn-danger btn-action" data-bs-toggle="modal" data-bs-target="#deletePriceModal"> 
+            <i class="fas fa-trash"></i> <span> Excluir</span> 
+        </button>
+        <div>
+            <button type="button" (click)="back()" class="btn btn-light border me-2">Cancelar</button>
+            <button type="button" (click)="save()" class="btn btn-primary"><i class="fas fa-check"></i> Salvar</button>
+        </div>
+    </div>
+</form>
+
+<app-delete-modal
+    [id]="'deletePriceModal'"
+    [title]="'Excluir preço'"
+    [message]="'Tem certeza de que deseja excluir esse preço?'"
+    [confirmationMessage]="'Esta ação não pode ser desfeita.'"
+    [confirmButtonText]="'Excluir'"
+    (delete)="deletePrice()"
+></app-delete-modal>
+

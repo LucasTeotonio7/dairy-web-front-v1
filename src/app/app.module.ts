@@ -24,6 +24,7 @@ import { WeeklyDetailComponent } from './pages/weekly-control/weekly-detail/week
 import { PurchaseComponent } from './pages/purchase/purchase.component';
 import { EmptyListComponent } from './shared/components/empty-list/empty-list.component';
 import { PriceComponent } from './pages/price/price.component';
+import { PriceFormComponent } from './pages/price/price-form/price-form.component';
 
 registerLocaleData(ptBr)
 
@@ -46,7 +47,8 @@ registerLocaleData(ptBr)
     WeeklyDetailComponent,
     PurchaseComponent,
     EmptyListComponent,
-    PriceComponent
+    PriceComponent,
+    PriceFormComponent
   ],
   imports: [
     BrowserModule,
