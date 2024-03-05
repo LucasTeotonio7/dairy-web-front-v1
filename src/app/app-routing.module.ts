@@ -14,6 +14,7 @@ import { WeeklyControlFormComponent } from './pages/weekly-control/forms/weekly-
 import { WeeklyDetailComponent } from './pages/weekly-control/weekly-detail/weekly-detail/weekly-detail.component';
 import { PurchaseComponent } from './pages/purchase/purchase.component';
 import { PriceComponent } from './pages/price/price.component';
+import { PriceFormComponent } from './pages/price/price-form/price-form.component';
 
 const routes: Routes = [
   {
@@ -32,7 +33,9 @@ const routes: Routes = [
       { path: 'weekly-control/:id/update', component: WeeklyControlFormComponent },
       { path: 'weekly-control/:id/detail', component: WeeklyDetailComponent },
       { path: 'weekly-control/:id/supplier/:supplier-id/purchases', component: PurchaseComponent },
-      { path: 'prices', component: PriceComponent }
+      { path: 'prices', component: PriceComponent },
+      { path: 'prices/create', component: PriceFormComponent },
+      { path: 'prices/:id/update', component: PriceFormComponent },
     ],
   },
   { path: 'login', component: LoginComponent, canActivate: [authGuard] },
