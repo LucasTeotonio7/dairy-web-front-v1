@@ -1,5 +1,5 @@
 <div class="container-fluid">
-    <button class="btn btn-primary mb-2" routerLink="/">
+    <button class="btn btn-primary mb-2" routerLink="/prices/create">
         Nova tabela
     </button>
     <table *ngIf="paginator && paginator.count > 0 else emptyList" class="table mt-2">
@@ -8,6 +8,8 @@
                 <th>Nome</th>
                 <th>Produto</th>
                 <th>Valor</th>
+                <th>tabela padrão</th>
+                <th>Ações</th>
             </tr>
         </thead>
         <tbody>
@@ -15,6 +17,25 @@
                 <td>{{ price.description }}</td>
                 <td>{{ price.product }}</td>
                 <td>{{ price.value }}</td>
+                <td class="active-column">
+                    <i *ngIf="price.default" class="fas fa-check-circle text-success"></i>
+                    <i *ngIf="!price.default" class="fas fa-times-circle text-danger"></i>
+                </td>
+                <td>
+                    <div role="group">
+                        <button type="button" routerLink="/prices/{{ price.id }}/update" class="btn btn-primary btn-action">
+                            <i class="far fa-edit"></i> <span> Editar</span> 
+                        </button>
+                        <button id="{{ price.id }}" 
+                                type="button" 
+                                class="btn btn-danger btn-action" 
+                                data-bs-toggle="modal" 
+                                data-bs-target="#deletePriceModal"
+                                (click)="setPriceId($event)"> 
+                            <i class="fas fa-trash"></i> <span> Excluir</span> 
+                        </button>
+                    </div>
+                </td>
             </tr>
         </tbody>
     </table>
@@ -22,3 +43,13 @@
         <app-empty-list [listingName]="'tabelas de preço'"></app-empty-list>
     </ng-template>
 </div>
+
+
+<app-delete-modal
+    [id]="'deletePriceModal'"
+    [title]="'Excluir preço'"
+    [message]="'Tem certeza de que deseja excluir esse preço?'"
+    [confirmationMessage]="'Esta ação não pode ser desfeita.'"
+    [confirmButtonText]="'Excluir'"
+    (delete)="deletePrice()"
+></app-delete-modal>

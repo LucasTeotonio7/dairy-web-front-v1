@@ -14,6 +14,7 @@ import { PriceService } from './services/price.service';
 export class PriceComponent {
   prices: Price[] = [];
   paginator!: Paginator<Price>;
+  priceId!: string;
 
   constructor(
     private priceService: PriceService, 
@@ -31,6 +32,25 @@ export class PriceComponent {
     this.priceService.list(page).subscribe((paginator: Paginator<Price>) => {
         this.paginator = paginator;
         this.prices = paginator.results;
+    });
+  }
+
+  setPriceId($event: Event): void {
+    let button = $event.currentTarget as HTMLElement;
+    this.priceId = button.id;
+  }
+
+  deletePrice() {
+    this.priceService.delete(this.priceId).subscribe({
+        next: (response) => {
+            alert('preço excluída!');
+        },
+        error: (error) => {
+            console.error(error);
+        },
+        complete: () => {
+          this.ngOnInit();
+        }
     });
   }
 }
