@@ -31,6 +31,11 @@ export class CrudService<Type> {
     return this.http.get<Paginator<Type>>(`${this.BASE_URL}`, this.getRequestOptions(param));
   }
 
+  listAll(): Observable<Type[]> {
+    let param = { no_paginate : 1 };
+    return this.http.get<Type[]>(`${this.BASE_URL}`, this.getRequestOptions(param));
+  }
+
   post(formData: FormData): Observable<any> {
     return this.http.post(`${this.BASE_URL}`, formData, this.getRequestOptions());
   }
