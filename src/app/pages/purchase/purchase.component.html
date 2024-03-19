@@ -36,14 +36,16 @@
             <tr *ngIf="weeklyControl">
                 <td *ngFor="let purchase of weeklyControl.suppliers![0].purchases">
                     <input id="{{ purchase.id }}" 
-                           type="text" 
+                           type="number"
+                           min="0"
                            class="form-control purchase-quantity" 
                            [attr.data-reference-day]="purchase.reference_day" 
-                           [attr.data-init-value]="purchase.quantity" 
+                           [attr.data-init-value]="purchase.quantity"
+                           (input)="updateTotal($event)"
                            value="{{ purchase.quantity }}"/>
                 </td>
                 <td>{{ weeklyControl.suppliers![0].total_quantity }} L</td>
-                <td>R$ {{ weeklyControl.suppliers![0].total_quantity * 2 }} </td>
+                <td>{{ getPriceTotal() | currency:'BRL':'symbol':'1.2-2' }} </td>
             </tr>
         </tbody>
     </table>

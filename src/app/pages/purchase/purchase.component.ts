@@ -77,7 +77,6 @@ export class PurchaseComponent {
     const priceProductSupplierForm = this.priceProductSupplierForm.value;
     console.log(this.isDefaultTable)
     if (this.isDefaultTable) {
-      console.log('TRUE')
       let price_product_supplier_id = this.weeklyControl.suppliers![0].price.price_product_supplier_id;
       if (price_product_supplier_id) {
         this.priceProductSupplierService.delete(price_product_supplier_id).subscribe({
@@ -86,7 +85,6 @@ export class PurchaseComponent {
         })
       }
     } else {
-      console.log('FALSE')
       const formData = new FormData();
       formData.append('price', priceProductSupplierForm.price);
       formData.append('supplier', supplier);
@@ -136,6 +134,40 @@ export class PurchaseComponent {
 
     }
   
+  }
+
+  hideZero(value: number): number {
+    if (value.toString().startsWith('0')) {
+      return parseFloat(value.toString());
+    }
+    return value;
+  }
+
+  updateTotal($event: any) {
+    let value = $event.target.value;
+    value = this.hideZero(value);
+    $event.target.value = value;
+    if (value < 0 || !value) {
+      $event.target.value = 0; // Define como 0
+    }
+    var inputs = document.getElementsByClassName("purchase-quantity");
+    var total_quantity = 0.00;
+    for (let i = 0; i < inputs.length; i++) {
+      let input = inputs[i] as HTMLInputElement;
+      total_quantity += parseFloat(input.value);
+    }
+
+    this.weeklyControl.suppliers![0].total_quantity = total_quantity;
+  }
+
+  getPriceTotal(): number {
+    if (this.weeklyControl && this.weeklyControl.suppliers && this.weeklyControl.suppliers.length > 0) {
+      const supplier = this.weeklyControl.suppliers[0];
+      if (supplier.total_quantity && supplier.price && supplier.price.value) {
+        return supplier.total_quantity * supplier.price.value;
+      }
+    }
+    return 0;
   }
 
   save() {
