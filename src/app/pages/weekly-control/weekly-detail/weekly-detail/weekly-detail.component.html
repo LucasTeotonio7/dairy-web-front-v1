@@ -33,7 +33,7 @@
                 <th>QUA</th>
                 <th>QUI</th>
                 <th>QUANTIDADE</th>
-                <th>VALOR</th>
+                <th>PREÇO</th>
                 <th>AÇÕES</th>
             </tr>
         </thead>
@@ -46,7 +46,7 @@
                 </td>
                 <td *ngFor="let purchase of supplier.purchases">{{ purchase.quantity }}</td>
                 <td>{{ supplier.total_quantity }} L</td>
-                <td>R$ 0,00 </td>
+                <td>{{ supplier.price.value|currency:'BRL' }}</td>
                 <td>
                     <button type="button" routerLink="/weekly-control/{{ weeklyControl.id }}/supplier/{{supplier.id}}/purchases" class="btn btn-primary btn-action">
                         <i class="far fa-edit"></i> <span> Editar</span> 

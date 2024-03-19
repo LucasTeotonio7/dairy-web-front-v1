@@ -5,9 +5,17 @@ interface Purchase {
     weekday: number;
 }
 
+interface Price {
+    id: string,
+    value: number,
+    default: boolean
+    price_product_supplier_id?: string,
+}
+
 interface Supplier {
     id: string;
     name: string;
+    price: Price,
     purchases: Purchase[];
     total_quantity: number;
 }

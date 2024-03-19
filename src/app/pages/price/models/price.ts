@@ -4,7 +4,7 @@ export interface Price {
     updated_at: string;
     value: number;
     description?: string;
-    default?: boolean;
+    default: boolean;
     product: string;
     created_by: string;
 }

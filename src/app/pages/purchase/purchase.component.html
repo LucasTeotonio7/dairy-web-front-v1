@@ -1,5 +1,5 @@
-<div class="navbar navbar-light">
-    <div><i class="fa-solid fa-truck-ramp-box mx-1"></i> Fornecedor </div>
+<div *ngIf="weeklyControl" class="navbar navbar-light">
+    <div><i class="fa-solid fa-truck-ramp-box mx-1"></i> {{ weeklyControl.suppliers![0].name }} </div>
     <div>
         <i class="far fa-calendar-alt me-2"></i>
         <span>09/20/2024</span> ~ 
@@ -7,9 +7,9 @@
     </div>
     <div class="price-tag">
         <i class="fa-solid fa-tag"></i> 
-        <span class="mx-2">Preço: R$ 2,00</span>
+        <span class="mx-2">Preço: {{ weeklyControl.suppliers![0].price.value|currency:'BRL' }}</span>
         <div>
-            <button type="button" class="btn btn-primary btn-action">
+            <button type="button" class="btn btn-primary btn-action" data-bs-toggle="modal" data-bs-target="#modalExemplo">
                 <i class="far fa-edit"></i> 
             </button>
         </div>
@@ -57,3 +57,34 @@
 </div>
 
 
+<div *ngIf="weeklyControl" class="modal fade" id="modalExemplo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+
+        <header class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Selecionar tabela de preço</h5>
+            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Fechar">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </header>
+
+        <main class="modal-body">
+            <small class="d-flex">#Fornecedor: {{ weeklyControl.suppliers![0].name }}</small>
+            <hr>
+            <form class="container" [formGroup]="priceProductSupplierForm">
+                <label for="price-product-supplier">Selecione a tabela</label>
+                <select *ngIf="priceTables" class="form-select" id="price-product-supplier" formControlName="price" (change)="ChangingPriceValue($event)">
+                    <option *ngFor="let priceTable of priceTables" 
+                            value="{{ priceTable.id }}"
+                            [attr.default]="priceTable.default"> {{ priceTable.description }} - R$ {{ priceTable.value }} </option>
+                </select>
+            </form>
+        </main>
+
+        <footer class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+            <button type="button" (click)="setPriceTable()" data-bs-dismiss="modal" class="btn btn-primary">Salvar</button>
+        </footer>
+        </div>
+    </div>
+</div>
