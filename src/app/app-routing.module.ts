@@ -21,9 +21,10 @@ const routes: Routes = [
     children: [
       { path: 'dashboard', component: DashboardComponent },
       { path: 'products', loadChildren: () => import('./pages/product/product.module').then(m => m.ProductModule)},
-      { path: 'suppliers', component: SupplierComponent },
-      { path: 'suppliers/create', component: SupplierFormComponent },
-      { path: 'suppliers/:id/update', component: SupplierFormComponent },
+      { path: 'suppliers', loadChildren: () => import('./pages/supplier/supplier.module').then(m => m.SupplierModule)},
+      // { path: 'suppliers', component: SupplierComponent },
+      // { path: 'suppliers/create', component: SupplierFormComponent },
+      // { path: 'suppliers/:id/update', component: SupplierFormComponent },
       { path: 'weekly-control', component: WeeklyControlComponent },
       { path: 'weekly-control/create', component: WeeklyControlFormComponent },
       { path: 'weekly-control/:id/update', component: WeeklyControlFormComponent },
