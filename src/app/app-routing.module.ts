@@ -5,8 +5,6 @@ import { authGuard } from './pages/auth/guards/auth.guard';
 import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/auth/login.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
-import { PriceComponent } from './pages/price/price.component';
-import { PriceFormComponent } from './pages/price/price-form/price-form.component';
 
 const routes: Routes = [
   {
