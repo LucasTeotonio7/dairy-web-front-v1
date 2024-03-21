@@ -11,9 +11,6 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/auth/login.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
-import { WeeklyControlComponent } from './pages/weekly-control/weekly-control.component';
-import { WeeklyControlFormComponent } from './pages/weekly-control/forms/weekly-control-form/weekly-control-form.component';
-import { WeeklyDetailComponent } from './pages/weekly-control/weekly-detail/weekly-detail/weekly-detail.component';
 import { PurchaseComponent } from './pages/purchase/purchase.component';
 import { PriceComponent } from './pages/price/price.component';
 import { PriceFormComponent } from './pages/price/price-form/price-form.component';
@@ -31,9 +28,6 @@ registerLocaleData(ptBr)
     HomeComponent,
     LoginComponent,
     DashboardComponent,
-    WeeklyControlComponent,
-    WeeklyControlFormComponent,
-    WeeklyDetailComponent,
     PurchaseComponent,
     PriceComponent,
     PriceFormComponent,
