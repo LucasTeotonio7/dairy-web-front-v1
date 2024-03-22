@@ -1,12 +1,30 @@
 import { FormGroup } from "@angular/forms";
-import { Component, ElementRef, Renderer2 } from '@angular/core';
+import { ElementRef, Renderer2 } from '@angular/core';
 
-export class FormBaseMixin {
+import { Observable } from "rxjs";
+
+
+interface FormBase {
+  setProperties<T>(serviceMethod: () => Observable<T[]>, property: keyof this): void;
+}
+
+export class FormBaseMixin implements FormBase {
 
   constructor(
     protected renderer: Renderer2,
     protected el: ElementRef
   ) {}
+
+  setProperties<T>(serviceMethod: () => Observable<T[]>, property: keyof this): void {
+    serviceMethod().subscribe({
+      next: (data: T[]) => {
+        (this[property] as any) = data;
+      },
+      error: (error: any) => {
+        console.error(error);
+      },
+    });
+  }
 
   protected formDataFromFormGroup(formGroupValue: any): FormData {
     const formData = new FormData();

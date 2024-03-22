@@ -48,42 +48,17 @@ export class ProductFormComponent extends FormBaseMixin {
     this.observeAllControlChanges(this.productForm);
 
   }
-  
-  // TODO:  refactor methods to avoid code repetition => setBrands(), setCategories(), setMeasureUnits();
+
   setBrands(): void {
-    this.productService.getBrands().subscribe({
-      next: (brands: Brand[]) => {
-        this.brands = brands
-      },
-      error: (error: any) => {
-        console.error(error);
-      },
-      complete: () => {}
-    });
+    this.setProperties(() => this.productService.getBrands(), 'brands');
   }
 
   setCategories(): void {
-    this.productService.getCategories().subscribe({
-      next: (categories: Category[]) => {
-        this.categories = categories
-      },
-      error: (error: any) => {
-        console.error(error);
-      },
-      complete: () => {}
-    });
+    this.setProperties(() => this.productService.getCategories(), 'categories');
   }
 
   setMeasureUnits(): void {
-    this.productService.getMeasureUnit().subscribe({
-      next: (measureUnits: MeasureUnit[]) => {
-        this.measureUnits = measureUnits
-      },
-      error: (error: any) => {
-        console.error(error);
-      },
-      complete: () => {}
-    });
+    this.setProperties(() => this.productService.getMeasureUnit(), 'measureUnits');
   }
 
   setImageProduct(product: Product) {
