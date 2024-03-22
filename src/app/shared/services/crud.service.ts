@@ -44,6 +44,10 @@ export class CrudService<Type> {
     return this.http.put(`${this.BASE_URL}${id}/`, formData, this.getRequestOptions());
   }
 
+  save(formData: FormData, id?: string): Observable<any> {
+    return id ? this.put(id, formData) : this.post(formData);
+  }
+
   patch(id: string, formData: FormData): Observable<any> {
     return this.http.patch(`${this.BASE_URL}${id}/`, formData, this.getRequestOptions());
   } 
