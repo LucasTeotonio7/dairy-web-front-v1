@@ -1,11 +1,12 @@
 import { Component, ElementRef, Renderer2 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
-import { Product } from '../../product/models/product';
-import { PriceService } from '../services/price.service';
-import { WeeklyControlService } from '../../weekly-control/services/weekly-control.service';
+import { FormBaseMixin } from 'src/app/shared/mixins/form-base.mixin';
 import { Price } from '../models/price';
+import { PriceService } from '../services/price.service';
+import { Product } from '../../product/models/product';
+import { WeeklyControlService } from '../../weekly-control/services/weekly-control.service';
 
 
 @Component({
@@ -13,7 +14,7 @@ import { Price } from '../models/price';
   templateUrl: './price-form.component.html',
   styleUrls: ['./price-form.component.css']
 })
-export class PriceFormComponent {
+export class PriceFormComponent extends FormBaseMixin {
   priceForm!: FormGroup;
   priceId: string | any = '';
   products: Product[] = [];
@@ -24,16 +25,17 @@ export class PriceFormComponent {
     private formBuilder: FormBuilder,
     private router: Router,
     private route: ActivatedRoute,
-    private renderer: Renderer2,
-    private el: ElementRef
+    renderer: Renderer2,
+    el: ElementRef
   ) {
+    super(renderer, el);
     this.priceForm = this.formBuilder.group({
       description: ['', Validators.required],
       value: ['', Validators.required],
       default: [false],
       product: ['', Validators.required]
     });
-    this.observeAllControlChanges();
+    this.observeAllControlChanges(this.priceForm);
   }
 
   setProducts(): void {
@@ -81,74 +83,18 @@ export class PriceFormComponent {
   }
 
   save() {
-      if (this.priceForm.valid) {
-          const priceForm = this.priceForm.value;
+    if (this.priceForm.valid) {
+        const priceForm = this.priceForm.value;
 
-          if (this.priceId) {
-              this.priceService.put(this.priceId, priceForm).subscribe({
-                  next: (response: any) => {
-                      console.log(response);
-                  },
-                  error: (error: any) => {
-                      console.log(error);
-                  },
-                  complete: () => {
-                      this.router.navigate(['/prices']);
-                  }
-              });
-          } else {
-              this.priceService.post(priceForm).subscribe({
-                  next: (response: any) => {
-                      console.log(response);
-                  },
-                  error: (error: any) => {
-                      console.log(error);
-                  },
-                  complete: () => {
-                      this.router.navigate(['/prices']);
-                  }
-              });
-          }
-      } else {
-          for (const controlName in this.priceForm.controls) {
-              if (this.priceForm.controls.hasOwnProperty(controlName)) {
-                  const control = this.priceForm.get(controlName);
-          
-                  if (control instanceof FormGroup) {
-                      for (const nestedControlName in control.controls) {
-                          if (control.controls.hasOwnProperty(nestedControlName)) {
-                              const nestedControl = control.get(nestedControlName);
-                              this.handleControlValidation(nestedControl, nestedControlName);
-                          }
-                      }
-                  } else {
-                      this.handleControlValidation(control, controlName);
-                  }
-              }
-          }
-      }
-  }
+        this.priceService.save(priceForm, this.priceId).subscribe({
+            error: (error: any) => {console.log(error)},
+            complete: () => {this.router.navigate(['/prices'])}
+        });
 
-  private handleControlValidation(control: AbstractControl | null, controlName: string): void {
-      if (control?.hasError('required')) {
-          const inputElement = this.el.nativeElement.querySelector(`[formcontrolname="${controlName}"]`);
-          this.renderer.addClass(inputElement, 'is-invalid');
-      }
-  }
-
-
-  private observeAllControlChanges() {
-
-      for (const controlName in this.priceForm.controls) {
-          const control = this.priceForm.get(controlName);
-          if (control) {
-            control.valueChanges.subscribe(() => {
-              const inputElement = this.el.nativeElement.querySelector(`[formcontrolname="${controlName}"].form-control`);
-              this.renderer.removeClass(inputElement, 'is-invalid');
-            });
-          }
-      }
+    } else {
+        this.setInvalidFields(this.priceForm);
     }
+  }
 
   back() {
       this.router.navigate(['/prices']);
