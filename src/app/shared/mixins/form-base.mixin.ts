@@ -1,4 +1,4 @@
-import { FormGroup } from "@angular/forms";
+import { AbstractControl, FormGroup } from "@angular/forms";
 import { ElementRef, Renderer2 } from '@angular/core';
 
 import { Observable } from "rxjs";
@@ -13,7 +13,7 @@ export class FormBaseMixin implements FormBase {
   constructor(
     protected renderer: Renderer2,
     protected el: ElementRef
-  ) {}
+  ) { }
 
   setProperties<T>(serviceMethod: () => Observable<T[]>, property: keyof this): void {
     serviceMethod().subscribe({
@@ -41,9 +41,15 @@ export class FormBaseMixin implements FormBase {
     for (const controlName in formGroup.controls) {
       if (formGroup.controls.hasOwnProperty(controlName)) {
         const control = formGroup.get(controlName);
-        if (control?.hasError('required')) {
-          const inputElement = this.el.nativeElement.querySelector(`[formcontrolname="${controlName}"]`);
-          this.renderer.addClass(inputElement, 'is-invalid');
+        if (control instanceof FormGroup) {
+          for (const nestedControlName in control.controls) {
+            if (control.controls.hasOwnProperty(nestedControlName)) {
+              const nestedControl = control.get(nestedControlName);
+              this.handleControlValidation(nestedControl, nestedControlName);
+            }
+          }
+        } else {
+          this.handleControlValidation(control, controlName);
         }
       }
     }
@@ -51,13 +57,35 @@ export class FormBaseMixin implements FormBase {
 
   protected observeAllControlChanges(formGroup: FormGroup) {
     for (const controlName in formGroup.controls) {
-        const control = formGroup.get(controlName);
-        if (control) {
-          control.valueChanges.subscribe(() => {
-            const inputElement = this.el.nativeElement.querySelector(`[formcontrolname="${controlName}"].form-control`);
-            this.renderer.removeClass(inputElement, 'is-invalid');
-          });
-        }
+      const control = formGroup.get(controlName);
+      if (control) {
+        control.valueChanges.subscribe(() => {
+          if (control instanceof FormGroup) {
+            for (const nestedControlName in control.controls) {
+              if (control.controls.hasOwnProperty(nestedControlName)) {
+                const nestedControl = control.get(nestedControlName);
+                this.handleControlChange(nestedControl, nestedControlName);
+              }
+            }
+          } else {
+            this.handleControlChange(control, controlName);
+          }
+        });
+      }
+    }
+  }
+
+  private handleControlValidation(control: AbstractControl | null, controlName: string): void {
+    if (control?.hasError('required')) {
+      const inputElement = this.el.nativeElement.querySelector(`[formcontrolname="${controlName}"]`);
+      this.renderer.addClass(inputElement, 'is-invalid');
+    }
+  }
+
+  private handleControlChange(control: AbstractControl | null, controlName: string): void {
+    const inputElement = this.el.nativeElement.querySelector(`[formcontrolname="${controlName}"].form-control`);
+    if (inputElement) {
+      this.renderer.removeClass(inputElement, 'is-invalid');
     }
   }
 
