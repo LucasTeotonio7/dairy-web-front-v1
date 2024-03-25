@@ -1,16 +1,19 @@
 import { Component, ElementRef, Renderer2 } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { WeeklyControlService } from '../../services/weekly-control.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { WeeklyControl } from '../../models/weekly-control';
+
+import { FormBaseMixin } from 'src/app/shared/mixins/form-base.mixin';
 import { Product } from 'src/app/pages/product/models/product';
+import { WeeklyControl } from '../../models/weekly-control';
+import { WeeklyControlService } from '../../services/weekly-control.service';
+
 
 @Component({
   selector: 'app-weekly-control-form',
   templateUrl: './weekly-control-form.component.html',
   styleUrls: ['./weekly-control-form.component.css']
 })
-export class WeeklyControlFormComponent {
+export class WeeklyControlFormComponent extends FormBaseMixin {
     weeklyControlForm!: FormGroup;
     weeklyControlId: string | any = '';
     products: Product[] = [];
@@ -20,16 +23,17 @@ export class WeeklyControlFormComponent {
         private formBuilder: FormBuilder,
         private router: Router,
         private route: ActivatedRoute,
-        private renderer: Renderer2,
-        private el: ElementRef
+        renderer: Renderer2,
+        el: ElementRef
     ) {
+        super(renderer, el);
         this.weeklyControlForm = this.formBuilder.group({
             start_date: ['', Validators.required],
             end_date: ['', Validators.required],
             is_closed: [false],
             product: ['', Validators.required]
         });
-        this.observeAllControlChanges();
+        this.observeAllControlChanges(this.weeklyControlForm);
     }
 
     setProducts(): void {
@@ -84,72 +88,15 @@ export class WeeklyControlFormComponent {
     save() {
         if (this.weeklyControlForm.valid) {
             const weeklyControlForm = this.weeklyControlForm.value;
-    
-            if (this.weeklyControlId) {
-                this.weeklyControlService.put(this.weeklyControlId, weeklyControlForm).subscribe({
-                    next: (response: any) => {
-                        console.log(response);
-                    },
-                    error: (error: any) => {
-                        console.log(error);
-                    },
-                    complete: () => {
-                        this.router.navigate(['/weekly-control']);
-                    }
-                });
-            } else {
-                this.weeklyControlService.post(weeklyControlForm).subscribe({
-                    next: (response: any) => {
-                        console.log(response);
-                    },
-                    error: (error: any) => {
-                        console.log(error);
-                    },
-                    complete: () => {
-                        this.router.navigate(['/weekly-control']);
-                    }
-                });
-            }
+            this.weeklyControlService.save(weeklyControlForm, this.weeklyControlId).subscribe({
+                error: (error: any) => {console.error(error)},
+                complete: () => {this.router.navigate(['/weekly-control'])}
+            });
+
         } else {
-            for (const controlName in this.weeklyControlForm.controls) {
-                if (this.weeklyControlForm.controls.hasOwnProperty(controlName)) {
-                    const control = this.weeklyControlForm.get(controlName);
-            
-                    if (control instanceof FormGroup) {
-                        for (const nestedControlName in control.controls) {
-                            if (control.controls.hasOwnProperty(nestedControlName)) {
-                                const nestedControl = control.get(nestedControlName);
-                                this.handleControlValidation(nestedControl, nestedControlName);
-                            }
-                        }
-                    } else {
-                        this.handleControlValidation(control, controlName);
-                    }
-                }
-            }
+            this.setInvalidFields(this.weeklyControlForm);
         }
     }
-
-    private handleControlValidation(control: AbstractControl | null, controlName: string): void {
-        if (control?.hasError('required')) {
-            const inputElement = this.el.nativeElement.querySelector(`[formcontrolname="${controlName}"]`);
-            this.renderer.addClass(inputElement, 'is-invalid');
-        }
-    }
-    
-
-    private observeAllControlChanges() {
-
-        for (const controlName in this.weeklyControlForm.controls) {
-            const control = this.weeklyControlForm.get(controlName);
-            if (control) {
-              control.valueChanges.subscribe(() => {
-                const inputElement = this.el.nativeElement.querySelector(`[formcontrolname="${controlName}"].form-control`);
-                this.renderer.removeClass(inputElement, 'is-invalid');
-              });
-            }
-        }
-      }
 
     back() {
         this.router.navigate(['/weekly-control']);
