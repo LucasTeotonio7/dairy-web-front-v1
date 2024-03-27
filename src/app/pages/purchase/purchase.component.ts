@@ -148,7 +148,7 @@ export class PurchaseComponent {
     value = this.hideZero(value);
     $event.target.value = value;
     if (value < 0 || !value) {
-      $event.target.value = 0; // Define como 0
+      $event.target.value = 0;
     }
     var inputs = document.getElementsByClassName("purchase-quantity");
     var total_quantity = 0.00;
