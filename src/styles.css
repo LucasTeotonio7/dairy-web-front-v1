@@ -2,6 +2,8 @@
 @import '~bootstrap/dist/css/bootstrap.min.css';
 @import '~startbootstrap-sb-admin-2/css/sb-admin-2.min.css';
 @import '~@fortawesome/fontawesome-free/css/all.css';
+@import '~flatpickr/dist/flatpickr.css';
+
 
 .btn-action {
     font-size: 10px;
