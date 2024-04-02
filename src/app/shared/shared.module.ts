@@ -6,6 +6,7 @@ import { DeleteModalComponent } from './components/delete-modal/delete-modal.com
 import { ImageUploadComponent } from './components/image-upload/image-upload.component';
 import { PaginatorComponent } from './components/paginator/paginator.component';
 import { EmptyListComponent } from './components/empty-list/empty-list.component';
+import { ToastComponent } from './components/toast/toast.component';
 
 
 @NgModule({
@@ -17,13 +18,15 @@ import { EmptyListComponent } from './components/empty-list/empty-list.component
   ],
   imports: [
     CommonModule,
-    RouterModule
+    RouterModule,
+    ToastComponent
   ],
   exports: [
     DeleteModalComponent,
     ImageUploadComponent,
     PaginatorComponent,
-    EmptyListComponent
+    EmptyListComponent,
+    ToastComponent
   ]
 })
 export class SharedModule { }
