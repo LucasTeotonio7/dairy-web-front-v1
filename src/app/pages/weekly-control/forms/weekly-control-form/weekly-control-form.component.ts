@@ -2,6 +2,9 @@ import { Component, ElementRef, Renderer2 } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
+import flatpickr from "flatpickr";
+import { Options } from "flatpickr/dist/types/options"
+
 import { FormBaseMixin } from 'src/app/shared/mixins/form-base.mixin';
 import { Product } from 'src/app/pages/product/models/product';
 import { WeeklyControl } from '../../models/weekly-control';
@@ -17,6 +20,7 @@ export class WeeklyControlFormComponent extends FormBaseMixin {
     weeklyControlForm!: FormGroup;
     weeklyControlId: string | any = '';
     products: Product[] = [];
+    flatpickrOptions: Options = {};
 
     constructor(
         private weeklyControlService: WeeklyControlService,
@@ -36,6 +40,18 @@ export class WeeklyControlFormComponent extends FormBaseMixin {
         this.observeAllControlChanges(this.weeklyControlForm);
     }
 
+    initFlatpickr(defaultDate?: any): void {
+        let element = document.getElementById('range-date') as HTMLInputElement;
+        this.flatpickrOptions = {
+            mode: "range",
+            altFormat: "l d/m",
+            dateFormat: "Y-m-d",
+            altInput: true,
+            defaultDate: defaultDate
+        }
+        flatpickr(element, this.flatpickrOptions);
+    }
+
     setProducts(): void {
         this.weeklyControlService.getProducts().subscribe({
           next: (products: Product[]) => {
@@ -53,12 +69,25 @@ export class WeeklyControlFormComponent extends FormBaseMixin {
         return splitDate[2] + '/' + splitDate[1] + '/' + splitDate[0];
     }
 
+    dateRange(event: any): void {
+        var dateRangeString = event.target.value;
+        if(dateRangeString.includes('to')){
+            var dates = dateRangeString.split(' to ');
+            this.weeklyControlForm.patchValue({
+                start_date: dates[0],
+                end_date: dates[1]
+            });
+        }
+    }
+
     private setWeeklyControl(): void {
         this.route.paramMap.subscribe(params => {
             this.weeklyControlId = params.get('id');
             if (this.weeklyControlId) {
                 this.weeklyControlService.get(this.weeklyControlId).subscribe({
                     next: (weeklyControl: WeeklyControl) => {
+                        let initialDate = [weeklyControl.start_date, weeklyControl.end_date]
+                        this.initFlatpickr(initialDate);
                         this.weeklyControlForm.setValue({
                             start_date: weeklyControl.start_date,
                             end_date: weeklyControl.end_date,
@@ -71,6 +100,8 @@ export class WeeklyControlFormComponent extends FormBaseMixin {
                     },
                     complete: () => { }
                 });
+            } else {
+                this.initFlatpickr();
             }
         });
     }
