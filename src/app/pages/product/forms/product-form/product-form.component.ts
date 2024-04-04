@@ -1,11 +1,15 @@
-import { Component, ElementRef, Renderer2 } from '@angular/core';
+import { Component, ElementRef, Renderer2, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Subscription } from 'rxjs';
-import { ProductService } from '../../services/product.service';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Product } from '../../models/product';
+
+import { Subscription } from 'rxjs';
+
 import { Brand, Category, MeasureUnit } from './../../models/general_models';
+import { Product } from '../../models/product';
+import { ProductService } from '../../services/product.service';
 import { FormBaseMixin } from 'src/app/shared/mixins/form-base.mixin';
+import { ToastService } from 'src/app/shared/services/toast.service';
+
 
 @Component({
   selector: 'app-product-form',
@@ -31,6 +35,7 @@ export class ProductFormComponent extends FormBaseMixin {
     private formBuilder: FormBuilder,
     private router: Router,
     private route: ActivatedRoute,
+    private toastService: ToastService,
     renderer: Renderer2,
     el: ElementRef 
   ) {
@@ -114,8 +119,13 @@ export class ProductFormComponent extends FormBaseMixin {
         formData.append('image', this.imageFile);
       }
       this.productService.save(formData, this.productId).subscribe({
-        next: (response: any) => {},
-        error: (error: any) => {console.log(error)},
+        next: (response: any) => {
+          this.toastService.showToastSuccess('Produto', 'Produto salvo com sucesso!');
+        },
+        error: (error: any) => {
+          console.log(error), 
+          this.toastService.showToastDanger('Produto', 'Ocorreu um erro ao salvar o produto');
+        },
         complete: () => {this.router.navigate(['/products'])}
       });
 
