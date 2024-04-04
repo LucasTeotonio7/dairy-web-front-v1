@@ -14,12 +14,12 @@ import { ToastComponent } from './components/toast/toast.component';
     DeleteModalComponent,
     ImageUploadComponent,
     PaginatorComponent,
-    EmptyListComponent
+    EmptyListComponent,
+    ToastComponent
   ],
   imports: [
     CommonModule,
     RouterModule,
-    ToastComponent
   ],
   exports: [
     DeleteModalComponent,
