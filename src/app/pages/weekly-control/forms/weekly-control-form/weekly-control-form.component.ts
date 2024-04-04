@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 import flatpickr from "flatpickr";
 import { Options } from "flatpickr/dist/types/options"
+import { Portuguese } from "flatpickr/dist/l10n/pt.js"
 
 import { FormBaseMixin } from 'src/app/shared/mixins/form-base.mixin';
 import { Product } from 'src/app/pages/product/models/product';
@@ -47,6 +48,7 @@ export class WeeklyControlFormComponent extends FormBaseMixin {
             altFormat: "l d/m",
             dateFormat: "Y-m-d",
             altInput: true,
+            locale: Portuguese,
             defaultDate: defaultDate
         }
         flatpickr(element, this.flatpickrOptions);
