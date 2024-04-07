@@ -76,9 +76,13 @@ export class FormBaseMixin implements FormBase {
   }
 
   private handleControlValidation(control: AbstractControl | null, controlName: string): void {
-    if (control?.hasError('required')) {
+    if (control?.errors) {
       const inputElement = this.el.nativeElement.querySelector(`[formcontrolname="${controlName}"]`);
       this.renderer.addClass(inputElement, 'is-invalid');
+
+      if (control.errors['dateOutOfRange']) {
+        inputElement.nextSibling.nextSibling.textContent = 'O intervalo de datas deve abranger um período de 7 dias';
+      }
     }
   }
 
