@@ -3,6 +3,8 @@ import { Product } from './models/product';
 import { ProductService } from './services/product.service';
 import { ActivatedRoute } from '@angular/router';
 import { Paginator } from 'src/app/shared/models/paginator';
+import { ToastService } from 'src/app/shared/services/toast.service';
+
 
 @Component({
   selector: 'app-product',
@@ -15,7 +17,11 @@ export class ProductComponent {
   productId!: string;
   paginator!: Paginator<Product>;
 
-  constructor(private productService: ProductService, private route: ActivatedRoute) { }
+  constructor(
+    private productService: ProductService, 
+    private route: ActivatedRoute,
+    private toastService: ToastService,
+  ) { }
 
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
@@ -39,7 +45,7 @@ export class ProductComponent {
   deleteProduct() {
     this.productService.delete(this.productId).subscribe({
       next: (response) => {
-        alert('produto excluído!');
+        this.toastService.showToastSuccess('Produto', 'Produto excluído com sucesso!');
       },
       error: (error) => {
         console.error(error);

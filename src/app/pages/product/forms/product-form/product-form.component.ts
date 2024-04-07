@@ -137,7 +137,7 @@ export class ProductFormComponent extends FormBaseMixin {
   deleteProduct() {
     this.productService.delete(this.productId).subscribe({
       next: (response) => {
-        alert('produto excluído!');
+        this.toastService.showToastSuccess('Produto', 'Produto excluído com sucesso!');
       },
       error: (error) => {
         console.error(error);
