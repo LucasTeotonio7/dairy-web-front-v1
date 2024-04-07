@@ -9,7 +9,7 @@
     <div class="row">
         <div class="form-group col-12">
             <label class="form-label">Selecione a semana</label>
-            <input id="range-date" type="date" class="form-control" (change)="dateRange($event)">
+            <input id="range-date" type="date" class="form-control" formControlName="date_range" (change)="dateRange($event)">
             <div class="invalid-feedback">Campo obrigatório</div>
         </div>
     </div>

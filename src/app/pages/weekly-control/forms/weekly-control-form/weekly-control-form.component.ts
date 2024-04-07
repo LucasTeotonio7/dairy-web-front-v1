@@ -8,6 +8,8 @@ import { Portuguese } from "flatpickr/dist/l10n/pt.js"
 
 import { FormBaseMixin } from 'src/app/shared/mixins/form-base.mixin';
 import { Product } from 'src/app/pages/product/models/product';
+import { ToastService } from 'src/app/shared/services/toast.service';
+import { validateWeekWith7days } from '../../validators/date.validator';
 import { WeeklyControl } from '../../models/weekly-control';
 import { WeeklyControlService } from '../../services/weekly-control.service';
 
@@ -28,13 +30,15 @@ export class WeeklyControlFormComponent extends FormBaseMixin {
         private formBuilder: FormBuilder,
         private router: Router,
         private route: ActivatedRoute,
+        private toastService: ToastService,
         renderer: Renderer2,
         el: ElementRef
     ) {
         super(renderer, el);
         this.weeklyControlForm = this.formBuilder.group({
-            start_date: ['', Validators.required],
-            end_date: ['', Validators.required],
+            start_date: [''],
+            end_date: [''],
+            date_range: ['', [Validators.required, validateWeekWith7days()]],
             is_closed: [false],
             product: ['', Validators.required]
         });
@@ -73,8 +77,8 @@ export class WeeklyControlFormComponent extends FormBaseMixin {
 
     dateRange(event: any): void {
         var dateRangeString = event.target.value;
-        if(dateRangeString.includes('to')){
-            var dates = dateRangeString.split(' to ');
+        if(dateRangeString.length > 20){
+            var dates = dateRangeString.split(' até ');
             this.weeklyControlForm.patchValue({
                 start_date: dates[0],
                 end_date: dates[1]
@@ -93,6 +97,7 @@ export class WeeklyControlFormComponent extends FormBaseMixin {
                         this.weeklyControlForm.setValue({
                             start_date: weeklyControl.start_date,
                             end_date: weeklyControl.end_date,
+                            date_range: initialDate,
                             is_closed: weeklyControl.is_closed,
                             product: weeklyControl.product
                         });
@@ -122,7 +127,12 @@ export class WeeklyControlFormComponent extends FormBaseMixin {
         if (this.weeklyControlForm.valid) {
             const weeklyControlForm = this.weeklyControlForm.value;
             this.weeklyControlService.save(weeklyControlForm, this.weeklyControlId).subscribe({
-                error: (error: any) => {console.error(error)},
+                next: (reponse: any) => {
+                    this.toastService.showToastSuccess('Planilha', 'Planilha salva com sucesso!');
+                },
+                error: (error: any) => {
+                    this.toastService.showToastDanger('Planilha inválida', 'Aconteceu um erro ao salvar a planilha');
+                },
                 complete: () => {this.router.navigate(['/weekly-control'])}
             });
 
@@ -138,7 +148,7 @@ export class WeeklyControlFormComponent extends FormBaseMixin {
     deleteWeeklyControl() {
         this.weeklyControlService.delete(this.weeklyControlId).subscribe({
             next: (response) => {
-                alert('Planilha excluída!');
+                this.toastService.showToastSuccess('Planilha', 'Planilha excluída!');
             },
             error: (error) => {
                 console.error(error);
