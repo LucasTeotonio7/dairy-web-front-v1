@@ -30,5 +30,6 @@ export interface WeeklyControl {
     product: string;
     product_description: string;
     created_by: string;
+    purchase_exists: boolean;
     suppliers?: Supplier[];
 }

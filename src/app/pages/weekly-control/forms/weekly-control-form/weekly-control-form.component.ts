@@ -45,7 +45,7 @@ export class WeeklyControlFormComponent extends FormBaseMixin {
         this.observeAllControlChanges(this.weeklyControlForm);
     }
 
-    initFlatpickr(defaultDate?: any): void {
+    initFlatpickr(defaultDate?: any, noCalendar=false): void {
         let element = document.getElementById('range-date') as HTMLInputElement;
         this.flatpickrOptions = {
             mode: "range",
@@ -53,7 +53,8 @@ export class WeeklyControlFormComponent extends FormBaseMixin {
             dateFormat: "Y-m-d",
             altInput: true,
             locale: Portuguese,
-            defaultDate: defaultDate
+            defaultDate: defaultDate,
+            noCalendar: noCalendar
         }
         flatpickr(element, this.flatpickrOptions);
     }
@@ -93,7 +94,7 @@ export class WeeklyControlFormComponent extends FormBaseMixin {
                 this.weeklyControlService.get(this.weeklyControlId).subscribe({
                     next: (weeklyControl: WeeklyControl) => {
                         let initialDate = [weeklyControl.start_date, weeklyControl.end_date]
-                        this.initFlatpickr(initialDate);
+                        
                         this.weeklyControlForm.setValue({
                             start_date: weeklyControl.start_date,
                             end_date: weeklyControl.end_date,
@@ -101,6 +102,16 @@ export class WeeklyControlFormComponent extends FormBaseMixin {
                             is_closed: weeklyControl.is_closed,
                             product: weeklyControl.product
                         });
+
+                        if (weeklyControl.purchase_exists) {
+                            const dateRangeControl = this.weeklyControlForm.get('date_range');
+                            const productControl = this.weeklyControlForm.get('product');
+                            productControl!.disable();
+                            dateRangeControl!.disable();
+                            this.initFlatpickr(initialDate, true);
+                        } else {
+                            this.initFlatpickr(initialDate);
+                        }
                     },
                     error: (error: any) => {
                         console.error(error);
@@ -126,7 +137,7 @@ export class WeeklyControlFormComponent extends FormBaseMixin {
     save() {
         if (this.weeklyControlForm.valid) {
             const weeklyControlForm = this.weeklyControlForm.value;
-            this.weeklyControlService.save(weeklyControlForm, this.weeklyControlId).subscribe({
+            this.weeklyControlService.save(weeklyControlForm, this.weeklyControlId, true).subscribe({
                 next: (reponse: any) => {
                     this.toastService.showToastSuccess('Planilha', 'Planilha salva com sucesso!');
                 },
