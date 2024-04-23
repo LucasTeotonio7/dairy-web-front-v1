@@ -16,6 +16,7 @@ const routes: Routes = [
   { path: ':id/update', component: WeeklyControlFormComponent },
   { path: ':id/detail', component: WeeklyDetailComponent },
   { path: ':id/supplier/:supplier-id/purchases', component: PurchaseComponent },
+  { path: ':id/supplier/:supplier-id/payment', component: PurchaseComponent },
 ]
 
 
