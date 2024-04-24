@@ -1,3 +1,9 @@
+<div *ngIf="path" class="h3 px-3">
+    <span *ngIf="path === 'purchases'">Editar planilha</span>
+    <span *ngIf="path === 'payment'">Pagar fornecedor</span>
+    <hr>
+</div>
+
 <div *ngIf="weeklyControl" class="navbar navbar-light">
     <div><i class="fa-solid fa-truck-ramp-box mx-1"></i> {{ weeklyControl.suppliers![0].name }} </div>
     <div>
@@ -9,7 +15,7 @@
         <i class="fa-solid fa-tag"></i> 
         <span class="mx-2">Preço: {{ weeklyControl.suppliers![0].price.value|currency:'BRL' }}</span>
         <div>
-            <button type="button" class="btn btn-primary btn-action" data-bs-toggle="modal" data-bs-target="#modalExemplo">
+            <button *ngIf="!weeklyControl.suppliers![0].paid_supplier" type="button" class="btn btn-primary btn-action" data-bs-toggle="modal" data-bs-target="#update-price-modal">
                 <i class="far fa-edit"></i> 
             </button>
         </div>
@@ -42,6 +48,7 @@
                            [attr.data-reference-day]="purchase.reference_day" 
                            [attr.data-init-value]="purchase.quantity"
                            (input)="updateTotal($event)"
+                           [disabled]="path === 'payment' || weeklyControl.suppliers![0].paid_supplier"
                            value="{{ purchase.quantity }}"/>
                 </td>
                 <td>{{ weeklyControl.suppliers![0].total_quantity }} L</td>
@@ -53,13 +60,18 @@
     <div class="button-area">
         <div>
             <button type="button" (click)="back()" class="btn btn-light border me-2">Cancelar</button>
-            <button type="button" (click)="save()" class="btn btn-primary"><i class="fas fa-check"></i> Salvar</button>
+            <button *ngIf="path === 'purchases'" type="button" (click)="save()" class="btn btn-primary">
+                <i class="fas fa-check"></i> Salvar
+            </button>
+            <button *ngIf="path === 'payment' && !weeklyControl.suppliers![0].paid_supplier" type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#pay-supplier-modal">
+                <i class="fa-solid fa-money-check-dollar bg-success"></i> Pagar
+            </button>
         </div>
     </div>
 </div>
 
 
-<div *ngIf="weeklyControl" class="modal fade" id="modalExemplo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div *ngIf="weeklyControl" class="modal fade" id="update-price-modal" tabindex="-1" role="dialog" aria-labelledby="update-price" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
 
@@ -86,6 +98,46 @@
         <footer class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
             <button type="button" (click)="setPriceTable()" data-bs-dismiss="modal" class="btn btn-primary">Salvar</button>
+        </footer>
+        </div>
+    </div>
+</div>
+
+
+<div *ngIf="weeklyControl" class="modal fade" id="pay-supplier-modal" tabindex="-1" role="dialog" aria-labelledby="paySupplier" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+
+        <header class="modal-header">
+            <h5 class="modal-title">Pagar fornecedor</h5>
+            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Fechar">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </header>
+
+        <main class="modal-body">
+            <span class="d-flex">#Fornecedor: {{ weeklyControl.suppliers![0].name }}</span>
+            <hr>
+            
+            <div class="pay-details">
+                <label>Quantidade: </label>
+                <strong class="d-flex">{{ weeklyControl.suppliers![0].total_quantity }} L</strong>
+            </div>
+            <div class="pay-details">
+                <label>Preço unitário: </label>
+                <strong class="d-flex">{{ weeklyControl.suppliers![0].price.value|currency:'BRL' }}</strong>
+            </div>
+            <div class="pay-details">
+                <label>Valor final: </label>
+                <strong class="d-flex">{{ getPriceTotal() | currency:'BRL':'symbol':'1.2-2' }}</strong>
+            </div>
+        </main>
+
+        <footer class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+            <button type="button" class="btn btn-dark" (click)="pay()" data-bs-dismiss="modal">
+                <i class="fa-solid fa-money-check-dollar bg-success"></i> Pagar
+            </button>
         </footer>
         </div>
     </div>

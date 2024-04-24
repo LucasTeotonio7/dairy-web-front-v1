@@ -1,5 +1,7 @@
 interface Purchase {
     id: string;
+    is_closed: boolean;
+    price: number;
     reference_day: string;
     quantity: number;
     weekday: number;
@@ -14,6 +16,7 @@ interface Price {
 
 interface Supplier {
     id: string;
+    paid_supplier: boolean;
     name: string;
     price: Price,
     purchases: Purchase[];

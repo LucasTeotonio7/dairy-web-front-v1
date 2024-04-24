@@ -6,6 +6,7 @@ import { Price } from '../price/models/price';
 import { PriceService } from './../price/services/price.service';
 import { PriceProductSupplierService } from './../price/services/price-product-supplier.service';
 import { PurchaseService } from './services/purchase.service';
+import { ToastService } from 'src/app/shared/services/toast.service';
 import { WeeklyControl } from '../weekly-control/models/weekly-control';
 import { WeeklyControlService } from './../weekly-control/services/weekly-control.service';
 
@@ -21,6 +22,7 @@ export class PurchaseComponent {
   priceTables: Price[] = [];
   priceProductSupplierForm!: FormGroup;
   isDefaultTable: boolean = false;
+  path!: string;
 
   constructor(
     private router: Router, 
@@ -29,7 +31,8 @@ export class PurchaseComponent {
     private weeklyControlService: WeeklyControlService,
     private purchaseService: PurchaseService,
     private priceService: PriceService,
-    private priceProductSupplierService: PriceProductSupplierService
+    private priceProductSupplierService: PriceProductSupplierService,
+    private toastService: ToastService,
   ) {
     this.priceProductSupplierForm = this.formBuilder.group({
       price: [''],
@@ -38,7 +41,19 @@ export class PurchaseComponent {
   }
 
   ngOnInit() {
+    this.getPath();
     this.getWeeklyControl();
+  }
+
+  getPath() {
+    this.route.url.subscribe(segments => {
+      const segment = segments.map(segment => segment.path);
+      if (segment.includes('purchases')) {
+        this.path = 'purchases';
+      } else if (segment.includes('payment')) {
+        this.path = 'payment';
+      }
+    });
   }
 
   getWeeklyControl() {
@@ -66,7 +81,6 @@ export class PurchaseComponent {
     this.priceService.listAll().subscribe({
       next: (response) => {
         this.priceTables = response;
-        console.log(this.priceTables)
       },
       error: (error) => {console.error(error);}
     })
@@ -75,7 +89,6 @@ export class PurchaseComponent {
   setPriceTable() {
     let supplier = this.weeklyControl.suppliers![0].id
     const priceProductSupplierForm = this.priceProductSupplierForm.value;
-    console.log(this.isDefaultTable)
     if (this.isDefaultTable) {
       let price_product_supplier_id = this.weeklyControl.suppliers![0].price.price_product_supplier_id;
       if (price_product_supplier_id) {
@@ -172,6 +185,26 @@ export class PurchaseComponent {
 
   save() {
     this.updatePurchaseValues();
+    this.back();
+  }
+
+  pay() {
+    var inputs = document.getElementsByClassName("purchase-quantity");
+    for (let i = 0; i < inputs.length; i++) {
+      let input = inputs[i] as HTMLInputElement;
+      if(input.id) {
+        const formData = new FormData();
+        formData.append('is_closed', 'true');
+        this.purchaseService.patch(input.id, formData).subscribe({
+          next: (response) => {
+            this.toastService.showToastSuccess('Pagamento', 'Fornecedor pago com sucesso!')
+          },
+          error: (error) => {
+            this.toastService.showToastDanger('Pagamento', 'Ocorreu uma falha ao processar o pagamento')
+          }
+        });
+      }
+    }
     this.back();
   }
 

@@ -101,7 +101,6 @@ export class ProductFormComponent extends FormBaseMixin {
 
   onOptionChange(event: any) {
     let option = event.target.options[event.target.selectedIndex];
-    console.log("Opção selecionada:", option.getAttribute('data-abbreviation'));
     this.labelValue = option.getAttribute('data-abbreviation')
   }
 

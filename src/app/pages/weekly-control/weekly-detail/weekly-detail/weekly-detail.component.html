@@ -51,7 +51,7 @@
                     <button type="button" routerLink="/weekly-control/{{ weeklyControl.id }}/supplier/{{supplier.id}}/purchases" class="btn btn-primary btn-action">
                         <i class="far fa-edit"></i> <span> Editar</span> 
                     </button>
-                    <button type="button" routerLink="/weekly-control/{{ weeklyControl.id }}/supplier/{{supplier.id}}/payment" class="btn btn-primary btn-action bg-dark">
+                    <button *ngIf="!supplier.paid_supplier" type="button" routerLink="/weekly-control/{{ weeklyControl.id }}/supplier/{{supplier.id}}/payment" class="btn btn-primary btn-action bg-dark">
                         <i class="fa-solid fa-money-check-dollar bg-success"></i> <span> Pagar</span> 
                     </button>
                 </td>

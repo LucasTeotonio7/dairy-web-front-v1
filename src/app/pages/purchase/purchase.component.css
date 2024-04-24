@@ -25,3 +25,12 @@ input::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
 }
+
+
+#pay-supplier-modal .pay-details {
+    margin-bottom: 1rem;
+}
+
+#pay-supplier-modal .pay-details label{
+    margin-bottom: 0;
+}
