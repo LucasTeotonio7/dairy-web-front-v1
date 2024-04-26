@@ -23,6 +23,7 @@ export class PurchaseComponent {
   priceProductSupplierForm!: FormGroup;
   isDefaultTable: boolean = false;
   path!: string;
+  unit_price!:number;
 
   constructor(
     private router: Router, 
@@ -106,12 +107,15 @@ export class PurchaseComponent {
         error: (error) => {console.error(error)}
       })
     }
+    this.weeklyControl.suppliers![0].price.value = this.unit_price;
+    this.updateUnitPrice(this.unit_price.toString());
   }
 
-  ChangingPriceValue($event: any){
+  changePriceValue($event: any){
     const selectedIndex = $event.target.selectedIndex;
     const selectedOption = $event.target.options[selectedIndex];
     this.isDefaultTable = selectedOption.getAttribute('default') === 'false' ? false : true;
+    this.unit_price = selectedOption.getAttribute('unit-price')
   }
 
   updatePurchaseValues() {
@@ -186,6 +190,18 @@ export class PurchaseComponent {
   save() {
     this.updatePurchaseValues();
     this.back();
+  }
+
+  updateUnitPrice(value: string) {
+    var inputs = document.getElementsByClassName("purchase-quantity");
+    for (let i = 0; i < inputs.length; i++) {
+      let input = inputs[i] as HTMLInputElement;
+      if(input.id) {
+        const formData = new FormData();
+        formData.append('unit_price', value);
+        this.purchaseService.patch(input.id, formData).subscribe();
+      }
+    }
   }
 
   pay() {

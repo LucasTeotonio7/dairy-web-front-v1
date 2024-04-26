@@ -87,9 +87,10 @@
             <hr>
             <form class="container" [formGroup]="priceProductSupplierForm">
                 <label for="price-product-supplier">Selecione a tabela</label>
-                <select *ngIf="priceTables" class="form-select" id="price-product-supplier" formControlName="price" (change)="ChangingPriceValue($event)">
+                <select *ngIf="priceTables" class="form-select" id="price-product-supplier" formControlName="price" (change)="changePriceValue($event)">
                     <option *ngFor="let priceTable of priceTables" 
                             value="{{ priceTable.id }}"
+                            [attr.unit-price]="priceTable.value"
                             [attr.default]="priceTable.default"> {{ priceTable.description }} - R$ {{ priceTable.value }} </option>
                 </select>
             </form>
