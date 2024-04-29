@@ -108,7 +108,6 @@ export class PurchaseComponent {
       })
     }
     this.weeklyControl.suppliers![0].price.value = this.unit_price;
-    this.updateUnitPrice(this.unit_price.toString());
   }
 
   changePriceValue($event: any){
@@ -190,18 +189,6 @@ export class PurchaseComponent {
   save() {
     this.updatePurchaseValues();
     this.back();
-  }
-
-  updateUnitPrice(value: string) {
-    var inputs = document.getElementsByClassName("purchase-quantity");
-    for (let i = 0; i < inputs.length; i++) {
-      let input = inputs[i] as HTMLInputElement;
-      if(input.id) {
-        const formData = new FormData();
-        formData.append('unit_price', value);
-        this.purchaseService.patch(input.id, formData).subscribe();
-      }
-    }
   }
 
   pay() {

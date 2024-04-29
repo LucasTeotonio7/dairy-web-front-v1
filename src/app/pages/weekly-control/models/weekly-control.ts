@@ -1,7 +1,5 @@
 interface Purchase {
     id: string;
-    is_closed: boolean;
-    price: number;
     reference_day: string;
     quantity: number;
     weekday: number;
