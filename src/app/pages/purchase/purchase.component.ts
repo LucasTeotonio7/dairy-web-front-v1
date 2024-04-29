@@ -9,6 +9,7 @@ import { PurchaseService } from './services/purchase.service';
 import { ToastService } from 'src/app/shared/services/toast.service';
 import { WeeklyControl } from '../weekly-control/models/weekly-control';
 import { WeeklyControlService } from './../weekly-control/services/weekly-control.service';
+import { SupplierPaymentService } from './services/supplier-payment.service';
 
 
 @Component({
@@ -31,6 +32,7 @@ export class PurchaseComponent {
     private formBuilder: FormBuilder,
     private weeklyControlService: WeeklyControlService,
     private purchaseService: PurchaseService,
+    private supplierPaymentService: SupplierPaymentService,
     private priceService: PriceService,
     private priceProductSupplierService: PriceProductSupplierService,
     private toastService: ToastService,
@@ -192,21 +194,21 @@ export class PurchaseComponent {
   }
 
   pay() {
-    var inputs = document.getElementsByClassName("purchase-quantity");
-    for (let i = 0; i < inputs.length; i++) {
-      let input = inputs[i] as HTMLInputElement;
-      if(input.id) {
-        const formData = new FormData();
-        formData.append('is_closed', 'true');
-        this.purchaseService.patch(input.id, formData).subscribe({
-          next: (response) => {
-            this.toastService.showToastSuccess('Pagamento', 'Fornecedor pago com sucesso!')
-          },
-          error: (error) => {
-            this.toastService.showToastDanger('Pagamento', 'Ocorreu uma falha ao processar o pagamento')
-          }
-        });
-      }
+    if(this.weeklyControl.suppliers) {
+      const supplier = this.weeklyControl.suppliers[0];
+      const formData = new FormData();
+      formData.append('quantity', supplier.total_quantity.toString());
+      formData.append('unit_price', supplier.price.value.toString());
+      formData.append('supplier', supplier.id);
+      formData.append('weekly_control', this.weeklyControl.id);
+      this.supplierPaymentService.post(formData).subscribe({
+        next: (response) => {
+          this.toastService.showToastSuccess('Pagamento', 'Fornecedor pago com sucesso!')
+        },
+        error: (error) => {
+          this.toastService.showToastDanger('Pagamento', 'Ocorreu uma falha ao processar o pagamento')
+        }
+      });
     }
     this.back();
   }
