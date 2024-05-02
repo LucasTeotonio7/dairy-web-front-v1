@@ -9,6 +9,7 @@ import { PurchaseService } from './services/purchase.service';
 import { ToastService } from 'src/app/shared/services/toast.service';
 import { WeeklyControl } from '../weekly-control/models/weekly-control';
 import { WeeklyControlService } from './../weekly-control/services/weekly-control.service';
+import { WeeklyControlEvent } from '../weekly-control/models/weekly-control-event';
 import { SupplierPaymentService } from './services/supplier-payment.service';
 
 
@@ -25,6 +26,7 @@ export class PurchaseComponent {
   isDefaultTable: boolean = false;
   path!: string;
   unit_price!:number;
+  weeklyControlEvents!: WeeklyControlEvent[];
 
   constructor(
     private router: Router, 
@@ -68,6 +70,7 @@ export class PurchaseComponent {
         this.weeklyControlService.get(this.weeklyControlId, queryParam).subscribe({
           next: (response) => {
               this.weeklyControl = response;
+              this.get_events(supplierId, this.weeklyControl.id)
           },
           error: (error) => {
             console.error(error);
@@ -78,6 +81,21 @@ export class PurchaseComponent {
         });
       }
     })
+  }
+
+  get_events(supplierId: string, weeklyControlId: string){
+    let params = {
+      "supplier_id" : supplierId,
+      "weekly_control_id": weeklyControlId
+    };
+    this.weeklyControlService.get_events(1, params).subscribe({
+      next: (response) => {
+        this.weeklyControlEvents = response.results;
+      },
+      error: (err) => {
+        console.error(err);
+      }
+    });
   }
 
   getPriceTables() {

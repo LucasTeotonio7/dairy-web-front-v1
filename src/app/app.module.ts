@@ -8,6 +8,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { HistoryComponent } from './pages/purchase/history/history.component';
 import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/auth/login.component';
 import { PurchaseComponent } from './pages/purchase/purchase.component';
@@ -24,7 +25,8 @@ registerLocaleData(ptBr)
     HomeComponent,
     LoginComponent,
     DashboardComponent,
-    PurchaseComponent
+    PurchaseComponent,
+    HistoryComponent
   ],
   imports: [
     BrowserModule,

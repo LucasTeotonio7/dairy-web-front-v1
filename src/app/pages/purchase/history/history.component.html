@@ -1,0 +1,12 @@
+<div class="history" *ngIf="weeklyControlEvents.length > 0">
+    <h3>Atualizações recentes</h3>
+    <div class="history-list">
+        <div class="history-item" *ngFor="let event of weeklyControlEvents">
+            <img src="{{ event.created_by.image }}" alt="User Avatar" class="rounded-avatar">
+            <div class="desc">
+                <span>{{ event.created_by.name }} {{ format_history_event(event)}}</span>
+                <small>{{ formatDateTime(event.created_at) }}</small>
+            </div>
+        </div>
+    </div>
+</div>
