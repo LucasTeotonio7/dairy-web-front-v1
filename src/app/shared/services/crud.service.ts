@@ -26,8 +26,8 @@ export class CrudService<Type> {
       return this.http.get<Type>(`${this.BASE_URL}${id}`, this.getRequestOptions(params));
   }
 
-  list(page: number): Observable<Paginator<Type>> {
-    let param = { page : page };
+  list(page: number, params?: object): Observable<Paginator<Type>> {
+    let param = { page : page, ...params };
     return this.http.get<Paginator<Type>>(`${this.BASE_URL}`, this.getRequestOptions(param));
   }
 
@@ -59,7 +59,7 @@ export class CrudService<Type> {
     return this.http.delete(`${this.BASE_URL}${id}/`, this.getRequestOptions());
   }
 
-  private getRequestOptions(params?: { [key: string]: any }): { headers: HttpHeaders; params?: HttpParams} {
+  getRequestOptions(params?: { [key: string]: any }): { headers: HttpHeaders; params?: HttpParams} {
     let httpParams: HttpParams | undefined;
 
     if (params) {
