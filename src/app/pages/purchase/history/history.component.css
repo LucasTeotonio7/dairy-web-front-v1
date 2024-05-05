@@ -4,20 +4,35 @@
 
 .history h3 {
     font-size: 1.5rem;
+    color: var(--title-color);
+    font-weight: 700;
 }
 
-.history .history-list .history-item {
+.history-item {
     display: flex;
     align-items: center;
-    margin-bottom: 10px;
+    padding: 25px 0;
 }
 
-.history .history-list .history-item .desc {
+.history-item .desc {
     display: flex;
     flex-direction: column;
+    margin-left: 1rem;
+    color: var(--title-color);
+    font-size: 14px;
 }
 
-.rounded-avatar {
+.history-item .desc .datetime {
+    color: var(--subtitle-color);
+    font-size: 13px;
+    margin-top: 4px;
+}
+
+.avatar-container {
+    z-index: 5;
+}
+
+.avatar-container .rounded-avatar {
     width: 40px;
     height: 40px;
     object-fit: cover;
