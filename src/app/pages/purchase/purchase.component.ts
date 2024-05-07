@@ -120,7 +120,11 @@ export class PurchaseComponent {
     if (this.isDefaultTable) {
       let price_product_supplier_id = this.weeklyControl.suppliers![0].price.price_product_supplier_id;
       if (price_product_supplier_id) {
-        this.priceProductSupplierService.delete(price_product_supplier_id).subscribe({
+        let params = {
+          "new_value": this.unit_price,
+          "weekly_control_id": this.weeklyControl.id
+        };
+        this.priceProductSupplierService.delete(price_product_supplier_id, params).subscribe({
           next: () => {},
           error: (error) => {console.error(error)}
         })
@@ -129,6 +133,7 @@ export class PurchaseComponent {
       const formData = new FormData();
       formData.append('price', priceProductSupplierForm.price);
       formData.append('supplier', supplier);
+      formData.append('weekly_control_id', this.weeklyControl.id);
       this.priceProductSupplierService.post(formData).subscribe({
         next: () => {console.log('ok')},
         error: (error) => {console.error(error)}
