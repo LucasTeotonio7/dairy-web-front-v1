@@ -3,12 +3,30 @@
 }
 
 .history h3 {
-    font-size: 1.5rem;
+    font-size: 20px;
     color: var(--title-color);
     font-weight: 700;
 }
 
 .history-item {
+    height: 7%;
+}
+
+.history-item .line {
+    width: 3px;
+    display: block;
+    height: inherit;
+    background: #dddfeb;
+    position: absolute;
+    margin-left: 18px;
+    margin-top: 48px;
+}
+
+.history-item:nth-last-child(2) .line {
+    display: none;
+}
+
+.history-item .item-detail {
     display: flex;
     align-items: center;
     padding: 25px 0;
@@ -38,4 +56,15 @@
     object-fit: cover;
     border-radius: 50%;
     margin-right: 5px;
+}
+
+.btn-view-more {
+    border: none;
+    padding: 10px;
+    border-radius: 20px;
+    background: var(--blue);
+    color: #fff;
+    font-size: 14px;
+    font-weight: 400;
+    margin: 20px 0;
 }

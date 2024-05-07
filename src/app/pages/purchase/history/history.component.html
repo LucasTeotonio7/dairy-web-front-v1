@@ -1,14 +1,44 @@
-<div class="history" *ngIf="weeklyControlEvents.length > 0">
+<div class="history" *ngIf="WeeklyControlEventPaginator">
+    <hr>
     <h3>Atualizações recentes</h3>
     <div class="history-list">
-        <div class="history-item" *ngFor="let event of weeklyControlEvents">
-            <div class="avatar-container">
-                <img src="{{ event.created_by.image }}" alt="User Avatar" class="rounded-avatar">
+        <div class="history-item" *ngFor="let event of WeeklyControlEventPaginator.results">
+            <span class="line"></span>
+            <div class="item-detail">
+                <div class="avatar-container">
+                    <img src="{{ event.created_by.image }}" alt="User Avatar" class="rounded-avatar">
+                </div>
+                <div class="desc">
+                    <div>
+                        <ng-container [ngSwitch]="event.type">
+                            <ng-container *ngSwitchCase="'RECORD'">
+                                <ng-container *ngIf="!event.old_value; else updateRecord">
+                                    <b>{{ event.created_by.name }}</b> registrou {{ event.new_value|number: '1.0-2' }}{{ event.measure_unit }} para <b>{{ getDayOfWeek(event.reference_day) }}</b>
+                                </ng-container>
+                                <ng-template #updateRecord>
+                                    <b>{{ event.created_by.name }}</b> atualizou o registro de 
+                                    <b>{{ getDayOfWeek(event.reference_day) }}</b> de {{ event.old_value|number: '1.0-2' }}{{ event.measure_unit }} para 
+                                    {{ event.new_value|number: '1.0-2' }}{{ event.measure_unit }}
+                                </ng-template>
+                            </ng-container>
+                            <ng-container *ngSwitchCase="'PRICE'">
+                                <b>{{ event.created_by.name }}</b> atualizou a tabela de preço de R$ {{ event.old_value|number: '1.2-2' }} para R$ {{ event.new_value }}
+                            </ng-container>
+                            <ng-container *ngSwitchCase="'PAYMENT'">
+                                <b>{{ event.created_by.name }}</b> fez o pagamento ao fornecedor no valor de R$ {{ event.new_value|number: '1.2-2' }}
+                            </ng-container>
+                            <ng-container *ngSwitchCase="'MANUAL'">
+                                <b>{{ event.created_by.name }}</b> Adicionou uma nota: {{ event.description }}
+                            </ng-container>
+                        </ng-container>
+                    </div>
+                    <small class="datetime">{{ formatDateTime(event.created_at) }}</small>
+                </div>
             </div>
-            <div class="desc">
-                <span>{{ event.created_by.name }} {{ format_history_event(event)}}</span>
-                <small class="datetime">{{ formatDateTime(event.created_at) }}</small>
-            </div>
+        </div>
+
+        <div *ngIf="WeeklyControlEventPaginator.next">
+            <button class="btn-view-more" (click)="onGetMoreEvents()"> Exibir mais</button>
         </div>
     </div>
 </div>

@@ -1,4 +1,6 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+
+import { Paginator } from 'src/app/shared/models/paginator';
 import { WeeklyControlEvent } from '../../weekly-control/models/weekly-control-event';
 
 @Component({
@@ -7,39 +9,11 @@ import { WeeklyControlEvent } from '../../weekly-control/models/weekly-control-e
   styleUrl: './history.component.css'
 })
 export class HistoryComponent {
-  @Input() weeklyControlEvents!: WeeklyControlEvent[];
+  @Input() WeeklyControlEventPaginator!: Paginator<WeeklyControlEvent>;
+  @Output() getMoreEvents = new EventEmitter<void>();
 
-
-  format_history_event(weeklyControlEvent: WeeklyControlEvent) {
-    let description = ''
-    let newValue = weeklyControlEvent.new_value;
-    let oldValue = weeklyControlEvent.old_value;
-    let unit = weeklyControlEvent.measure_unit;
-    let dayOfWeek = this.getDayOfWeek(weeklyControlEvent.reference_day);
-
-    switch (weeklyControlEvent.type) {
-
-      case 'RECORD':
-          if (!oldValue) {
-            description =` registrou ${newValue} ${unit} para ${dayOfWeek}`;
-          } else {
-            description =` atualizou o registro de ${dayOfWeek} de ${oldValue} ${unit} para ${newValue} ${unit}`;
-          }
-          break;
-      case 'PRICE':
-        description =` atualizou a tabela de preço de R$ ${oldValue} para R$ ${newValue}`;
-        break;
-      case 'PAYMENT':
-          description =` fez o pagamento ao fornecedor no valor de R$ ${newValue}`;
-          break;
-      case 'MANUAL':
-          description = `Adicionou um nota: ${weeklyControlEvent.description}`;
-          break;
-      default:
-          console.error("Event not recognized");
-    }
-
-    return description;
+  onGetMoreEvents() {
+    this.getMoreEvents.emit();
   }
 
   getDayOfWeek(dateString: string): string {
