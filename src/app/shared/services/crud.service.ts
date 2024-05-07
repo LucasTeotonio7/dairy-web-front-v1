@@ -55,8 +55,8 @@ export class CrudService<Type> {
     return this.http.patch(`${this.BASE_URL}${id}/`, formData, this.getRequestOptions());
   } 
 
-  delete(id: string): Observable<any> {
-    return this.http.delete(`${this.BASE_URL}${id}/`, this.getRequestOptions());
+  delete(id: string, params?: object): Observable<any> {
+    return this.http.delete(`${this.BASE_URL}${id}/`, this.getRequestOptions(params));
   }
 
   getRequestOptions(params?: { [key: string]: any }): { headers: HttpHeaders; params?: HttpParams} {
