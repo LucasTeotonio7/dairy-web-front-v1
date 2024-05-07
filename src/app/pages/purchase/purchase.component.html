@@ -1,4 +1,4 @@
-<div *ngIf="path" class="h3 px-3">
+<div *ngIf="path" class="h3 px-3 title">
     <span *ngIf="path === 'purchases'">Editar planilha</span>
     <span *ngIf="path === 'payment'">Pagar fornecedor</span>
     <hr>
@@ -70,7 +70,9 @@
     </div>
 </div>
 
-<app-history [weeklyControlEvents]="weeklyControlEvents"></app-history>
+<app-history [WeeklyControlEventPaginator]="WeeklyControlEventPaginator" 
+            (getMoreEvents)="get_events(weeklyControl.suppliers![0].id, weeklyControl.id, 2)">
+</app-history>
 
 <div *ngIf="weeklyControl" class="modal fade" id="update-price-modal" tabindex="-1" role="dialog" aria-labelledby="update-price" aria-hidden="true">
     <div class="modal-dialog" role="document">
