@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
+import { Paginator } from 'src/app/shared/models/paginator';
 import { Price } from '../price/models/price';
 import { PriceService } from './../price/services/price.service';
 import { PriceProductSupplierService } from './../price/services/price-product-supplier.service';
@@ -26,7 +27,7 @@ export class PurchaseComponent {
   isDefaultTable: boolean = false;
   path!: string;
   unit_price!:number;
-  weeklyControlEvents!: WeeklyControlEvent[];
+  WeeklyControlEventPaginator!: Paginator<WeeklyControlEvent>;
 
   constructor(
     private router: Router, 
@@ -83,14 +84,20 @@ export class PurchaseComponent {
     })
   }
 
-  get_events(supplierId: string, weeklyControlId: string){
+  get_events(supplierId: string, weeklyControlId: string, page=1){
     let params = {
       "supplier_id" : supplierId,
       "weekly_control_id": weeklyControlId
     };
-    this.weeklyControlService.get_events(1, params).subscribe({
+    this.weeklyControlService.get_events(page, params).subscribe({
       next: (response) => {
-        this.weeklyControlEvents = response.results;
+        if(page > 1) {
+          let allResults = this.WeeklyControlEventPaginator.results;
+          response.results = allResults.concat(response.results);
+          this.WeeklyControlEventPaginator = response;
+        } else {
+          this.WeeklyControlEventPaginator = response;
+        }
       },
       error: (err) => {
         console.error(err);
