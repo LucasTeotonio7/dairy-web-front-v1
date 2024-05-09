@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
+import { DateService } from 'src/app/shared/services/date.service';
 import { WeeklyControl } from '../../models/weekly-control';
 import { WeeklyControlService } from '../../services/weekly-control.service';
 
@@ -12,10 +13,12 @@ import { WeeklyControlService } from '../../services/weekly-control.service';
 export class WeeklyDetailComponent {
 
   weeklyControl!: WeeklyControl;
+  weekDays: string[] = [];
 
   constructor(
     private weeklyControlService: WeeklyControlService,
     private route: ActivatedRoute,
+    private dateService: DateService
   ) { }
 
   ngOnInit(): void {
@@ -29,6 +32,7 @@ export class WeeklyDetailComponent {
         this.weeklyControlService.get(id).subscribe({
           next: (weeklyControl: WeeklyControl) => {
             this.weeklyControl = weeklyControl;
+            this.weekDays = this.dateService.getWeekDays(this.weeklyControl.start_date);
           },
           error: (error: any) => {
             console.error(error);

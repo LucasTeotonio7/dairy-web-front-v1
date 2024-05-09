@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
+import { DateService } from 'src/app/shared/services/date.service';
 import { Paginator } from 'src/app/shared/models/paginator';
 import { Price } from '../price/models/price';
 import { PriceService } from './../price/services/price.service';
@@ -28,6 +29,7 @@ export class PurchaseComponent {
   path!: string;
   unit_price!:number;
   WeeklyControlEventPaginator!: Paginator<WeeklyControlEvent>;
+  weekDays: string[] = [];
 
   constructor(
     private router: Router, 
@@ -39,6 +41,7 @@ export class PurchaseComponent {
     private priceService: PriceService,
     private priceProductSupplierService: PriceProductSupplierService,
     private toastService: ToastService,
+    private dateService: DateService
   ) {
     this.priceProductSupplierForm = this.formBuilder.group({
       price: [''],
@@ -71,6 +74,7 @@ export class PurchaseComponent {
         this.weeklyControlService.get(this.weeklyControlId, queryParam).subscribe({
           next: (response) => {
               this.weeklyControl = response;
+              this.weekDays = this.dateService.getWeekDays(this.weeklyControl.start_date);
               this.get_events(supplierId, this.weeklyControl.id)
           },
           error: (error) => {

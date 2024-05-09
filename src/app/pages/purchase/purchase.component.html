@@ -8,8 +8,8 @@
     <div><i class="fa-solid fa-truck-ramp-box mx-1"></i> {{ weeklyControl.suppliers![0].name }} </div>
     <div>
         <i class="far fa-calendar-alt me-2"></i>
-        <span>09/20/2024</span> ~ 
-        <span>15/20/2024</span>
+        <span>{{ weeklyControl.start_date|date:'dd/MM/yyyy' }}</span> ~ 
+        <span>{{ weeklyControl.end_date|date:'dd/MM/yyyy' }}</span>
     </div>
     <div class="price-tag">
         <i class="fa-solid fa-tag"></i> 
@@ -27,13 +27,7 @@
     <table class="table table-purchases mt-2">
         <thead>
             <tr>
-                <th>SEX</th>
-                <th>SAB</th>
-                <th>DOM</th>
-                <th>SEG</th>
-                <th>TER</th>
-                <th>QUA</th>
-                <th>QUI</th>
+                <th *ngFor="let weekDay of weekDays">{{ weekDay }}</th>
                 <th>QUANTIDADE</th>
                 <th>VALOR</th>
             </tr>
