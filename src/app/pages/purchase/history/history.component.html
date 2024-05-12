@@ -1,4 +1,4 @@
-<div class="history" *ngIf="WeeklyControlEventPaginator">
+<div class="history" *ngIf="WeeklyControlEventPaginator && WeeklyControlEventPaginator.count > 0">
     <hr>
     <h3>Atualizações recentes</h3>
     <div class="history-list">
@@ -36,9 +36,8 @@
                 </div>
             </div>
         </div>
-
-        <div *ngIf="WeeklyControlEventPaginator.next">
-            <button class="btn-view-more" (click)="onGetMoreEvents()"> Exibir mais</button>
-        </div>
+    </div>
+    <div *ngIf="WeeklyControlEventPaginator.next">
+        <button class="btn-view-more" (click)="onGetMoreEvents()"> Exibir mais</button>
     </div>
 </div>

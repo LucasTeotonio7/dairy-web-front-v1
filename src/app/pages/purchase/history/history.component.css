@@ -15,14 +15,14 @@
 .history-item .line {
     width: 3px;
     display: block;
-    height: inherit;
+    height: 110px;
     background: #dddfeb;
     position: absolute;
     margin-left: 18px;
     margin-top: 48px;
 }
 
-.history-item:nth-last-child(2) .line {
+.history-item:nth-last-child(1) .line {
     display: none;
 }
 
@@ -67,4 +67,34 @@
     font-size: 14px;
     font-weight: 400;
     margin: 20px 0;
+}
+
+
+@media (max-width: 768px) {
+    .history h3 {
+        font-size: 15px;
+    }
+
+    .avatar-container .rounded-avatar {
+        width: 30px;
+        height: 30px;
+    }
+
+    .history-item .line {
+        width: 2px;
+        height: 90px;
+        margin-left: 15px;
+    }
+
+    .history-item .desc {
+        font-size: 11px;
+    }
+
+    .history-item .desc .datetime {
+        font-size: 10px;
+    }
+
+    .btn-view-more {
+        font-size: 11px;
+    }
 }

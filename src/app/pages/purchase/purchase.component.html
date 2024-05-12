@@ -65,7 +65,7 @@
 </div>
 
 <app-history [WeeklyControlEventPaginator]="WeeklyControlEventPaginator" 
-            (getMoreEvents)="get_events(weeklyControl.suppliers![0].id, weeklyControl.id, 2)">
+            (getMoreEvents)="get_events(weeklyControl.suppliers![0].id, weeklyControl.id, WeeklyControlEventPaginator.page_number+1)">
 </app-history>
 
 <div *ngIf="weeklyControl" class="modal fade" id="update-price-modal" tabindex="-1" role="dialog" aria-labelledby="update-price" aria-hidden="true">
