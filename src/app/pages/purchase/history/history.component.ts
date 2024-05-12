@@ -19,7 +19,7 @@ export class HistoryComponent {
   getDayOfWeek(dateString: string): string {
     const days = ['domingo', 'segunda-feira', 'terça-feira', 'quarta-feira', 'quinta-feira', 'sexta-feira', 'sábado'];
     const date = new Date(dateString + 'T00:00:00Z');
-    const dayOfWeek = days[date.getDay()];
+    const dayOfWeek = days[date.getUTCDay()];
     return dayOfWeek;
   }
 
