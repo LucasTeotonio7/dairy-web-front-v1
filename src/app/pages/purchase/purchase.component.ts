@@ -13,6 +13,7 @@ import { WeeklyControl } from '../weekly-control/models/weekly-control';
 import { WeeklyControlService } from './../weekly-control/services/weekly-control.service';
 import { WeeklyControlEvent } from '../weekly-control/models/weekly-control-event';
 import { SupplierPaymentService } from './services/supplier-payment.service';
+import { Weekday } from 'src/app/shared/models/date';
 
 
 @Component({
@@ -29,7 +30,7 @@ export class PurchaseComponent {
   path!: string;
   unit_price!:number;
   WeeklyControlEventPaginator!: Paginator<WeeklyControlEvent>;
-  weekDays: string[] = [];
+  weekDays: Weekday[] = [];
 
   constructor(
     private router: Router, 
@@ -74,7 +75,7 @@ export class PurchaseComponent {
         this.weeklyControlService.get(this.weeklyControlId, queryParam).subscribe({
           next: (response) => {
               this.weeklyControl = response;
-              this.weekDays = this.dateService.getWeekDays(this.weeklyControl.start_date);
+              this.weekDays = this.dateService.getWeekdays(this.weeklyControl.start_date);
               this.get_events(supplierId, this.weeklyControl.id)
           },
           error: (error) => {
