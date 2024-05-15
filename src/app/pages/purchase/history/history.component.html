@@ -22,7 +22,7 @@
                                 </ng-template>
                             </ng-container>
                             <ng-container *ngSwitchCase="'PRICE'">
-                                <b>{{ event.created_by.name }}</b> atualizou a tabela de preço de <b>R$ {{ event.old_value|number: '1.2-2' }}</b> para <b>R$ {{ event.new_value }}</b>
+                                <b>{{ event.created_by.name }}</b> atualizou a tabela de preço de <b>R$ {{ event.old_value|number: '1.2-2' }}</b> para <b>R$ {{ event.new_value|number: '1.2-2' }}</b>
                             </ng-container>
                             <ng-container *ngSwitchCase="'PAYMENT'">
                                 <b>{{ event.created_by.name }}</b> fez o pagamento ao fornecedor no valor de <b>R$ {{ event.new_value|number: '1.2-2' }}</b>
