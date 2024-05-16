@@ -31,6 +31,7 @@ export class PurchaseComponent {
   unit_price!:number;
   WeeklyControlEventPaginator!: Paginator<WeeklyControlEvent>;
   weekDays: Weekday[] = [];
+  today!: string;
 
   constructor(
     private router: Router, 
@@ -53,6 +54,7 @@ export class PurchaseComponent {
   ngOnInit() {
     this.getPath();
     this.getWeeklyControl();
+    this.today = this.dateService.formatDate(new Date(), false);
   }
 
   getPath() {
@@ -117,6 +119,17 @@ export class PurchaseComponent {
       },
       error: (error) => {console.error(error);}
     })
+  }
+
+  disableField(reference_day: string) {
+    const isPaymentRoute = this.path === 'payment';
+    const paidSupplier = this.weeklyControl.suppliers![0].paid_supplier;
+    
+    let reference_date = new Date(reference_day);
+    let today_date = new Date(this.today);
+    const futureDate = reference_date > today_date;
+
+    return isPaymentRoute || paidSupplier || futureDate;
   }
 
   setPriceTable() {
