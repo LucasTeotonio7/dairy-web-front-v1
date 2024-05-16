@@ -15,7 +15,8 @@ export class DateService {
     const firstDayOfWeek = startDateObj.getUTCDay();
     result.push({
       name: daysOfWeek[firstDayOfWeek],
-      date: startDateObj
+      date: startDateObj,
+      day: this.formatDate(startDateObj)
     });
 
     for (let i = 1; i <= 6; i++) {
@@ -23,10 +24,22 @@ export class DateService {
       nextDate.setUTCDate(startDateObj.getUTCDate() + i);
       result.push({
         name: daysOfWeek[nextDate.getUTCDay()],
-        date: startDateObj
+        date: startDateObj,
+        day: this.formatDate(nextDate)
       });
     }
     return result;
+  }
+
+  formatDate(date: Date, utc = true): string {
+    const year = utc ? date.getUTCFullYear() : date.getFullYear();
+    const month = utc ? date.getUTCMonth() + 1 : date.getMonth() + 1;
+    const day = utc ? date.getUTCDate() : date.getDate();
+  
+    const formattedMonth = (month < 10) ? `0${month}` : month;
+    const formattedDay = (day < 10) ? `0${day}` : day;
+  
+    return `${year}-${formattedMonth}-${formattedDay}`;
   }
 
 }
