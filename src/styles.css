@@ -28,13 +28,26 @@
     font-size: 12px;
     font-weight: 700;
     border: none;
-    background: #e3e6f0;
-    color: #000;
+    background: var(--blue);
+    color: var(--white);
 }
 
 .table tbody td {
     vertical-align: middle;
-    font-size: 12px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.table {
+    box-shadow: 0 .15rem 1.75rem 0 rgba(58, 59, 69, .15) !important;
+}
+
+.table th:first-child {
+    border-top-left-radius: 10px;
+}
+
+.table th:last-child {
+    border-top-right-radius: 10px;
 }
 
 .table {
