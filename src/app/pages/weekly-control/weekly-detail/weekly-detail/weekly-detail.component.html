@@ -24,7 +24,7 @@
     <table class="table mt-2">
         <thead>
             <tr>
-                <th>Fornecedor</th>
+                <th>FORNECEDOR</th>
                 <th *ngFor="let weekday of weekdays">{{ weekday.name }}</th>
                 <th>QUANTIDADE</th>
                 <th>PREÇO</th>
@@ -33,15 +33,15 @@
         </thead>
         <tbody>
             <tr *ngFor="let supplier of weeklyControl.suppliers">
-                <td>
+                <td data-label="fornecedor">
                     <a routerLink="/weekly-control/{{ weeklyControl.id }}/supplier/{{supplier.id}}/purchases">
                         {{ supplier.name }}
                     </a>
                 </td>
-                <td *ngFor="let purchase of supplier.purchases">{{ purchase.quantity }}</td>
-                <td>{{ supplier.total_quantity }} L</td>
-                <td>{{ supplier.price.value|currency:'BRL' }}</td>
-                <td>
+                <td [attr.data-label]="getWeekday(purchase.reference_day).name" *ngFor="let purchase of supplier.purchases">{{ purchase.quantity }}</td>
+                <td data-label="Quantidade">{{ supplier.total_quantity }} L</td>
+                <td data-label="Preço">{{ supplier.price.value|currency:'BRL' }}</td>
+                <td data-label="Ações">
                     <button type="button" routerLink="/weekly-control/{{ weeklyControl.id }}/supplier/{{supplier.id}}/purchases" class="btn btn-primary btn-action">
                         <i class="far fa-edit"></i> <span> Editar</span> 
                     </button>

@@ -13,13 +13,13 @@
         </thead>
         <tbody>
             <tr *ngFor="let supplier of suppliers">
-                <td>{{ supplier.name}}</td>
-                <td>{{ supplier.cellphone}}</td>
-                <td class="active-column">
+                <td data-label="Nome">{{ supplier.name}}</td>
+                <td data-label="Contato">{{ supplier.cellphone}}</td>
+                <td data-label="Ativo" class="active-column">
                     <i *ngIf="supplier.active" class="fas fa-check-circle text-success"></i>
                     <i *ngIf="!supplier.active" class="fas fa-times-circle text-danger"></i>
                 </td>
-                <td>
+                <td data-label="Ações">
                     <div role="group">
                         <button type="button" routerLink="/suppliers/{{ supplier.id }}/update" class="btn btn-primary btn-action">
                             <i class="far fa-edit"></i> <span> Editar</span> 

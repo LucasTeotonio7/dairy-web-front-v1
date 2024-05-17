@@ -14,14 +14,14 @@
         </thead>
         <tbody>
             <tr *ngFor="let price of prices">
-                <td>{{ price.description }}</td>
-                <td>{{ price.product }}</td>
-                <td>{{ price.value }}</td>
-                <td class="active-column">
+                <td data-label="Nome">{{ price.description }}</td>
+                <td data-label="Produto">{{ price.product }}</td>
+                <td data-label="Valor">R$ {{ price.value|number: '1.2-2' }}</td>
+                <td data-label="tabela padrão" class="active-column">
                     <i *ngIf="price.default" class="fas fa-check-circle text-success"></i>
                     <i *ngIf="!price.default" class="fas fa-times-circle text-danger"></i>
                 </td>
-                <td>
+                <td data-label="Ações">
                     <div role="group">
                         <button type="button" routerLink="/prices/{{ price.id }}/update" class="btn btn-primary btn-action">
                             <i class="far fa-edit"></i> <span> Editar</span> 

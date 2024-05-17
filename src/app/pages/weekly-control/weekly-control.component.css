@@ -1,0 +1,13 @@
+@media (max-width: 768px){
+    .product-name {
+        color: var(--bs-white);
+    }
+
+    .product-name::before {
+        content: "\f35d";
+        font-family: "Font Awesome 5 Free";
+        font-weight: 900;
+        margin-right: 5px;
+        transform: translateY(-50%);
+    }
+}

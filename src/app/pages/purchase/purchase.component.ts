@@ -91,6 +91,10 @@ export class PurchaseComponent {
     })
   }
 
+  getWeekday(day: string): Weekday {
+    return this.dateService.getWeekday(day);
+  }
+
   get_events(supplierId: string, weeklyControlId: string, page=1){
     let params = {
       "supplier_id" : supplierId,

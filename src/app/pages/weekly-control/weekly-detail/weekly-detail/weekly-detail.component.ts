@@ -26,6 +26,10 @@ export class WeeklyDetailComponent {
     this.setWeeklyControl();
   }
 
+  getWeekday(day: string): Weekday {
+    return this.dateService.getWeekday(day);
+  }
+
   private setWeeklyControl(): void {
     this.route.paramMap.subscribe(params => {
       const id = params.get('id');

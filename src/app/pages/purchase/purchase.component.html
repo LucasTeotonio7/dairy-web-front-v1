@@ -46,7 +46,7 @@
         </thead>
         <tbody>
             <tr *ngIf="weeklyControl">
-                <td *ngFor="let purchase of weeklyControl.suppliers![0].purchases">
+                <td [attr.data-label]="getWeekday(purchase.reference_day).name" *ngFor="let purchase of weeklyControl.suppliers![0].purchases">
                     <input id="{{ purchase.id }}"
                            type="number"
                            min="0"
@@ -57,8 +57,8 @@
                            [disabled]="disableField(purchase.reference_day)"
                            value="{{ purchase.quantity }}"/>
                 </td>
-                <td class="values-result">{{ weeklyControl.suppliers![0].total_quantity }}</td>
-                <td class="values-result">{{ getPriceTotal() | currency:'BRL':'symbol':'1.2-2' }} </td>
+                <td data-label="Quantidade" class="values-result">{{ weeklyControl.suppliers![0].total_quantity }}</td>
+                <td data-label="Valor" class="values-result">{{ getPriceTotal() | currency:'BRL':'symbol':'1.2-2' }} </td>
             </tr>
         </tbody>
     </table>

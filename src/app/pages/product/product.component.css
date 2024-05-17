@@ -1,8 +1,9 @@
 .image-product {
     width: 50px;
     height: 50px;
-    object-fit: contain;
+    object-fit: cover;
     margin-right: 10px;
+    border-radius: 3px;
 }
 
 .product-info .description {
@@ -10,6 +11,18 @@
     font-weight: 700;
 }
 
-.product-info .measure_unit {
-    font-size: 10px;
+.product-info .measure-unit {
+    font-size: 12px;
+    text-align: start;
+}
+
+@media (max-width: 768px) {
+    .product-info .description {
+        font-size: 11px;
+    }
+
+    .product-info .measure-unit {
+        font-size: 9px;
+        text-align: start;
+    }
 }

@@ -31,6 +31,11 @@
     font-size: 14px;
 }
 
+.table-purchases td:first-child {
+    background-color: var(--bs-white);
+    color: #000;
+}
+
 .table-purchases .form-control {
     max-width: 65px;
 }
@@ -75,7 +80,7 @@ input::-webkit-inner-spin-button {
 .purchase-quantity {
     border: none;
     border-radius: 0;
-    color: 000;
+    color: #000;
     font-weight: 500;
 }
 
@@ -110,4 +115,13 @@ input::-webkit-inner-spin-button {
     height: 2px;
     color: red;
     border-radius: 50%;
+}
+
+
+@media (max-width: 768px) {
+    .table-purchases td {
+        display: flex;
+        align-items: center;
+        justify-content: end;
+    }
 }

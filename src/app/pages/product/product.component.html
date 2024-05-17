@@ -19,14 +19,14 @@
                             alt="Imagem do Produto">
                         <div class="product-info">
                             <h5 class="description">{{ product.description }}</h5>
-                            <p class="measure_unit">{{ product.unit_quantity | number: '1.0-0' }} {{
+                            <p class="measure-unit">{{ product.unit_quantity | number: '1.0-0' }} {{
                                 product.measure_unit.abbreviation }}</p>
                         </div>
                     </div>
                 </td>
-                <td class="d-none d-md-table-cell">{{ product.brand.description }}</td>
-                <td class="d-none d-md-table-cell">{{ product.category.description }}</td>
-                <td>
+                <td data-label="Marca">{{ product.brand.description }}</td>
+                <td data-label="Categoria">{{ product.category.description }}</td>
+                <td data-label="Ações">
                     <div role="group">
                         <button type="button" routerLink="/products/{{product.id}}/update" class="btn btn-primary btn-action">
                             <i class="far fa-edit"></i> <span> Editar</span> 
