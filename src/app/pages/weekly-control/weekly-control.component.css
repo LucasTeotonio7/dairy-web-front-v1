@@ -1,7 +1,4 @@
 @media (max-width: 768px){
-    .product-name {
-        color: var(--bs-white);
-    }
 
     .product-name::before {
         content: "\f35d";
