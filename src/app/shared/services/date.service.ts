@@ -2,13 +2,27 @@ import { Injectable } from '@angular/core';
 
 import { Weekday } from '../models/date';
 
+
+const daysOfWeek = ['DOM', 'SEG', 'TER', 'QUA', 'QUI', 'SEX', 'SAB'];
+
+
 @Injectable({
   providedIn: 'root'
 })
 export class DateService {
 
+  getWeekday(startDate: string): Weekday {
+    const startDateObj = new Date(startDate + 'T00:00:00Z');
+    const UTCDay = startDateObj.getUTCDay();
+    return {
+      name: daysOfWeek[UTCDay],
+      date: startDateObj,
+      day: this.formatDate(startDateObj)
+    };
+  }
+
   getWeekdays(startDate: string): Weekday[] {
-    const daysOfWeek = ['DOM', 'SEG', 'TER', 'QUA', 'QUI', 'SEX', 'SAB'];
+    
     const result: Weekday[] = [];
     const startDateObj = new Date(startDate + 'T00:00:00Z');
 
