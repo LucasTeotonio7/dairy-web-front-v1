@@ -7,6 +7,10 @@
     color: var(--bs-gray-dark);
     font-weight: 500;
     font-size: 14px;
+    border: 1px solid var(--bs-gray-200);
+    border-radius: 10px;
+    background: var(--bs-white);
+    padding: 10px 5px;
 }
 
 .weekly-control-info div {
@@ -22,7 +26,7 @@
 
 .price-tag {
     display: flex;
-    justify-content: center;
+    justify-content: start;
     align-items: center;
 }
 
@@ -77,6 +81,10 @@ input::-webkit-inner-spin-button {
     margin: 0;
 }
 
+.title small {
+    font-size: 13px;
+}
+
 .purchase-quantity {
     border: none;
     border-radius: 0;
@@ -119,9 +127,50 @@ input::-webkit-inner-spin-button {
 
 
 @media (max-width: 768px) {
+
+    .title {
+        margin-bottom: 20px;
+    }
+
+    .title h3{
+        font-size: 18px;
+    }
+    
+    .title small {
+        font-size: 10px;
+    }
+
+    .weekly-control-info .supplier-name,
+    .weekly-control-info .date-range,
+    .weekly-control-info .price-tag,
+    .weekly-control-info .status {
+        width: 100%;
+        padding: 10px;
+        font-size: 11px;
+    }
     .table-purchases td {
         display: flex;
         align-items: center;
         justify-content: end;
+    }
+
+    .purchase-quantity {
+        max-width: 50% !important;
+        width: 50%;
+        text-align: end;
+    }
+
+    .table-purchases td::before {
+        display: flex;
+        align-items: center;
+        height: 100%;
+        background: var(--blue);
+        color: var(--bs-gray-100);
+        border-top-left-radius: 10px;
+        border-bottom-left-radius: 10px;
+    }
+
+    .navbar {
+        padding: 0.5rem 0.5rem;
     }
 }
