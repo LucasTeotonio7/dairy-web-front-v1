@@ -6,7 +6,7 @@
             <span class="line"></span>
             <div class="item-detail">
                 <div class="avatar-container">
-                    <img src="{{ event.created_by.image }}" alt="User Avatar" class="rounded-avatar">
+                    <img src="{{ event.created_by.image ?? 'assets/user-no-image.jpg' }}" alt="User Avatar" class="rounded-avatar">
                 </div>
                 <div class="desc">
                     <div>
