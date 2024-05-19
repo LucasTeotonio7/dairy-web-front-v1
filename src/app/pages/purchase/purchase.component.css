@@ -105,26 +105,10 @@ input::-webkit-inner-spin-button {
     color: var(--bs-gray-500);
 }
 
-.today {
+.today,
+.today::before {
     color: #eeff00 !important;
 }
-
-.active-day {
-    position: absolute;
-    font-size: 7px;
-    margin-top: -2px;
-    margin-left: 26px;
-    color: red;
-}
-
-.today:before {
-    position: absolute;
-    width: 2px;
-    height: 2px;
-    color: red;
-    border-radius: 50%;
-}
-
 
 @media (max-width: 768px) {
 

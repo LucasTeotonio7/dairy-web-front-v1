@@ -47,7 +47,10 @@
         </thead>
         <tbody>
             <tr *ngIf="weeklyControl">
-                <td [attr.data-label]="getWeekday(purchase.reference_day).name" *ngFor="let purchase of weeklyControl.suppliers![0].purchases">
+                <td [attr.data-label]="getWeekday(purchase.reference_day).name" 
+                    class="{{ getWeekday(purchase.reference_day).day == today ? 'today' : '' }}" 
+                    *ngFor="let purchase of weeklyControl.suppliers![0].purchases">
+
                     <input id="{{ purchase.id }}"
                            type="number"
                            min="0"
