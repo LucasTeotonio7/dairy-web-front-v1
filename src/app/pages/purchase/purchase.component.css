@@ -136,6 +136,8 @@ input::-webkit-inner-spin-button {
         display: flex;
         align-items: center;
         justify-content: end;
+        border: none;
+        margin-bottom: 3px;
     }
 
     .purchase-quantity {
