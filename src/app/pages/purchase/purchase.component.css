@@ -70,21 +70,6 @@ input::-webkit-inner-spin-button {
     margin-bottom: 0;
 }
 
-.title {
-    margin-bottom: 30px;
-}
-
-.title h3{
-    color: var(--title-color);
-    font-weight: 700;
-    font-size: 24px;
-    margin: 0;
-}
-
-.title small {
-    font-size: 13px;
-}
-
 .purchase-quantity {
     border: none;
     border-radius: 0;
@@ -111,18 +96,6 @@ input::-webkit-inner-spin-button {
 }
 
 @media (max-width: 768px) {
-
-    .title {
-        margin-bottom: 20px;
-    }
-
-    .title h3{
-        font-size: 18px;
-    }
-    
-    .title small {
-        font-size: 10px;
-    }
 
     .weekly-control-info .supplier-name,
     .weekly-control-info .date-range,
