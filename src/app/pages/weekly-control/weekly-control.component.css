@@ -1,3 +1,11 @@
+.table td {
+    font-weight: 700;
+}
+
+.table td:first-child {
+    text-transform: uppercase;
+}
+
 @media (max-width: 768px){
 
     .product-name::before {

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, QueryList, ViewChildren } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { DateService } from 'src/app/shared/services/date.service';
@@ -15,6 +15,7 @@ export class WeeklyDetailComponent {
 
   weeklyControl!: WeeklyControl;
   weekdays: Weekday[] = [];
+  @ViewChildren('rows') rows!: QueryList<ElementRef>;
 
   constructor(
     private weeklyControlService: WeeklyControlService,
@@ -46,5 +47,10 @@ export class WeeklyDetailComponent {
         });
       }
     });
+  }
+
+  toggleDetails(index: number): void {
+    const row = this.rows.toArray()[index].nativeElement;
+    row.classList.toggle('show');
   }
 }
