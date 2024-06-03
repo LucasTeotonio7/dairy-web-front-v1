@@ -13,7 +13,7 @@
 <div *ngIf="weeklyControl" class="navbar navbar-light">
     <div class="weekly-control-info">
         <div class="supplier-name">
-            <i class="fa-solid fa-building-user me-2"></i>{{ weeklyControl.suppliers![0].name }} 
+            <i class="fa-solid fa-building-user me-2"></i>{{ supplier.name }} 
         </div>
         <div class="date-range">
             <i class="far fa-calendar-alt me-2"></i>
@@ -22,17 +22,17 @@
         </div>
         <div class="price-tag">
             <i class="fa-solid fa-tag"></i> 
-            <span class="mx-2">Preço: {{ weeklyControl.suppliers![0].price.value|currency:'BRL' }}</span>
+            <span class="mx-2">Preço: {{ supplier.price.value|currency:'BRL' }}</span>
             <div>
-                <button *ngIf="!weeklyControl.suppliers![0].paid_supplier" type="button" class="btn btn-primary btn-action" data-bs-toggle="modal" data-bs-target="#update-price-modal">
+                <button *ngIf="!supplier.paid_supplier" type="button" class="btn btn-primary btn-action" data-bs-toggle="modal" data-bs-target="#update-price-modal">
                     <i class="far fa-edit"></i> 
                 </button>
             </div>
         </div>
         <div class="status">
             
-            <span *ngIf="!weeklyControl.suppliers![0].paid_supplier"><i class="far fa-circle me-2"></i>Em aberto</span>
-            <span *ngIf="weeklyControl.suppliers![0].paid_supplier"><i class="fa-solid fa-file-invoice-dollar me-2"></i>Pago</span>
+            <span *ngIf="!supplier.paid_supplier"><i class="far fa-circle me-2"></i>Em aberto</span>
+            <span *ngIf="supplier.paid_supplier"><i class="fa-solid fa-file-invoice-dollar me-2"></i>Pago</span>
         </div>
     </div>
     <table class="table table-purchases mt-3">
@@ -49,7 +49,7 @@
             <tr *ngIf="weeklyControl">
                 <td [attr.data-label]="getWeekday(purchase.reference_day).name" 
                     class="{{ getWeekday(purchase.reference_day).day == today ? 'today' : '' }}" 
-                    *ngFor="let purchase of weeklyControl.suppliers![0].purchases">
+                    *ngFor="let purchase of supplier.purchases">
 
                     <input id="{{ purchase.id }}"
                            type="number"
@@ -61,7 +61,7 @@
                            [disabled]="disableField(purchase.reference_day)"
                            value="{{ purchase.quantity }}"/>
                 </td>
-                <td data-label="QUANTIDADE" class="values-result">{{ weeklyControl.suppliers![0].total_quantity }}</td>
+                <td data-label="QUANTIDADE" class="values-result">{{ supplier.total_quantity }}</td>
                 <td data-label="VALOR" class="values-result">{{ getPriceTotal() | currency:'BRL':'symbol':'1.2-2' }} </td>
             </tr>
         </tbody>
@@ -73,7 +73,7 @@
             <button *ngIf="path === 'purchases'" type="button" (click)="save()" class="btn btn-primary">
                 <i class="fas fa-check"></i> Salvar
             </button>
-            <button *ngIf="path === 'payment' && !weeklyControl.suppliers![0].paid_supplier" type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#pay-supplier-modal">
+            <button *ngIf="path === 'payment' && !supplier.paid_supplier" type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#pay-supplier-modal">
                 <i class="fa-solid fa-money-check-dollar bg-success"></i> Pagar
             </button>
         </div>
@@ -81,7 +81,7 @@
 </div>
 
 <app-history [WeeklyControlEventPaginator]="WeeklyControlEventPaginator" 
-            (getMoreEvents)="get_events(weeklyControl.suppliers![0].id, weeklyControl.id, WeeklyControlEventPaginator.page_number+1)">
+            (getMoreEvents)="get_events(supplier.id, weeklyControl.id, WeeklyControlEventPaginator.page_number+1)">
 </app-history>
 
 <div *ngIf="weeklyControl" class="modal fade" id="update-price-modal" tabindex="-1" role="dialog" aria-labelledby="update-price" aria-hidden="true">
@@ -96,7 +96,7 @@
         </header>
 
         <main class="modal-body">
-            <small class="d-flex">#Fornecedor: {{ weeklyControl.suppliers![0].name }}</small>
+            <small class="d-flex">#Fornecedor: {{ supplier.name }}</small>
             <hr>
             <form class="container" [formGroup]="priceProductSupplierForm">
                 <label for="price-product-supplier">Selecione a tabela</label>
@@ -130,16 +130,16 @@
         </header>
 
         <main class="modal-body">
-            <span class="d-flex">#Fornecedor: {{ weeklyControl.suppliers![0].name }}</span>
+            <span class="d-flex">#Fornecedor: {{ supplier.name }}</span>
             <hr>
             
             <div class="pay-details">
                 <label>Quantidade: </label>
-                <strong class="d-flex">{{ weeklyControl.suppliers![0].total_quantity }}</strong>
+                <strong class="d-flex">{{ supplier.total_quantity }}</strong>
             </div>
             <div class="pay-details">
                 <label>Preço unitário: </label>
-                <strong class="d-flex">{{ weeklyControl.suppliers![0].price.value|currency:'BRL' }}</strong>
+                <strong class="d-flex">{{ supplier.price.value|currency:'BRL' }}</strong>
             </div>
             <div class="pay-details">
                 <label>Valor final: </label>

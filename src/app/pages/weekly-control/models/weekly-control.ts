@@ -12,7 +12,7 @@ interface Price {
     price_product_supplier_id?: string,
 }
 
-interface Supplier {
+export interface Supplier {
     id: string;
     paid_supplier: boolean;
     name: string;

@@ -9,7 +9,7 @@ import { PriceService } from './../price/services/price.service';
 import { PriceProductSupplierService } from './../price/services/price-product-supplier.service';
 import { PurchaseService } from './services/purchase.service';
 import { ToastService } from 'src/app/shared/services/toast.service';
-import { WeeklyControl } from '../weekly-control/models/weekly-control';
+import { WeeklyControl, Supplier } from '../weekly-control/models/weekly-control';
 import { WeeklyControlService } from './../weekly-control/services/weekly-control.service';
 import { WeeklyControlEvent } from '../weekly-control/models/weekly-control-event';
 import { SupplierPaymentService } from './services/supplier-payment.service';
@@ -24,6 +24,7 @@ import { Weekday } from 'src/app/shared/models/date';
 export class PurchaseComponent {
   weeklyControlId : string | any = ''
   weeklyControl!: WeeklyControl;
+  supplier!: Supplier;
   priceTables: Price[] = [];
   priceProductSupplierForm!: FormGroup;
   isDefaultTable: boolean = false;
@@ -77,6 +78,7 @@ export class PurchaseComponent {
         this.weeklyControlService.get(this.weeklyControlId, queryParam).subscribe({
           next: (response) => {
               this.weeklyControl = response;
+              this.supplier = response.suppliers![0];
               this.weekDays = this.dateService.getWeekdays(this.weeklyControl.start_date);
               this.get_events(supplierId, this.weeklyControl.id)
           },
@@ -127,7 +129,7 @@ export class PurchaseComponent {
 
   disableField(reference_day: string) {
     const isPaymentRoute = this.path === 'payment';
-    const paidSupplier = this.weeklyControl.suppliers![0].paid_supplier;
+    const paidSupplier = this.supplier.paid_supplier;
     
     let reference_date = new Date(reference_day);
     let today_date = new Date(this.today);
@@ -137,10 +139,10 @@ export class PurchaseComponent {
   }
 
   setPriceTable() {
-    let supplier = this.weeklyControl.suppliers![0].id
+    let supplier = this.supplier.id
     const priceProductSupplierForm = this.priceProductSupplierForm.value;
     if (this.isDefaultTable) {
-      let price_product_supplier_id = this.weeklyControl.suppliers![0].price.price_product_supplier_id;
+      let price_product_supplier_id = this.supplier.price.price_product_supplier_id;
       if (price_product_supplier_id) {
         let params = {
           "new_value": this.unit_price,
@@ -161,7 +163,7 @@ export class PurchaseComponent {
         error: (error) => {console.error(error)}
       })
     }
-    this.weeklyControl.suppliers![0].price.value = this.unit_price;
+    this.supplier.price.value = this.unit_price;
   }
 
   changePriceValue($event: any){
@@ -193,7 +195,7 @@ export class PurchaseComponent {
 
         formData.append('reference_day', referenceDay ? referenceDay: '');
         formData.append('product', this.weeklyControl.product);
-        formData.append('supplier', this.weeklyControl.suppliers![0].id);
+        formData.append('supplier', this.supplier.id);
         formData.append('weekly_control', this.weeklyControlId);
 
         this.purchaseService.post(formData).subscribe({
@@ -227,14 +229,13 @@ export class PurchaseComponent {
       total_quantity += parseFloat(input.value);
     }
 
-    this.weeklyControl.suppliers![0].total_quantity = total_quantity;
+    this.supplier.total_quantity = total_quantity;
   }
 
   getPriceTotal(): number {
-    if (this.weeklyControl && this.weeklyControl.suppliers && this.weeklyControl.suppliers.length > 0) {
-      const supplier = this.weeklyControl.suppliers[0];
-      if (supplier.total_quantity && supplier.price && supplier.price.value) {
-        return supplier.total_quantity * supplier.price.value;
+    if (this.supplier) {
+      if (this.supplier.total_quantity && this.supplier.price && this.supplier.price.value) {
+        return this.supplier.total_quantity * this.supplier.price.value;
       }
     }
     return 0;
@@ -247,11 +248,10 @@ export class PurchaseComponent {
 
   pay() {
     if(this.weeklyControl.suppliers) {
-      const supplier = this.weeklyControl.suppliers[0];
       const formData = new FormData();
-      formData.append('quantity', supplier.total_quantity.toString());
-      formData.append('unit_price', supplier.price.value.toString());
-      formData.append('supplier', supplier.id);
+      formData.append('quantity', this.supplier.total_quantity.toString());
+      formData.append('unit_price', this.supplier.price.value.toString());
+      formData.append('supplier', this.supplier.id);
       formData.append('weekly_control', this.weeklyControl.id);
       this.supplierPaymentService.post(formData).subscribe({
         next: (response) => {
