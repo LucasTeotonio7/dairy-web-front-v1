@@ -99,13 +99,15 @@
             <small class="d-flex">#Fornecedor: {{ supplier.name }}</small>
             <hr>
             <form class="container" [formGroup]="priceProductSupplierForm">
-                <label for="price-product-supplier">Selecione a tabela</label>
-                <select *ngIf="priceTables" class="form-select" id="price-product-supplier" formControlName="price" (change)="changePriceValue($event)">
-                    <option *ngFor="let priceTable of priceTables" 
-                            value="{{ priceTable.id }}"
-                            [attr.unit-price]="priceTable.value"
-                            [attr.default]="priceTable.default"> {{ priceTable.description }} - R$ {{ priceTable.value }} </option>
-                </select>
+                <div class="form-group">
+                    <label for="price-product-supplier">Selecione a tabela</label>
+                    <select *ngIf="priceTables" class="form-control" id="price-product-supplier" name="price" formControlName="price" (change)="changePriceValue($event)">
+                        <option *ngFor="let priceTable of priceTables" 
+                                value="{{ priceTable.id }}"
+                                [attr.unit-price]="priceTable.value"
+                                [attr.default]="priceTable.default"> {{ priceTable.description }} - R$ {{ priceTable.value }} </option>
+                    </select>
+                </div>
             </form>
         </main>
 

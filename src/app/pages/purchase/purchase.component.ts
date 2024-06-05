@@ -79,6 +79,10 @@ export class PurchaseComponent {
           next: (response) => {
               this.weeklyControl = response;
               this.supplier = response.suppliers![0];
+              this.priceProductSupplierForm.setValue({
+                price: this.supplier.price.id,
+                supplier: this.supplier.id
+              });
               this.weekDays = this.dateService.getWeekdays(this.weeklyControl.start_date);
               this.get_events(supplierId, this.weeklyControl.id)
           },
@@ -139,7 +143,6 @@ export class PurchaseComponent {
   }
 
   setPriceTable() {
-    let supplier = this.supplier.id
     const priceProductSupplierForm = this.priceProductSupplierForm.value;
     if (this.isDefaultTable) {
       let price_product_supplier_id = this.supplier.price.price_product_supplier_id;
@@ -156,7 +159,7 @@ export class PurchaseComponent {
     } else {
       const formData = new FormData();
       formData.append('price', priceProductSupplierForm.price);
-      formData.append('supplier', supplier);
+      formData.append('supplier', priceProductSupplierForm.supplier);
       formData.append('weekly_control_id', this.weeklyControl.id);
       this.priceProductSupplierService.post(formData).subscribe({
         next: () => {console.log('ok')},
