@@ -1,12 +1,25 @@
-<div class="container-fluid">
+<div *ngIf="product" class="container">
+
+    <div class="title">
+        <h3>{{ product.description }}</h3>
+    </div>
+
+    <ul class="nav nav-tabs mb-3">
+        <li class="nav-item">
+          <a class="nav-link" aria-current="page" routerLink="/products/{{ product.id }}/detail">Detalhes </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" routerLink="/prices">Tabelas de preço</a>
+        </li>
+    </ul>
+
     <button class="btn btn-primary mb-2" routerLink="/prices/create">
-        Nova tabela
+        Nova
     </button>
     <table *ngIf="paginator && paginator.count > 0 else emptyList" class="table mt-2">
         <thead>
             <tr>
                 <th>Nome</th>
-                <th>Produto</th>
                 <th>Valor</th>
                 <th>tabela padrão</th>
                 <th>Ações</th>
@@ -15,7 +28,6 @@
         <tbody>
             <tr *ngFor="let price of prices">
                 <td data-label="Nome">{{ price.description }}</td>
-                <td data-label="Produto">{{ price.product }}</td>
                 <td data-label="Valor">R$ {{ price.value|number: '1.2-2' }}</td>
                 <td data-label="tabela padrão" class="active-column">
                     <i *ngIf="price.default" class="fas fa-check-circle text-success"></i>

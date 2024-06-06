@@ -1,0 +1,13 @@
+.container {
+    background: var(--bs-white);
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.nav-item {
+    font-size: 12px;
+}
+
+.nav-link {
+    color: var(--bs-dark);
+}

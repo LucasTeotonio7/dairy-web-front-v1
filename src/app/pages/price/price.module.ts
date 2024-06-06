@@ -9,8 +9,8 @@ import { SharedModule } from 'src/app/shared/shared.module';
 
 
 const routes: Routes = [
-  { path: '', component: PriceComponent },
   { path: 'create', component: PriceFormComponent },
+  { path: ':id', component: PriceComponent },
   { path: ':id/update', component: PriceFormComponent },
 ];
 

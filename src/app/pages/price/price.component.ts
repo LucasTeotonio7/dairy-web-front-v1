@@ -4,6 +4,8 @@ import { ActivatedRoute } from '@angular/router';
 import { Paginator } from 'src/app/shared/models/paginator';
 import { Price } from './models/price';
 import { PriceService } from './services/price.service';
+import { Product } from '../product/models/product';
+import { ProductService } from '../product/services/product.service';
 
 
 @Component({
@@ -15,21 +17,41 @@ export class PriceComponent {
   prices: Price[] = [];
   paginator!: Paginator<Price>;
   priceId!: string;
+  product!: Product;
 
   constructor(
-    private priceService: PriceService, 
+    private priceService: PriceService,
+    private productService: ProductService, 
     private route: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
-    this.route.queryParams.subscribe(params => {
-        const page = params['page'] || 1;
-        this.loadPrices(page);
+    this.setProduct();
+  }
+
+  setProduct() {
+    this.route.paramMap.subscribe(params => {
+      const productId = params.get('id');
+      if (productId) {
+        this.productService.get(productId).subscribe({
+          next: (product: Product) => {
+            this.product = product;
+            this.route.queryParams.subscribe(params => {
+              const page = params['page'] || 1;
+              const filter = { 'product_id': this.product.id };
+              this.loadPrices(page, filter);
+            });
+          },
+          error: (error: any) => {
+            console.error(error);
+          }
+        });
+      }
     });
   }
 
-  loadPrices(page: number) {
-    this.priceService.list(page).subscribe((paginator: Paginator<Price>) => {
+  loadPrices(page: number, params: object) {
+    this.priceService.list(page, params).subscribe((paginator: Paginator<Price>) => {
         this.paginator = paginator;
         this.prices = paginator.results;
     });
