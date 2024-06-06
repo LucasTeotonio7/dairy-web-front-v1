@@ -7,8 +7,24 @@
 }
 
 .product-info .description {
+    display: flex;
+    align-items: center;
     font-size: 14px;
     font-weight: 700;
+    color: var(--bs-dark);
+}
+
+.product-info .description:hover {
+    text-decoration: none;
+}
+
+.product-info .description:hover span {
+    text-decoration: underline;
+}
+
+.product-info .description i {
+    font-size: 8px;
+    padding: 5px;
 }
 
 .product-info .measure-unit {
@@ -19,6 +35,7 @@
 @media (max-width: 768px) {
     .product-info .description {
         font-size: 11px;
+        color: var(--bs-white);
     }
 
     .product-info .measure-unit {

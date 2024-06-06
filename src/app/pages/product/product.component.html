@@ -18,7 +18,10 @@
                         <img [src]="product.image ? product.image : 'assets/image-404.png'" class="image-product"
                             alt="Imagem do Produto">
                         <div class="product-info">
-                            <h5 class="description">{{ product.description }}</h5>
+                            <a class="description" routerLink="/products/{{product.id}}/detail">
+                                <span>{{ product.description }} </span>
+                                <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                            </a>
                             <p class="measure-unit">{{ product.unit_quantity | number: '1.0-0' }} {{
                                 product.measure_unit.abbreviation }}</p>
                         </div>

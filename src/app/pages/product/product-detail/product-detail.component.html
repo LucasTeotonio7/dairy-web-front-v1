@@ -1,0 +1,53 @@
+<div *ngIf="product" class="container">
+
+    <div class="title">
+        <h3>{{ product.description }}</h3>
+    </div>
+
+    <ul class="nav nav-tabs mb-3">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" routerLink="/product/{{product.id}}/detail">Detalhes </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/prices">Tabelas de preço</a>
+        </li>
+    </ul>
+
+    <div class="field mb-4">
+        <div class="img-container mb-4">
+            <img alt="Produto" src="{{ product.image }}" class="img-fluid">
+        </div>
+    </div>
+    <div class="desc-item">
+        <span class="detail-label">Marca: </span>
+        <span class="detail-desc">{{ product.brand.description }}</span>
+    </div>
+    <div class="desc-item">
+        <span class="detail-label">Categoria: </span>
+        <span class="detail-desc">{{ product.category.description }}</span>
+    </div>
+    <div class="desc-item">
+        <span class="detail-label">Unidade de medida: </span>
+        <span class="detail-desc">{{ product.measure_unit.description }} ({{ product.measure_unit.abbreviation }})</span>
+    </div>
+    <div class="desc-item">
+        <span class="detail-label">Quantidade: </span>
+        <span class="detail-desc">{{ product.unit_quantity }} {{ product.measure_unit.description }}</span>
+    </div>
+    <div class="desc-item">
+        <span class="detail-label">Ativo: </span>
+        <span class="detail-desc">
+            <i *ngIf="!product.active" class="fas fa-times-circle text-danger"></i>
+            <i *ngIf="product.active" class="fas fa-check-circle text-success"></i>
+        </span>
+    </div>
+    <hr>
+    <div class="button-area update-product d-flex justify-content-between">
+        <div>
+            <button type="button" class="btn btn-light border me-2" routerLink="/products">Voltar</button>
+            <button type="button" class="btn btn-success" routerLink="/products/{{product.id}}/update">
+                <i class="fa-solid fa-pen-to-square"></i> Editar
+            </button>
+        </div>
+    </div>
+</div>
