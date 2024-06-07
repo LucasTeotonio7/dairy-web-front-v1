@@ -9,11 +9,11 @@
           <a class="nav-link" aria-current="page" routerLink="/products/{{ product.id }}/detail">Detalhes </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" routerLink="/prices">Tabelas de preço</a>
+          <a class="nav-link active">Tabelas de preço</a>
         </li>
     </ul>
 
-    <button class="btn btn-primary mb-2" routerLink="/prices/create">
+    <button class="btn btn-primary mb-2" routerLink="/products/{{ product.id }}/prices/create">
         Nova
     </button>
     <table *ngIf="paginator && paginator.count > 0 else emptyList" class="table mt-2">
@@ -35,7 +35,7 @@
                 </td>
                 <td data-label="Ações">
                     <div role="group">
-                        <button type="button" routerLink="/prices/{{ price.id }}/update" class="btn btn-primary btn-action">
+                        <button type="button" routerLink="/products/{{ product.id }}/prices/{{ price.id }}/update" class="btn btn-primary btn-action">
                             <i class="far fa-edit"></i> <span> Editar</span> 
                         </button>
                         <button id="{{ price.id }}" 

@@ -14,8 +14,7 @@ const routes: Routes = [
       { path: 'dashboard', component: DashboardComponent },
       { path: 'products', loadChildren: () => import('./pages/product/product.module').then(m => m.ProductModule)},
       { path: 'suppliers', loadChildren: () => import('./pages/supplier/supplier.module').then(m => m.SupplierModule)},
-      { path: 'weekly-control', loadChildren: () => import('./pages/weekly-control/weekly-control.module').then(m => m.WeeklyControlModule)},
-      { path: 'prices', loadChildren: () => import('./pages/price/price.module').then(m => m.PriceModule)}
+      { path: 'weekly-control', loadChildren: () => import('./pages/weekly-control/weekly-control.module').then(m => m.WeeklyControlModule)}
     ],
   },
   { path: 'login', component: LoginComponent, canActivate: [authGuard] },

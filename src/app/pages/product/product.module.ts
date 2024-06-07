@@ -7,6 +7,8 @@ import { ProductComponent } from './product.component';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
 import { ProductFormComponent } from './forms/product-form/product-form.component';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { PriceComponent } from './price-list/price.component';
+import { PriceFormComponent } from './forms/price-form/price-form.component';
 
 
 const routes: Routes = [
@@ -14,13 +16,18 @@ const routes: Routes = [
   { path: 'create', component: ProductFormComponent },
   { path: ':id/detail', component: ProductDetailComponent },
   { path: ':id/update', component: ProductFormComponent },
+  { path: ':id/prices', component: PriceComponent },
+  { path: ':id/prices/create', component: PriceFormComponent },
+  { path: ':id/prices/:price-id/update', component: PriceFormComponent },
 ];
 
 @NgModule({
   declarations: [
     ProductComponent,
     ProductFormComponent,
-    ProductDetailComponent
+    ProductDetailComponent,
+    PriceComponent,
+    PriceFormComponent
   ],
   imports: [
     CommonModule,

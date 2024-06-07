@@ -2,10 +2,10 @@ import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { Paginator } from 'src/app/shared/models/paginator';
-import { Price } from './models/price';
-import { PriceService } from './services/price.service';
-import { Product } from '../product/models/product';
-import { ProductService } from '../product/services/product.service';
+import { Price } from '../models/price';
+import { PriceService } from '../services/price.service';
+import { Product } from '../models/product';
+import { ProductService } from '../services/product.service';
 
 
 @Component({

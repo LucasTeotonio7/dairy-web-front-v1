@@ -4,9 +4,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 import { DateService } from 'src/app/shared/services/date.service';
 import { Paginator } from 'src/app/shared/models/paginator';
-import { Price } from '../price/models/price';
-import { PriceService } from './../price/services/price.service';
-import { PriceProductSupplierService } from './../price/services/price-product-supplier.service';
+import { Price } from '../product/models/price';
+import { PriceService } from '../product/services/price.service';
+import { PriceProductSupplierService } from '../product/services/price-product-supplier.service';
 import { PurchaseService } from './services/purchase.service';
 import { ToastService } from 'src/app/shared/services/toast.service';
 import { WeeklyControl, Supplier } from '../weekly-control/models/weekly-control';

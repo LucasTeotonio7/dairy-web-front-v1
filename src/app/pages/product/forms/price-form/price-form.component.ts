@@ -3,10 +3,11 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { FormBaseMixin } from 'src/app/shared/mixins/form-base.mixin';
-import { Price } from '../models/price';
-import { PriceService } from '../services/price.service';
-import { Product } from '../../product/models/product';
-import { WeeklyControlService } from '../../weekly-control/services/weekly-control.service';
+import { Price } from '../../models/price';
+import { PriceService } from '../../services/price.service';
+import { Product } from '../../models/product';
+import { WeeklyControlService } from 'src/app/pages/weekly-control/services/weekly-control.service';
+import { ProductService } from '../../services/product.service';
 
 
 @Component({
@@ -17,10 +18,11 @@ import { WeeklyControlService } from '../../weekly-control/services/weekly-contr
 export class PriceFormComponent extends FormBaseMixin {
   priceForm!: FormGroup;
   priceId: string | any = '';
-  products: Product[] = [];
+  product!: Product;
 
   constructor(
     private priceService: PriceService,
+    private productService: ProductService,
     private weeklyControlService: WeeklyControlService,
     private formBuilder: FormBuilder,
     private router: Router,
@@ -33,26 +35,31 @@ export class PriceFormComponent extends FormBaseMixin {
       description: ['', Validators.required],
       value: ['', Validators.required],
       default: [false],
-      product: ['', Validators.required]
+      product: ['']
     });
     this.observeAllControlChanges(this.priceForm);
   }
 
-  setProducts(): void {
-      this.weeklyControlService.getProducts().subscribe({
-        next: (products: Product[]) => {
-          this.products = products;
-        },
-        error: (error: any) => {
-          console.error(error);
-        },
-        complete: () => {}
-      });
+  setProduct() {
+    this.route.paramMap.subscribe(params => {
+      const productId = params.get('id');
+      if (productId) {
+        this.productService.get(productId).subscribe({
+          next: (product: Product) => {
+            this.product = product;
+            this.setPrice();
+          },
+          error: (error: any) => {
+            console.error(error);
+          }
+        });
+      }
+    });
   }
 
   private setPrice(): void {
       this.route.paramMap.subscribe(params => {
-          this.priceId = params.get('id');
+          this.priceId = params.get('price-id');
           if (this.priceId) {
               this.priceService.get(this.priceId).subscribe({
                   next: (price: Price) => {
@@ -78,17 +85,21 @@ export class PriceFormComponent extends FormBaseMixin {
   }
 
   ngOnInit() {
-      this.setProducts();
-      this.setPrice();
+      this.setProduct();
   }
 
   save() {
     if (this.priceForm.valid) {
         const priceForm = this.priceForm.value;
+        var formData = this.formDataFromFormGroup(priceForm);
 
-        this.priceService.save(priceForm, this.priceId).subscribe({
-            error: (error: any) => {console.log(error)},
-            complete: () => {this.router.navigate(['/prices'])}
+        if (this.product.id) {
+          formData.append('product', this.product.id.toString());
+        }
+
+        this.priceService.save(formData, this.priceId).subscribe({
+            error: (error: any) => {console.error(error)},
+            complete: () => {this.back()}
         });
 
     } else {
@@ -97,7 +108,7 @@ export class PriceFormComponent extends FormBaseMixin {
   }
 
   back() {
-      this.router.navigate(['/prices']);
+    this.router.navigate([`/products/${this.product.id}/prices`]);
   }
 
   deletePrice() {

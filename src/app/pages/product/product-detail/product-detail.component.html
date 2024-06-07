@@ -6,10 +6,10 @@
 
     <ul class="nav nav-tabs mb-3">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" routerLink="/product/{{ product.id }}/detail">Detalhes </a>
+          <a class="nav-link active" aria-current="page">Detalhes </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/prices/{{ product.id }}">Tabelas de preço</a>
+          <a class="nav-link" routerLink="/products/{{product.id}}/prices/">Tabelas de preço</a>
         </li>
     </ul>
 
@@ -45,7 +45,7 @@
     <div class="button-area update-product d-flex justify-content-between">
         <div>
             <button type="button" class="btn btn-light border me-2" routerLink="/products">Voltar</button>
-            <button type="button" class="btn btn-success" routerLink="/products/{{product.id}}/update">
+            <button type="button" class="btn btn-success" routerLink="/products/{{ product.id }}/update">
                 <i class="fa-solid fa-pen-to-square"></i> Editar
             </button>
         </div>
