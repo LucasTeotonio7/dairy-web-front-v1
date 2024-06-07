@@ -123,7 +123,8 @@ export class PurchaseComponent {
   }
 
   getPriceTables() {
-    this.priceService.listAll().subscribe({
+    let params = {product_id: this.weeklyControl.product}
+    this.priceService.listAll(params).subscribe({
       next: (response) => {
         this.priceTables = response;
       },
