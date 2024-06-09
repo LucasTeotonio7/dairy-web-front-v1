@@ -8,6 +8,7 @@ import { Portuguese } from "flatpickr/dist/l10n/pt.js"
 
 import { FormBaseMixin } from 'src/app/shared/mixins/form-base.mixin';
 import { Product } from 'src/app/pages/product/models/product';
+import { ProductService } from 'src/app/pages/product/services/product.service';
 import { ToastService } from 'src/app/shared/services/toast.service';
 import { validateWeekWith7days } from '../../validators/date.validator';
 import { WeeklyControl } from '../../models/weekly-control';
@@ -27,6 +28,7 @@ export class WeeklyControlFormComponent extends FormBaseMixin {
 
     constructor(
         private weeklyControlService: WeeklyControlService,
+        private productService: ProductService,
         private formBuilder: FormBuilder,
         private router: Router,
         private route: ActivatedRoute,
@@ -60,7 +62,8 @@ export class WeeklyControlFormComponent extends FormBaseMixin {
     }
 
     setProducts(): void {
-        this.weeklyControlService.getProducts().subscribe({
+        let params = { default_table: true }
+        this.productService.listAll(params).subscribe({
           next: (products: Product[]) => {
             this.products = products;
           },

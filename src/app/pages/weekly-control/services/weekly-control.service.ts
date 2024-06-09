@@ -18,15 +18,6 @@ export class WeeklyControlService extends CrudService<WeeklyControl>  {
         super(http, tokenService, 'weekly-control/');
     }
 
-    getProducts(): Observable<Product[]> {
-        const headers = new HttpHeaders({
-          'Authorization': `Token ${this.tokenService.getToken()}`
-        });
-        const BASE_URL = environment.API;
-        const requestOptions = { headers: headers };
-        return this.http.get<Product[]>(`${BASE_URL}product/?no_paginate=1`, requestOptions);
-    }
-
     create_event(formData: FormData): Observable<any> {
       return this.http.post(`${this.BASE_URL}weekly-control-event/`, formData, this.getRequestOptions());
     }
