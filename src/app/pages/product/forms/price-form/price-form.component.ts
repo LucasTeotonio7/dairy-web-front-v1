@@ -19,6 +19,7 @@ export class PriceFormComponent extends FormBaseMixin {
   priceForm!: FormGroup;
   priceId: string | any = '';
   product!: Product;
+  price!: Price;
 
   constructor(
     private priceService: PriceService,
@@ -69,6 +70,7 @@ export class PriceFormComponent extends FormBaseMixin {
                         default: price.default,
                         product: price.product
                       });
+                      this.price = price;
                   },
                   error: (error: any) => {
                       console.error(error);

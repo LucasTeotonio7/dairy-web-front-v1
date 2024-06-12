@@ -38,7 +38,7 @@
                         <button type="button" routerLink="/products/{{ product.id }}/prices/{{ price.id }}/update" class="btn btn-primary btn-action">
                             <i class="far fa-edit"></i> <span> Editar</span> 
                         </button>
-                        <button id="{{ price.id }}" 
+                        <button [disabled]="price.has_spreadsheet" id="{{ price.id }}" 
                                 type="button" 
                                 class="btn btn-danger btn-action" 
                                 data-bs-toggle="modal" 

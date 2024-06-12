@@ -7,4 +7,5 @@ export interface Price {
     default: boolean;
     product: string;
     created_by: string;
+    has_spreadsheet: boolean;
 }
