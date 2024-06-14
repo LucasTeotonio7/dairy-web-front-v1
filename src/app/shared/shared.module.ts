@@ -7,6 +7,7 @@ import { ImageUploadComponent } from './components/image-upload/image-upload.com
 import { PaginatorComponent } from './components/paginator/paginator.component';
 import { EmptyListComponent } from './components/empty-list/empty-list.component';
 import { ToastComponent } from './components/toast/toast.component';
+import { SafeHtmlPipe } from './pipes/safe-html.pipe';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { ToastComponent } from './components/toast/toast.component';
     ImageUploadComponent,
     PaginatorComponent,
     EmptyListComponent,
-    ToastComponent
+    ToastComponent,
+    SafeHtmlPipe,
   ],
   imports: [
     CommonModule,
@@ -26,7 +28,8 @@ import { ToastComponent } from './components/toast/toast.component';
     ImageUploadComponent,
     PaginatorComponent,
     EmptyListComponent,
-    ToastComponent
+    ToastComponent,
+    SafeHtmlPipe
   ]
 })
 export class SharedModule { }
