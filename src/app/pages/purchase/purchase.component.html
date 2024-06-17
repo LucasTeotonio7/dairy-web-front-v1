@@ -69,8 +69,11 @@
 
     <div class="button-area">
         <div>
-            <button type="button" (click)="back()" class="btn btn-light border me-2">Cancelar</button>
-            <button *ngIf="path === 'purchases'" type="button" (click)="save()" class="btn btn-primary">
+            <button type="button" (click)="back()" class="btn btn-light border me-2">
+                <span *ngIf="supplier.paid_supplier"><i class="fa-solid fa-rotate-left"></i> Voltar</span>
+                <span *ngIf="!supplier.paid_supplier">Cancelar</span>
+            </button>
+            <button *ngIf="path === 'purchases' && !supplier.paid_supplier" type="button" (click)="save()" class="btn btn-primary">
                 <i class="fas fa-check"></i> Salvar
             </button>
             <button *ngIf="path === 'payment' && !supplier.paid_supplier" type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#pay-supplier-modal">

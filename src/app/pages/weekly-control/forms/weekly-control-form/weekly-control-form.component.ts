@@ -23,6 +23,7 @@ import { WeeklyControlService } from '../../services/weekly-control.service';
 export class WeeklyControlFormComponent extends FormBaseMixin {
     weeklyControlForm!: FormGroup;
     weeklyControlId: string | any = '';
+    weeklyControl!: WeeklyControl;
     products: Product[] = [];
     flatpickrOptions: Options = {};
 
@@ -96,6 +97,7 @@ export class WeeklyControlFormComponent extends FormBaseMixin {
             if (this.weeklyControlId) {
                 this.weeklyControlService.get(this.weeklyControlId).subscribe({
                     next: (weeklyControl: WeeklyControl) => {
+                        this.weeklyControl = weeklyControl;
                         let initialDate = [weeklyControl.start_date, weeklyControl.end_date]
                         
                         this.weeklyControlForm.setValue({
@@ -145,7 +147,11 @@ export class WeeklyControlFormComponent extends FormBaseMixin {
                     this.toastService.showToastSuccess('Planilha', 'Planilha salva com sucesso!');
                 },
                 error: (error: any) => {
-                    this.toastService.showToastDanger('Planilha inválida', 'Aconteceu um erro ao salvar a planilha');
+                    if(error.status == 403) {
+                        this.toastService.showToastDanger('Planilha inválida', 'Você não tem permissão alterar essa planilha');
+                    } else {
+                        this.toastService.showToastDanger('Planilha inválida', 'Aconteceu um erro ao salvar a planilha');
+                    }
                 },
                 complete: () => {this.router.navigate(['/weekly-control'])}
             });
@@ -165,7 +171,11 @@ export class WeeklyControlFormComponent extends FormBaseMixin {
                 this.toastService.showToastSuccess('Planilha', 'Planilha excluída!');
             },
             error: (error) => {
-                console.error(error);
+                if(error.status == 403) {
+                    this.toastService.showToastDanger('Planilha inválida', 'Você não tem permissão excluir essa planilha');
+                } else {
+                    this.toastService.showToastDanger('Planilha inválida', 'Aconteceu um erro ao excluir a planilha');
+                }
             },
             complete: () => {
                 this.back();

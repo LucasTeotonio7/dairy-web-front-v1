@@ -46,10 +46,11 @@
                 <td data-label="Total">{{ (supplier.price.value * supplier.total_quantity)|currency:'BRL' }}</td>
                 <td data-label="Ações">
                     <button type="button" routerLink="/weekly-control/{{ weeklyControl.id }}/supplier/{{supplier.id}}/purchases" class="btn btn-primary btn-action">
-                        <i class="far fa-edit"></i> <span></span> 
+                        <i *ngIf="!supplier.paid_supplier" class="far fa-edit"></i>
+                        <i *ngIf="supplier.paid_supplier" class="fa-solid fa-share-from-square"></i>
                     </button>
                     <button *ngIf="!supplier.paid_supplier" type="button" routerLink="/weekly-control/{{ weeklyControl.id }}/supplier/{{supplier.id}}/payment" class="btn btn-primary btn-action bg-dark">
-                        <i class="fa-solid fa-money-check-dollar bg-success"></i> <span></span> 
+                        <i class="fa-solid fa-money-check-dollar bg-success"></i>
                     </button>
                 </td>
             </tr>
