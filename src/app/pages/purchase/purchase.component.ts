@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import * as printJS from 'print-js';
 
 import { DateService } from 'src/app/shared/services/date.service';
 import { Paginator } from 'src/app/shared/models/paginator';
@@ -272,4 +273,47 @@ export class PurchaseComponent {
   back() {
     this.router.navigate([`/weekly-control/${this.weeklyControlId}/detail`]);
   }
+
+  formatDateTime(dateTimeString: string): string {
+    const options: Intl.DateTimeFormatOptions = {
+        month: 'long',
+        day: '2-digit',
+        hour: 'numeric',
+        minute: '2-digit',
+        hour12: true
+    };
+
+    const date = new Date(dateTimeString);
+    const formattedDateTime = new Intl.DateTimeFormat('pt-BR', options).format(date);
+    return formattedDateTime;
+  }
+
+  formatCurrency(value: number): string {
+    return value.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+  }
+
+  printReceipt() {
+    const receiptHtml = `
+      <div class="receipt">
+        <p>Fornecedor: ${this.supplier.name}</p>
+        <p>Data: ${this.formatDateTime(this.supplier.paid_at)}</p>
+        <hr/>
+        <h2>Coletas</h2>
+        ${this.supplier.purchases.map(
+          purchase => `<p>${this.getWeekday(purchase.reference_day).name}: ${purchase.quantity}</p>`
+        ).join('')}
+        <hr/>
+        <p>Quantidade: ${this.supplier.total_quantity.toFixed(2)}</p>
+        <p>Preço por unidade: ${this.formatCurrency(this.supplier.price.value)}</p>
+        <div>Total: ${this.formatCurrency(this.getPriceTotal())}</div> 
+      </div>
+    `;
+
+    printJS({ 
+      printable: receiptHtml, 
+      type: 'raw-html', 
+      css: 'styles.css' 
+    });
+  }
+
 }

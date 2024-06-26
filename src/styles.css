@@ -66,6 +66,22 @@
     font-weight: 500;
 }
 
+.receipt {
+    width: 58mm; /* Typical size for machine receipts. TODO: adjust, if necessary. */
+    font-family: Arial, sans-serif;
+    font-size: 12px;
+    padding: 10px;
+}
+
+.receipt h1, .receipt h2 {
+    font-size: 16px;
+    margin: 0;
+}
+
+.receipt p {
+    margin: 5px 0;
+}
+
 @media (max-width: 767px) {
 
     .title {

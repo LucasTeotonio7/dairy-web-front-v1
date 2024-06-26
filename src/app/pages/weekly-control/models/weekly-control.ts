@@ -15,6 +15,7 @@ interface Price {
 export interface Supplier {
     id: string;
     paid_supplier: boolean;
+    paid_at: string;
     name: string;
     price: Price,
     purchases: Purchase[];

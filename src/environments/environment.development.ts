@@ -1,4 +1,4 @@
 export const environment = {
     API : "http://localhost:8100/api/",
-    version: '0.5.12'
+    version: '0.5.13'
 };
