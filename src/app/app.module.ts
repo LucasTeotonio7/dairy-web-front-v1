@@ -14,6 +14,7 @@ import { LoginComponent } from './pages/auth/login.component';
 import { PurchaseComponent } from './pages/purchase/purchase.component';
 
 import { SharedModule } from './shared/shared.module';
+import { UserComponent } from './pages/auth/user/user.component';
 
 
 registerLocaleData(ptBr)
@@ -26,7 +27,8 @@ registerLocaleData(ptBr)
     LoginComponent,
     DashboardComponent,
     PurchaseComponent,
-    HistoryComponent
+    HistoryComponent,
+    UserComponent
   ],
   imports: [
     BrowserModule,

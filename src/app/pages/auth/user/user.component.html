@@ -1,0 +1,59 @@
+<div class="container-fluid">
+    <button class="btn btn-primary mb-2" routerLink="/" disabled>
+        Novo
+    </button>
+    <table *ngIf="paginator && paginator.count > 0 else emptyList" class="table">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Ativo</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let user of users">
+                <td data-label="">
+                    <div class="avatar-container">
+                        <img src="{{ user.image ?? 'assets/user-no-image.jpg' }}" alt="User Avatar" class="rounded-avatar">
+                        <div>
+                            {{ user.name}} {{ user.last_name}}
+                        </div>
+                    </div>
+                </td>
+                <td data-label="Ativo" class="active-column">
+                    <i *ngIf="user.is_active" class="fas fa-check-circle text-success"></i>
+                    <i *ngIf="!user.is_active" class="fas fa-times-circle text-danger"></i>
+                </td>
+                <td data-label="Ações">
+                    <div role="group">
+                        <button type="button" routerLink="/" class="btn btn-primary btn-action" disabled>
+                            <i class="far fa-edit"></i> <span> Editar</span> 
+                        </button>
+                        <button id="{{ user.id }}" 
+                                type="button" 
+                                class="btn btn-danger btn-action" 
+                                data-bs-toggle="modal" 
+                                data-bs-target="#deleteUserModal"
+                                (click)="setUserId($event)" disabled> 
+                            <i class="fas fa-trash"></i> <span> Excluir</span> 
+                        </button>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <ng-template #emptyList>
+        <app-empty-list [listingName]="'usuários'"></app-empty-list>
+    </ng-template>
+    <app-paginator [paginator]="paginator" [link]="'/users'" listingName="Usuários"></app-paginator>
+</div>
+
+
+<app-delete-modal
+    [id]="'deleteUserModal'"
+    [title]="'Excluir usuário'"
+    [message]="'Tem certeza de que deseja excluir este usuário?'"
+    [confirmationMessage]="'Esta ação não pode ser desfeita.'"
+    [confirmButtonText]="'Excluir'"
+    (delete)="deleteUser()"
+></app-delete-modal>

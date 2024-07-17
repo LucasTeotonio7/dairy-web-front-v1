@@ -1,0 +1,19 @@
+.avatar-container {
+    display: flex;
+    align-items: center;
+}
+
+.avatar-container .rounded-avatar {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    border: 1px solid var(--bs-gray-dark);
+    border-radius: 50%;
+    margin-right: 5px;
+}
+
+@media (max-width: 768px) {
+    .avatar-container .rounded-avatar {
+        border: none;
+    }
+}

@@ -5,6 +5,7 @@ import { authGuard } from './pages/auth/guards/auth.guard';
 import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/auth/login.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { UserComponent } from './pages/auth/user/user.component';
 
 const routes: Routes = [
   {
@@ -14,10 +15,11 @@ const routes: Routes = [
       { path: 'dashboard', component: DashboardComponent },
       { path: 'products', loadChildren: () => import('./pages/product/product.module').then(m => m.ProductModule)},
       { path: 'suppliers', loadChildren: () => import('./pages/supplier/supplier.module').then(m => m.SupplierModule)},
-      { path: 'weekly-control', loadChildren: () => import('./pages/weekly-control/weekly-control.module').then(m => m.WeeklyControlModule)}
+      { path: 'weekly-control', loadChildren: () => import('./pages/weekly-control/weekly-control.module').then(m => m.WeeklyControlModule)},
+      { path: 'users', component: UserComponent }
     ],
   },
-  { path: 'login', component: LoginComponent, canActivate: [authGuard] },
+  { path: 'login', component: LoginComponent, canActivate: [authGuard] }
 ];
 
 @NgModule({
