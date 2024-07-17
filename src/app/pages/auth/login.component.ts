@@ -1,7 +1,7 @@
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
-import { User } from './models/user';
+import { UserLogin } from './models/user';
 import { Component } from '@angular/core';
 import { AuthService } from './services/auth.service';
 import { TokenService } from './services/token.service';
@@ -34,7 +34,7 @@ export class LoginComponent {
 
   login(): void {
     const formData = this.loginForm.value;
-    const user: User = {
+    const user: UserLogin = {
       username: formData.username,
       password: formData.password
     };

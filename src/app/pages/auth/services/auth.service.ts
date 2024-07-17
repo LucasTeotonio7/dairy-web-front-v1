@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
 import { Observable, throwError } from 'rxjs';
 
-import { User } from '../models/user';
+import { UserLogin } from '../models/user';
 import { TokenService } from './token.service';
 
 
@@ -20,7 +20,7 @@ export class AuthService {
     private tokenService: TokenService
   ) { }
 
-  authenticate(user: User): Observable<any> {
+  authenticate(user: UserLogin): Observable<any> {
 
     return this.http.post<any>(`${this.apiUrl}/api-token-auth/`, user).pipe(
       catchError((error) => {
