@@ -210,6 +210,7 @@ export class PurchaseComponent {
       }
 
     }
+    this.back();
   
   }
 
@@ -248,7 +249,6 @@ export class PurchaseComponent {
 
   save() {
     this.updatePurchaseValues();
-    this.back();
   }
 
   pay() {
