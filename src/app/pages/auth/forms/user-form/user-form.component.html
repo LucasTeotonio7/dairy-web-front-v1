@@ -1,0 +1,56 @@
+<form class="container" [formGroup]="userForm">
+    <h5 *ngIf="!userId; else elseBlock">Novo usuário</h5>
+    <ng-template #elseBlock><h5>Atualizar usuário</h5></ng-template>
+    <div class="field">
+        <app-image-upload [image]="image" (imageFileChange)="setImage($event)"></app-image-upload>
+    </div>
+
+    <div class="row">
+        <div class="form-group col-12 col-md-6">
+            <label class="form-label">Nome</label>
+            <input type="text" class="form-control" name="name" formControlName="name" required>
+            <div class="invalid-feedback">Campo obrigatório</div>
+        </div>
+
+        <div class="form-group col-12 col-md-6">
+            <label class="form-label">Sobrenome</label>
+            <input type="text" class="form-control" name="last_name" formControlName="last_name" required>
+            <div class="invalid-feedback">Campo obrigatório</div>
+        </div>
+
+        <div class="form-group">
+            <label class="form-label">Email</label>
+            <input type="email" class="form-control" name="email" formControlName="email" required>
+            <div class="invalid-feedback">Campo obrigatório</div>
+        </div>
+
+        <div class="form-group">
+            <label class="form-label">Nome de usuário</label>
+            <input type="text" class="form-control" name="username" formControlName="username" required>
+            <div class="invalid-feedback">Campo obrigatório</div>
+            <small>Será usado para realizar o login no sistema</small>
+        </div>
+    </div>
+
+    <hr>
+
+    <div class="button-area" [ngClass]="{'update': userId}">
+        <button *ngIf="userId" type="button" class="btn btn-danger btn-action" data-bs-toggle="modal" data-bs-target="#deleteUserModal"> 
+            <i class="fas fa-trash"></i> <span> Excluir</span> 
+        </button>
+        <div>
+            <button type="button" (click)="back()" class="btn btn-light border me-2">Cancelar</button>
+            <button type="button" (click)="save()" class="btn btn-primary"><i class="fas fa-check"></i> Salvar</button>
+        </div>
+    </div>
+</form>
+
+
+<app-delete-modal
+    [id]="'deleteUserModal'"
+    [title]="'Excluir usuário'"
+    [message]="'Tem certeza de que deseja excluir este usuário?'"
+    [confirmationMessage]="'Esta ação não pode ser desfeita.'"
+    [confirmButtonText]="'Excluir'"
+    (delete)="delete()"
+></app-delete-modal>

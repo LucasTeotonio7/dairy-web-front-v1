@@ -1,8 +1,10 @@
 import { ActivatedRoute } from '@angular/router';
 import { Component } from '@angular/core';
-import { UserService } from '../services/user.service';
+
 import { Paginator } from 'src/app/shared/models/paginator';
+import { UserService } from '../services/user.service';
 import { User } from '../models/user';
+import { ToastService } from 'src/app/shared/services/toast.service';
 
 @Component({
   selector: 'app-user',
@@ -15,7 +17,11 @@ export class UserComponent {
   userId!: string;
   paginator!: Paginator<User>;
 
-  constructor(private userService: UserService, private route: ActivatedRoute) {}
+  constructor(
+    private userService: UserService, 
+    private route: ActivatedRoute,
+    private toastService: ToastService,
+  ) {}
 
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
@@ -37,6 +43,18 @@ export class UserComponent {
     this.userId = button.id;
   }
 
-  deleteUser() {}
+  delete() : void {
+    this.userService.delete(this.userId).subscribe({
+      next: (response) => {
+        this.toastService.showToastSuccess('Usuário', 'Usuário excluído com sucesso!');
+      },
+      error: (error) => {
+        console.error(error);
+      },
+      complete: () => {
+        this.ngOnInit();
+      }
+    });
+  }
 
 }

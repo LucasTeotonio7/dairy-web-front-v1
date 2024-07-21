@@ -1,5 +1,5 @@
 <div class="container-fluid">
-    <button class="btn btn-primary mb-2" routerLink="/" disabled>
+    <button class="btn btn-primary mb-2" routerLink="create">
         Novo
     </button>
     <table *ngIf="paginator && paginator.count > 0 else emptyList" class="table">
@@ -26,7 +26,7 @@
                 </td>
                 <td data-label="Ações">
                     <div role="group">
-                        <button type="button" routerLink="/" class="btn btn-primary btn-action" disabled>
+                        <button type="button" routerLink="{{ user.id }}/update" class="btn btn-primary btn-action">
                             <i class="far fa-edit"></i> <span> Editar</span> 
                         </button>
                         <button id="{{ user.id }}" 
@@ -34,7 +34,7 @@
                                 class="btn btn-danger btn-action" 
                                 data-bs-toggle="modal" 
                                 data-bs-target="#deleteUserModal"
-                                (click)="setUserId($event)" disabled> 
+                                (click)="setUserId($event)"> 
                             <i class="fas fa-trash"></i> <span> Excluir</span> 
                         </button>
                     </div>
@@ -55,5 +55,5 @@
     [message]="'Tem certeza de que deseja excluir este usuário?'"
     [confirmationMessage]="'Esta ação não pode ser desfeita.'"
     [confirmButtonText]="'Excluir'"
-    (delete)="deleteUser()"
+    (delete)="delete()"
 ></app-delete-modal>
