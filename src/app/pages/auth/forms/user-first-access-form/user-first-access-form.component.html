@@ -1,0 +1,66 @@
+<div class="container">
+    <div class="card-login">
+        <div class="logo-image">
+            <img src="/assets/logo.png"><br>
+            <span>GESTÃO DO LEITE</span>
+        </div>
+
+        <h1 class="h4 text-gray-900 mb-4 text-center">Primeiro acesso</h1>
+        <hr>
+
+        <form *ngIf="!user" class="user" [formGroup]="userForm">
+            <div class="form-group">
+                <input type="text"
+                    class="form-control form-control-user"
+                    formControlName="username"
+                    placeholder="Informe seu nome de usuário">
+                <div class="invalid-feedback msg-auth-fail">Informe o usuário para prosseguir</div>
+            </div>
+            <button (click)="getUser()" class="btn btn-primary btn-user btn-block">
+                Prosseguir
+            </button>
+            <hr>
+            <div class="text-center">
+                <a class="small" routerLink="/login">Voltar para o login</a>
+            </div>
+        </form>
+
+        <form *ngIf="user && !passwordDone" class="user" [formGroup]="passwordForm">
+            <h5 class="mb-0">Olá {{ user.name }} {{ user.last_name }}</h5>
+            <small>Para prosseguir, defina sua senha de acesso ao sistema</small>
+            <div class="form-group mt-3">
+                <input type="password"
+                    class="form-control form-control-user mb-2"
+                    formControlName="password"
+                    placeholder="Defina sua senha">
+                <div class="invalid-feedback msg-auth-fail">Campo obrigatório</div>
+                <input type="password"
+                    class="form-control form-control-user"
+                    formControlName="confirm_password"
+                    placeholder="Confirme a senha">
+                <div class="invalid-feedback msg-auth-fail">Campo obrigatório</div>
+
+                <div *ngIf="passwordMismatch" class="msg-auth-fail">
+                    <label class="text-danger">As senhas não coincidem</label>
+                </div>
+            </div>
+
+            <button (click)="setPassword()" class="btn btn-primary btn-user btn-block">
+                Confirmar
+            </button>
+            <hr>
+            <div class="text-center">
+                <a class="small" routerLink="/login">Voltar para o login</a>
+            </div>
+        </form>
+
+
+        <div *ngIf="passwordDone">
+            <h5 class="mb-0">Olá {{ user.name }} {{ user.last_name }}</h5>
+            <small>Sua senha foi definida com sucesso! Agora você pode realizar o seu acesso a plataforma</small>
+            <button routerLink="/login" class="btn btn-primary btn-user btn-block mt-3">
+                Entrar
+            </button>
+        </div>
+    </div>
+</div>

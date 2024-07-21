@@ -5,6 +5,7 @@ import { authGuard } from './pages/auth/guards/auth.guard';
 import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/auth/login.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { UserFirstAccessFormComponent } from './pages/auth/forms/user-first-access-form/user-first-access-form.component';
 
 
 const routes: Routes = [
@@ -19,7 +20,8 @@ const routes: Routes = [
       { path: 'users', loadChildren: () => import('./pages/auth/auth.module').then(m => m.AuthModule)}
     ],
   },
-  { path: 'login', component: LoginComponent, canActivate: [authGuard] }
+  { path: 'login', component: LoginComponent, canActivate: [authGuard] },
+  { path: 'first-access', component: UserFirstAccessFormComponent }
 ];
 
 @NgModule({

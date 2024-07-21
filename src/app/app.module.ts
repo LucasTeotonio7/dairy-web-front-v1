@@ -12,6 +12,7 @@ import { HistoryComponent } from './pages/purchase/history/history.component';
 import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/auth/login.component';
 import { PurchaseComponent } from './pages/purchase/purchase.component';
+import { UserFirstAccessFormComponent } from './pages/auth/forms/user-first-access-form/user-first-access-form.component';
 
 import { SharedModule } from './shared/shared.module';
 
@@ -26,7 +27,8 @@ registerLocaleData(ptBr)
     LoginComponent,
     DashboardComponent,
     PurchaseComponent,
-    HistoryComponent
+    HistoryComponent,
+    UserFirstAccessFormComponent
   ],
   imports: [
     BrowserModule,
