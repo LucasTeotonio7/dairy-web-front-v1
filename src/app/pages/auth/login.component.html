@@ -1,83 +1,66 @@
 <div class="container">
-    <div class="col-xl-10 col-lg-12 col-md-9">
-
-        <div class="card o-hidden border-0 shadow-lg my-5">
-            <div class="card-body p-0">
-
-                <div class="row">
-                    <div
-                        class="col-lg-6 d-none d-lg-block bg-login-image">
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="p-5">
-                            <div class="logo-image">
-                                <img
-                                    src="/assets/logo.png"><br>
-                                <span>GESTÃO DO LEITE</span>
-                            </div>
-
-                            <h1
-                                class="h4 text-gray-900 mb-4 text-center">
-                                Bem vindo de volta!</h1>
-                            <form class="user"
-                                [formGroup]="loginForm">
-                                <div class="form-group">
-                                    <input type="text"
-                                        class="form-control form-control-user"
-                                        formControlName="username"
-                                        placeholder="Usuário">
-                                </div>
-                                <div class="form-group">
-                                    <input type="password"
-                                        class="form-control form-control-user"
-                                        formControlName="password"
-                                        placeholder="Senha">
-                                </div>
-                                <div class="form-group">
-                                    <div
-                                        class="custom-control custom-checkbox small">
-                                        <input
-                                            type="checkbox"
-                                            class="custom-control-input"
-                                            id="customCheck">
-                                        <label
-                                            class="custom-control-label"
-                                            for="customCheck">Lembre-me</label>
-                                    </div>
-                                </div>
-                                <div class="msg-auth-fail">
-                                    <label
-                                        *ngIf="messageError"
-                                        id="msg-auth-fail"
-                                        class="text-danger">Usuário ou senha incorretos!
-                                    </label>
-                                </div>
-                                <button type="submit"
-                                    (click)="login()"
-                                    class="btn btn-primary btn-user btn-block">
-                                    Entrar
-                                </button>
-                                <hr>
-                            </form>
-
-                            <div class="text-center">
-                                <a class="small"
-                                    href="#">
-                                    Esqueceu a senha ?
-                                </a>
-                            </div>
-                            <div class="text-center">
-                                <a class="small"
-                                    href="#">
-                                    Crie a sua conta aqui!
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+    <div class="card-login">
+        <div class="logo-image">
+            <img
+                src="/assets/logo.png"><br>
+            <span>GESTÃO DO LEITE</span>
         </div>
 
-    </div>
+        <h1
+            class="h4 text-gray-900 mb-4 text-center">
+            Bem vindo de volta!</h1>
+        <form class="user"
+            [formGroup]="loginForm">
+            <div class="form-group">
+                <input type="text"
+                    class="form-control form-control-user"
+                    formControlName="username"
+                    placeholder="Usuário">
+            </div>
+            <div class="form-group">
+                <input type="password"
+                    class="form-control form-control-user"
+                    formControlName="password"
+                    placeholder="Senha">
+            </div>
+            <div class="form-group">
+                <div
+                    class="custom-control custom-checkbox small">
+                    <input
+                        type="checkbox"
+                        class="custom-control-input"
+                        id="customCheck">
+                    <label
+                        class="custom-control-label"
+                        for="customCheck">Lembre-me</label>
+                </div>
+            </div>
+            <div class="msg-auth-fail">
+                <label
+                    *ngIf="messageError"
+                    id="msg-auth-fail"
+                    class="text-danger">Usuário ou senha incorretos!
+                </label>
+            </div>
+            <button type="submit"
+                (click)="login()"
+                class="btn btn-primary btn-user btn-block">
+                Entrar
+            </button>
+            <hr>
+        </form>
 
+        <div class="text-center">
+            <a class="small"
+                href="#">
+                Esqueceu a senha ?
+            </a>
+        </div>
+        <div class="text-center">
+            <a class="small"
+                href="#">
+                Crie a sua conta aqui!
+            </a>
+        </div>
+    </div>
 </div>
