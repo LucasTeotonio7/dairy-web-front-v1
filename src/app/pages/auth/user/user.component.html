@@ -29,7 +29,8 @@
                         <button type="button" routerLink="{{ user.id }}/update" class="btn btn-primary btn-action">
                             <i class="far fa-edit"></i> <span> Editar</span> 
                         </button>
-                        <button id="{{ user.id }}" 
+                        <button *ngIf="!user.last_login"
+                                id="{{ user.id }}"
                                 type="button" 
                                 class="btn btn-danger btn-action" 
                                 data-bs-toggle="modal" 

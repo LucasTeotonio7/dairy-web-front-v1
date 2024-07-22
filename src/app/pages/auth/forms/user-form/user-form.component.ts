@@ -16,6 +16,7 @@ export class UserFormComponent extends FormBaseMixin {
   userForm!: FormGroup;
 
   userId!: string | any;
+  user!: User;
   image: string = '/assets/image-404.png';
   imageFile!: File;
 
@@ -49,6 +50,7 @@ export class UserFormComponent extends FormBaseMixin {
 
         this.userService.get(this.userId).subscribe({
           next: (user: User) => {
+            this.user = user;
             this.userForm.setValue({
               name: user.name,
               last_name: user.last_name,

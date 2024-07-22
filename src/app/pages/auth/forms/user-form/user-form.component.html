@@ -35,7 +35,7 @@
     <hr>
 
     <div class="button-area" [ngClass]="{'update': userId}">
-        <button *ngIf="userId" type="button" class="btn btn-danger btn-action" data-bs-toggle="modal" data-bs-target="#deleteUserModal"> 
+        <button *ngIf="userId && !user.last_login" type="button" class="btn btn-danger btn-action" data-bs-toggle="modal" data-bs-target="#deleteUserModal"> 
             <i class="fas fa-trash"></i> <span> Excluir</span> 
         </button>
         <div>
