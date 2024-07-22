@@ -35,6 +35,7 @@ export class UserFormComponent extends FormBaseMixin {
       last_name: ['', Validators.required],
       email: ['', Validators.required],
       image: [''],
+      is_active: [true],
       username: ['', Validators.required]
     });
   }
@@ -55,6 +56,7 @@ export class UserFormComponent extends FormBaseMixin {
               name: user.name,
               last_name: user.last_name,
               email: user.email,
+              is_active: user.is_active,
               username: user.username,
               image: null
             });
@@ -79,7 +81,10 @@ export class UserFormComponent extends FormBaseMixin {
       if(this.imageFile){
         formData.append('image', this.imageFile);
       }
-      this.userService.save(formData, this.userId).subscribe({
+      if(!this.user) {
+        formData.set('is_active', 'false');
+      }
+      this.userService.save(formData, this.userId, true).subscribe({
         next: (response: any) => {
           this.toastService.showToastSuccess('Usuário', 'Usuário salvo com sucesso!');
         },

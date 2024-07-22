@@ -82,6 +82,10 @@
     margin: 5px 0;
 }
 
+.grayscale {
+    filter: grayscale(100%);
+}
+
 @media (max-width: 767px) {
 
     .title {

@@ -30,6 +30,11 @@
             <div class="invalid-feedback">Campo obrigatório</div>
             <small>Será usado para realizar o login no sistema</small>
         </div>
+
+        <div *ngIf="user && user.last_login" class="form-group active-field">
+            <input class="form-check-input" type="checkbox" tabindex="0" name="active" formControlName="is_active" checked>
+            <label class="form-check-label">Ativo</label>
+        </div>
     </div>
 
     <hr>

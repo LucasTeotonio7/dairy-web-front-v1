@@ -11,3 +11,7 @@
 .button-area .btn i {
     font-size: 14px;
 }
+
+.active-field {
+    margin-left: 19px;
+}

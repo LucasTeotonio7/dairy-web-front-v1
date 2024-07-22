@@ -14,7 +14,7 @@
             <tr *ngFor="let user of users">
                 <td data-label="">
                     <div class="avatar-container">
-                        <img src="{{ user.image ?? 'assets/user-no-image.jpg' }}" alt="User Avatar" class="rounded-avatar">
+                        <img src="{{ user.image ?? 'assets/user-no-image.jpg' }}" alt="User Avatar" class="rounded-avatar" [ngClass]="{'grayscale' : user.last_login && !user.is_active}">
                         <div>
                             {{ user.name}} {{ user.last_name}}
                         </div>
