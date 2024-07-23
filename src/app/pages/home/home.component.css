@@ -28,6 +28,10 @@
     color: var(--bs-gray-400);
 }
 
+.img-profile {
+    object-fit: cover;
+}
+
 @media (max-width: 768px) {
     .version-label,
     .copyright {

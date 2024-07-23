@@ -31,4 +31,11 @@ export class UserService extends CrudService<User>{
     );
   }
 
+  getLoggedUser(): Observable<User> {
+      return this.http.get<User>(
+        `${this.BASE_URL}get-logged-user`, 
+        this.getRequestOptions()
+      );
+  }
+
 }

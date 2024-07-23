@@ -1,12 +1,12 @@
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
-import { UserLogin } from './models/user';
-import { Component } from '@angular/core';
-import { AuthService } from './services/auth.service';
-import { TokenService } from './services/token.service';
-
 import { Subscription } from 'rxjs';
+
+import { AuthService } from './services/auth.service';
+import { Component } from '@angular/core';
+import { TokenService } from './services/token.service';
+import { UserLogin } from './models/user';
 
 
 @Component({
