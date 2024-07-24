@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
+import { DateService } from 'src/app/shared/services/date.service';
 import { Paginator } from 'src/app/shared/models/paginator';
 import { WeeklyControlEvent } from '../../weekly-control/models/weekly-control-event';
 
@@ -11,6 +12,8 @@ import { WeeklyControlEvent } from '../../weekly-control/models/weekly-control-e
 export class HistoryComponent {
   @Input() WeeklyControlEventPaginator!: Paginator<WeeklyControlEvent>;
   @Output() getMoreEvents = new EventEmitter<void>();
+
+  constructor(private dateService: DateService) {}
 
   onGetMoreEvents() {
     this.getMoreEvents.emit();
@@ -24,17 +27,7 @@ export class HistoryComponent {
   }
 
   formatDateTime(dateTimeString: string): string {
-    const options: Intl.DateTimeFormatOptions = {
-        month: 'long',
-        day: '2-digit',
-        hour: 'numeric',
-        minute: '2-digit',
-        hour12: true
-    };
-
-    const date = new Date(dateTimeString);
-    const formattedDateTime = new Intl.DateTimeFormat('pt-BR', options).format(date);
-    return formattedDateTime;
+    return this.dateService.formatDateTime(dateTimeString);
   }
 
 }

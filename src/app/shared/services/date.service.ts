@@ -56,4 +56,18 @@ export class DateService {
     return `${year}-${formattedMonth}-${formattedDay}`;
   }
 
+  formatDateTime(dateTimeString: string): string {
+    const options: Intl.DateTimeFormatOptions = {
+        month: 'long',
+        day: '2-digit',
+        hour: 'numeric',
+        minute: '2-digit',
+        hour12: true
+    };
+
+    const date = new Date(dateTimeString);
+    const formattedDateTime = new Intl.DateTimeFormat('pt-BR', options).format(date);
+    return formattedDateTime;
+  }
+
 }

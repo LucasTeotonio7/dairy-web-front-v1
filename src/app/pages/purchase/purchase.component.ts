@@ -274,20 +274,6 @@ export class PurchaseComponent {
     this.router.navigate([`/weekly-control/${this.weeklyControlId}/detail`]);
   }
 
-  formatDateTime(dateTimeString: string): string {
-    const options: Intl.DateTimeFormatOptions = {
-        month: 'long',
-        day: '2-digit',
-        hour: 'numeric',
-        minute: '2-digit',
-        hour12: true
-    };
-
-    const date = new Date(dateTimeString);
-    const formattedDateTime = new Intl.DateTimeFormat('pt-BR', options).format(date);
-    return formattedDateTime;
-  }
-
   formatCurrency(value: number): string {
     return value.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
   }
@@ -296,7 +282,7 @@ export class PurchaseComponent {
     const receiptHtml = `
       <div class="receipt">
         <p>Fornecedor: ${this.supplier.name}</p>
-        <p>Data: ${this.formatDateTime(this.supplier.paid_at)}</p>
+        <p>Data: ${this.dateService.formatDateTime(this.supplier.paid_at)}</p>
         <hr/>
         <h2>Coletas</h2>
         ${this.supplier.purchases.map(
