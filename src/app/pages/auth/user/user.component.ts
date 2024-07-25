@@ -1,6 +1,7 @@
 import { ActivatedRoute } from '@angular/router';
 import { Component } from '@angular/core';
 
+import { DateService } from 'src/app/shared/services/date.service';
 import { Paginator } from 'src/app/shared/models/paginator';
 import { UserService } from '../services/user.service';
 import { User } from '../models/user';
@@ -21,13 +22,13 @@ export class UserComponent {
     private userService: UserService, 
     private route: ActivatedRoute,
     private toastService: ToastService,
+    private dateService: DateService
   ) {}
 
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
         const page = params['page'] || 1;
         this.loadUsers(page);
-        console.log(this.users)
     });
   }
 
@@ -55,6 +56,10 @@ export class UserComponent {
         this.ngOnInit();
       }
     });
+  }
+
+  formatDateTime(datetime: string ) {
+    return this.dateService.formatDateTime(datetime);
   }
 
 }

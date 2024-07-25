@@ -12,6 +12,22 @@
     margin-right: 5px;
 }
 
+.avatar-container .user-data {
+    display: flex;
+    flex-direction: column;
+    text-align: start;
+    margin-left: 10px;
+}
+
+.avatar-container .user-data .badge,
+.avatar-container .user-data small{
+    font-size: 10px;
+}
+
+.bg-warning {
+    color: var(--bs-gray-dark);
+}
+
 @media (max-width: 768px) {
     .avatar-container .rounded-avatar {
         border: none;

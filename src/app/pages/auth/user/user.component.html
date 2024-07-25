@@ -6,7 +6,7 @@
         <thead>
             <tr>
                 <th>Nome</th>
-                <th>Ativo</th>
+                <th>Email</th>
                 <th>Ações</th>
             </tr>
         </thead>
@@ -15,15 +15,18 @@
                 <td data-label="">
                     <div class="avatar-container">
                         <img src="{{ user.image ?? 'assets/user-no-image.jpg' }}" alt="User Avatar" class="rounded-avatar" [ngClass]="{'grayscale' : user.last_login && !user.is_active}">
-                        <div>
-                            {{ user.name}} {{ user.last_name}}
+                        <div class="user-data">
+                            <div>
+                                {{ user.name}} {{ user.last_name}} 
+                                <span *ngIf="user.is_active && user.last_login" class="badge bg-success">Ativo</span>
+                                <span *ngIf="!user.is_active && user.last_login" class="badge bg-secondary">Inativo</span>
+                                <span *ngIf="!user.is_active && !user.last_login" class="badge bg-warning">Pendente</span>
+                            </div>
+                            <small *ngIf="user.last_login">Último login: {{ formatDateTime(user.last_login) }}</small>
                         </div>
                     </div>
                 </td>
-                <td data-label="Ativo" class="active-column">
-                    <i *ngIf="user.is_active" class="fas fa-check-circle text-success"></i>
-                    <i *ngIf="!user.is_active" class="fas fa-times-circle text-danger"></i>
-                </td>
+                <td data-label="Email">{{ user.email }}</td>
                 <td data-label="Ações">
                     <div role="group">
                         <button type="button" routerLink="{{ user.id }}/update" class="btn btn-primary btn-action">
