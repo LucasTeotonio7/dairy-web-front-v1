@@ -26,6 +26,7 @@
     "gulp": "^4.0.2",
     "gulp-cli": "^2.3.0",
     "jquery": "^3.7.1",
+    "ng-multiselect-dropdown": "^1.0.0",
     "print-js": "^1.6.0",
     "rxjs": "~7.8.0",
     "startbootstrap-sb-admin-2": "^4.1.4",
