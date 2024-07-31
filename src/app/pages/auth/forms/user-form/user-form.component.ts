@@ -1,11 +1,13 @@
 import { Component, ElementRef, Renderer2 } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
+import { IDropdownSettings } from 'ng-multiselect-dropdown';
+
 import { FormBaseMixin } from 'src/app/shared/mixins/form-base.mixin';
 import { UserService } from '../../services/user.service';
 import { ToastService } from 'src/app/shared/services/toast.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { User } from '../../models/user';
+import { Groups, User } from '../../models/user';
 
 @Component({
   selector: 'app-user-form',
@@ -19,6 +21,10 @@ export class UserFormComponent extends FormBaseMixin {
   user!: User;
   image: string = '/assets/image-404.png';
   imageFile!: File;
+
+  dropdownList: any[] = [];
+  selectedItems: any[] = [];
+  dropdownSettings: IDropdownSettings = {};
 
   constructor(
     private userService: UserService,
@@ -36,12 +42,40 @@ export class UserFormComponent extends FormBaseMixin {
       email: ['', Validators.required],
       image: [''],
       is_active: [true],
-      username: ['', Validators.required]
+      username: ['', Validators.required],
+      groups: ['']
     });
   }
 
   ngOnInit() {
     this.setUser();
+
+  }
+
+  getUserPermissions(user: User) {
+    const allGroups = user.available_groups;
+    const userGroups = user.groups;
+
+    allGroups.forEach((group) => {
+      this.dropdownList.push({
+        id: group.id,
+        name: group.name
+      })
+    })
+    userGroups.forEach((id) => {
+      this.selectedItems.push({
+        id: id,
+        name: allGroups.find(element => element.id === id)!.name
+      })
+    })
+    this.dropdownSettings = {
+      singleSelection: false,
+      idField: 'id',
+      textField: 'name',
+      selectAllText: 'Selecionar todas',
+      unSelectAllText: 'Desmarcar todas',
+      itemsShowLimit: 5
+    };
   }
 
   setUser() {
@@ -52,13 +86,15 @@ export class UserFormComponent extends FormBaseMixin {
         this.userService.get(this.userId).subscribe({
           next: (user: User) => {
             this.user = user;
+            this.getUserPermissions(this.user);
             this.userForm.setValue({
               name: user.name,
               last_name: user.last_name,
               email: user.email,
               is_active: user.is_active,
               username: user.username,
-              image: null
+              image: null,
+              groups: this.selectedItems
             });
 
             if(user.image){
@@ -75,6 +111,13 @@ export class UserFormComponent extends FormBaseMixin {
     });
   }
 
+  setGroupPermissions(groups: Groups[], formData: FormData): void {
+    formData.delete('groups');
+      groups.forEach((group) => {
+        formData.append('groups', group.id.toString());
+    });
+  }
+
   save(): void {
     if (this.userForm.valid) {
       const formData = this.formDataFromFormGroup(this.userForm.value);
@@ -84,7 +127,8 @@ export class UserFormComponent extends FormBaseMixin {
       if(!this.user) {
         formData.set('is_active', 'false');
       }
-      this.userService.save(formData, this.userId, true).subscribe({
+      this.setGroupPermissions(this.userForm.value.groups, formData);
+      this.userService.save(formData, this.userId).subscribe({
         next: (response: any) => {
           this.toastService.showToastSuccess('Usuário', 'Usuário salvo com sucesso!');
         },

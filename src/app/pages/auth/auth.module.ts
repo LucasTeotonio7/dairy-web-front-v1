@@ -1,7 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
+
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 
 import { UserComponent } from './user/user.component';
 import { SharedModule } from 'src/app/shared/shared.module';
@@ -23,7 +25,9 @@ const routes: Routes = [
     CommonModule,
     RouterModule.forChild(routes),
     ReactiveFormsModule,
-    SharedModule
+    FormsModule,
+    SharedModule,
+    NgMultiSelectDropDownModule
   ]
 })
 export class AuthModule { }

@@ -37,10 +37,17 @@
         </div>
     </div>
 
+    <ng-multiselect-dropdown *ngIf="user"
+        [placeholder]="'Definir permissões'"
+        [settings]="dropdownSettings"
+        [data]="dropdownList"
+        formControlName="groups">
+    </ng-multiselect-dropdown>
+
     <hr>
 
     <div class="button-area" [ngClass]="{'update': userId}">
-        <button *ngIf="userId && !user.last_login" type="button" class="btn btn-danger btn-action" data-bs-toggle="modal" data-bs-target="#deleteUserModal"> 
+        <button *ngIf="user && !user.last_login" type="button" class="btn btn-danger btn-action" data-bs-toggle="modal" data-bs-target="#deleteUserModal"> 
             <i class="fas fa-trash"></i> <span> Excluir</span> 
         </button>
         <div>

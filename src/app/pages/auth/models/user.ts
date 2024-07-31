@@ -1,3 +1,8 @@
+export interface Groups {
+    id: number,
+    name: string
+}
+
 export interface User {
     id: string;
     last_login?: string;
@@ -11,6 +16,8 @@ export interface User {
     image?: string;
     is_active: boolean;
     is_staff: boolean;
+    groups: number[];
+    available_groups: Groups[];
 }
 
 
