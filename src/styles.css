@@ -8,10 +8,43 @@
 :root {
     --title-color: #1e293b;
     --subtitle-color: #818181;
+    --background-primary: #f8f9fa;
+    --background-secondary: #fff;
+    --nav-1: #682af5;
+    --blue-1: #118ab2;
+    --font-100: #ffffff;
+    --font-200: #f5f5f5;
+    --font-300: #e0e0e0;
+    --font-400: #cccccc;
+    --font-500: #b3b3b3;
+    --font-600: #999999;
+    --font-700: #808080;
+    --font-800: #666666;
+    --font-900: #4d4d4d;
+    --font-1000: #333333;
+    --font-1100: #000000;
+}
+
+.dark {
+    --background-primary: #1d2230;
+    --background-secondary: #10182c;
+    --nav-1: #B0C4DE;
+    --font-100: #000000;
+    --font-200: #1a1a1a;
+    --font-300: #333333;
+    --font-400: #4d4d4d;
+    --font-500: #666666;
+    --font-600: #808080;
+    --font-700: #999999;
+    --font-800: #b3b3b3;
+    --font-900: #cccccc;
+    --font-1000: #e0e0e0;
+    --font-1100: #ffffff;
 }
 
 * {
     font-family: "Inter", sans-serif;
+    transition: 0.3s;
 }
 
 .title {
@@ -39,17 +72,19 @@
 }
 
 .table {
-    box-shadow: 0 .15rem 1.75rem 0 rgba(58, 59, 69, .15);
-    border: 1px solid #f3f3f3b0;
+    background: var(--font-100);
+    border: 1px solid var(--font-300);
+    border-radius: 10px;
+    border-collapse: separate;
 }
 
 .table th {
     text-transform: uppercase;
     font-size: 12px;
     font-weight: 700;
-    border: none;
-    background: var(--blue);
-    color: var(--white);
+    border: none !important;
+    background: var(--font-300);
+    color: var(--font-1100);
 }
 
 .table th:first-child {
@@ -64,6 +99,9 @@
     vertical-align: middle;
     font-size: 14px;
     font-weight: 500;
+    border: none;
+    background: var(--font-100);
+    color: var(--font-1000);
 }
 
 .receipt {
