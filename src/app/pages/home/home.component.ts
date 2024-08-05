@@ -19,6 +19,7 @@ export class HomeComponent {
   date: Date = new Date();
   FullYear = this.date.getFullYear();
   env = environment;
+  isDarkMode: boolean = false;
 
   constructor(
     private authService: AuthService, 
@@ -28,6 +29,7 @@ export class HomeComponent {
 
   ngOnInit(): void {
     this.getLoggedUser();
+    this.getTheme();
   }
 
   getLoggedUser() {
@@ -50,6 +52,29 @@ export class HomeComponent {
   toggle(): void {
     const sidebarToggle = document.getElementById('accordionSidebar');
     sidebarToggle?.classList.toggle('toggled');
+  }
+
+  getTheme() {
+    const darkMode = localStorage.getItem('darkMode');
+    this.isDarkMode = darkMode === 'true';
+    const htmlElement = document.documentElement;
+    if (this.isDarkMode) {
+      htmlElement.classList.add('dark');
+    } else {
+      htmlElement.classList.remove('dark');
+    }
+  }
+
+  toggleDarkMode(event: any) {
+    this.isDarkMode = event.target.checked;
+    const htmlElement = document.documentElement;
+    if (this.isDarkMode) {
+      htmlElement.classList.add('dark');
+      localStorage.setItem('darkMode', 'true');
+    } else {
+      htmlElement.classList.remove('dark');
+      localStorage.setItem('darkMode', 'false');
+    }
   }
 
 }

@@ -1,8 +1,72 @@
+#content-wrapper {
+    background-color: var(--background-primary) !important;
+}
+
+.sidebar, .navbar {
+    background: var(--background-secondary);
+}
+
+#accordionSidebar {
+    border-right: 1px solid var(--font-300);
+}
+
 .sidebar-brand-text {
     font-size: 12px;
     text-wrap: nowrap;
+    color: var(--font-1100);
 }
 
+.sidebar-heading {
+    font-size: 10px;
+    color: var(--text-600);
+}
+
+.sidebar-divider {
+    border-color: var(--text-900) !important;
+    opacity: 0.07;
+}
+
+.nav-item {
+    font-size: 13px;
+}
+
+span {
+    color: var(--font-1000);
+    font-weight: 500;
+}
+
+.nav-item i {
+    display: inline-flex;
+    margin-right: 16px;
+    font-size: 16px;
+    color: var(--font-1000);
+}
+
+.nav-item i::before {
+    width: 16px;
+    height: 16px;
+}
+
+.nav-item.active a * {
+    color: var(--font-1100);
+    font-weight: 700;
+}
+
+.nav-item:hover * {
+    color: var(--font-1100) !important;
+    font-weight: 800;
+}
+
+#sidebarToggleTop:hover {
+    background: var(--font-200);
+    color: var(--font-1100);
+    border: 1px solid var(--font-300);
+}
+
+#sidebarToggle {
+    background: var(--font-200);
+    color: var(--font-1100);
+}
 
 .scroll-to-top {
     cursor: pointer;
@@ -10,6 +74,8 @@
 
 .sticky-footer {
     margin-top: auto;
+    padding: 1rem 0;
+    background-color: var(--background-secondary) !important;
 }
 
 #accordionSidebar {

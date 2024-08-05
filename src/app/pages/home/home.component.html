@@ -1,7 +1,7 @@
 <div id="wrapper">
 
     <!-- Sidebar -->
-    <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+    <ul class="sidebar navbar-nav accordion" id="accordionSidebar">
 
         <!-- Sidebar - Brand -->
         <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/">
@@ -59,7 +59,7 @@
         <!-- Nav Item - Tables -->
         <li class="nav-item">
             <a class="nav-link" routerLink="/suppliers">
-                <i class="fas fa-truck-loading"></i>
+                <i class="fa-solid fa-dolly"></i>
                 <span>Fornecedores</span></a>
         </li>
 
@@ -78,12 +78,14 @@
         <div>
 
             <!-- Topbar -->
-            <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+            <nav class="navbar navbar-expand topbar mb-4 static-top shadow">
 
                 <!-- Sidebar Toggle (Topbar) -->
                 <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3" (click)="toggle()">
                     <i class="fa fa-bars"></i>
                 </button>
+
+                <input type="checkbox" (change)="toggleDarkMode($event)" [checked]="isDarkMode"/>
 
                 <!-- Topbar Navbar -->
                 <ul class="navbar-nav ml-auto">
