@@ -1,0 +1,7 @@
+.card {
+    background: var(--font-100);
+}
+
+.card > * {
+    color: var(--font-1100);
+}
