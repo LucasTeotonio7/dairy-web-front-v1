@@ -64,7 +64,7 @@ span {
 }
 
 #sidebarToggle {
-    background: var(--font-200);
+    background: var(--dark-blue-1);
     color: var(--font-1100);
 }
 
