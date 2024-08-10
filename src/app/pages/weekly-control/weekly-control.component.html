@@ -2,7 +2,7 @@
     <div class="title">
         <div>
             <h3>Listagem de planilhas</h3>
-            <small>Acompanhamento semanal detalhado por fornecedor</small>
+            <small>Visualize e gerencie suas planilhas de controle semanal</small>
         </div>
     </div>
     <button class="btn btn-action create" routerLink="/weekly-control/create">
@@ -12,11 +12,11 @@
     <table *ngIf="paginator && paginator.count > 0 else emptyList" class="table">
         <thead>
             <tr>
-                <th><i class="fa-solid fa-box me-1"></i> Produto</th>
-                <th><i class="fa-regular fa-calendar me-1"></i> Data inicial</th>
-                <th><i class="fa-solid fa-calendar-check me-1"></i> Data final</th>
-                <th><i class="fa-solid fa-bolt me-1"></i> Ativa</th>
-                <th><i class="fa-solid fa-gears me-1"></i> Ações</th>
+                <th><i class="fa-solid fa-box"></i> Produto</th>
+                <th><i class="fa-regular fa-calendar"></i> Data inicial</th>
+                <th><i class="fa-solid fa-calendar-check"></i> Data final</th>
+                <th><i class="fa-solid fa-bolt"></i> Ativa</th>
+                <th><i class="fa-solid fa-gears"></i> Ações</th>
             </tr>
         </thead>
         <tbody>
