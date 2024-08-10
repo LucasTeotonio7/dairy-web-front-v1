@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Weekday } from '../models/date';
 
 
-const daysOfWeek = ['DOM', 'SEG', 'TER', 'QUA', 'QUI', 'SEX', 'SAB'];
+const daysOfWeek = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab'];
 
 
 @Injectable({
