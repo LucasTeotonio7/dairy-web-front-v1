@@ -5,7 +5,7 @@
     </div>
 </div>
 
-<nav *ngIf="weeklyControl" class="navbar navbar-light">
+<nav *ngIf="weeklyControl" class="navbar">
     <div class="weekly-details">
         <div><i class="fas fa-box me-2"></i>Planilha do {{ weeklyControl.product_description|lowercase }}</div>
         <div>
@@ -27,12 +27,12 @@
     <table class="table mt-2">
         <thead>
             <tr>
-                <th>FORNECEDOR</th>
+                <th><i class="fa-solid fa-dolly"></i> Fornecedor</th>
                 <th *ngFor="let weekday of weekdays">{{ weekday.name }}</th>
-                <th>QTD</th>
-                <th>PREÇO</th>
-                <th>TOTAL</th>
-                <th>AÇÕES</th>
+                <th>Qtd</th>
+                <th><i class="fa-solid fa-money-check-dollar"></i> Preço</th>
+                <th><i class="fa-solid fa-dollar-sign"></i> Total</th>
+                <th><i class="fa-solid fa-gears"></i> Ações</th>
             </tr>
         </thead>
         <tbody>
@@ -44,12 +44,12 @@
                 <td data-label="Preço">{{ supplier.price.value|currency:'BRL' }}</td>
                 <td data-label="Total">{{ (supplier.price.value * supplier.total_quantity)|currency:'BRL' }}</td>
                 <td data-label="Ações">
-                    <button type="button" routerLink="/weekly-control/{{ weeklyControl.id }}/supplier/{{supplier.id}}/purchases" class="btn btn-primary btn-action">
+                    <button type="button" routerLink="/weekly-control/{{ weeklyControl.id }}/supplier/{{supplier.id}}/purchases" class="btn btn-action edit">
                         <i *ngIf="!supplier.paid_supplier" class="far fa-edit"></i>
                         <i *ngIf="supplier.paid_supplier" class="fa-solid fa-share-from-square"></i>
                     </button>
-                    <button *ngIf="!supplier.paid_supplier" type="button" routerLink="/weekly-control/{{ weeklyControl.id }}/supplier/{{supplier.id}}/payment" class="btn btn-primary btn-action bg-dark">
-                        <i class="fa-solid fa-money-check-dollar bg-success"></i>
+                    <button *ngIf="!supplier.paid_supplier" type="button" routerLink="/weekly-control/{{ weeklyControl.id }}/supplier/{{supplier.id}}/payment" class="btn btn-action payment">
+                        <i class="fa-solid fa-dollar-sign"></i>
                     </button>
                 </td>
             </tr>
