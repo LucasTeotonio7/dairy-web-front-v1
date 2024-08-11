@@ -85,7 +85,8 @@
                     <i class="fa fa-bars"></i>
                 </button>
 
-                <input type="checkbox" (change)="toggleDarkMode($event)" [checked]="isDarkMode"/>
+                <input type="checkbox" id="themeToggle" (change)="toggleDarkMode($event)" [checked]="isDarkMode"/>
+                <label class="theme-toggle" for="themeToggle"></label>
 
                 <!-- Topbar Navbar -->
                 <ul class="navbar-nav ml-auto">
