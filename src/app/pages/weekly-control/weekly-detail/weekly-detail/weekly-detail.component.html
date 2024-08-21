@@ -44,7 +44,10 @@
                 <td data-label="Preço">{{ supplier.price.value|currency:'BRL' }}</td>
                 <td data-label="Total">{{ (supplier.price.value * supplier.total_quantity)|currency:'BRL' }}</td>
                 <td data-label="Ações">
-                    <button type="button" routerLink="/weekly-control/{{ weeklyControl.id }}/supplier/{{supplier.id}}/purchases" class="btn btn-action edit">
+                    <button type="button" 
+                            routerLink="/weekly-control/{{ weeklyControl.id }}/supplier/{{supplier.id}}/purchases" 
+                            class="btn btn-action" 
+                            [ngClass]="{'edit': !supplier.paid_supplier, 'redirect': supplier.paid_supplier}">
                         <i *ngIf="!supplier.paid_supplier" class="far fa-edit"></i>
                         <i *ngIf="supplier.paid_supplier" class="fa-solid fa-share-from-square"></i>
                     </button>
