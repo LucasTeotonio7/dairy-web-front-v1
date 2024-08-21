@@ -13,7 +13,7 @@
 <div *ngIf="weeklyControl" class="navbar navbar-light">
     <div class="weekly-control-info">
         <div class="supplier-name">
-            <i class="fa-solid fa-building-user me-2"></i>{{ supplier.name }} 
+            <i class="fa-solid fa-dolly me-2"></i>{{ supplier.name }} 
         </div>
         <div class="date-range">
             <i class="far fa-calendar-alt me-2"></i>
@@ -24,7 +24,7 @@
             <i class="fa-solid fa-tag"></i> 
             <span class="mx-2">Preço: {{ supplier.price.value|currency:'BRL' }}</span>
             <div>
-                <button *ngIf="!supplier.paid_supplier" type="button" class="btn btn-primary btn-action" data-bs-toggle="modal" data-bs-target="#update-price-modal">
+                <button *ngIf="!supplier.paid_supplier" type="button" class="btn btn-action edit" data-bs-toggle="modal" data-bs-target="#update-price-modal">
                     <i class="far fa-edit"></i> 
                 </button>
             </div>
@@ -39,10 +39,23 @@
         <thead>
             <tr>
                 <th *ngFor="let weekDay of weekDays" class="{{ weekDay.day == today ? 'today' : '' }}">
-                    {{ weekDay.name }}
+                    <span>{{ weekDay.name }}</span>
+                    <br>
+                    <small>
+                        {{ weekDay.day|formatDateTime }} 
+                        <span *ngIf="weekDay.day == today" class="badge bg-primary">Hoje</span>
+                    </small>
                 </th>
-                <th>QUANTIDADE</th>
-                <th>VALOR</th>
+                <th>
+                    <span>Quantidade</span> 
+                    <br>
+                    <small>Em litros ( L )</small>
+                </th>
+                <th>
+                    <span>Valor</span> 
+                    <br>
+                    <small>Em ( R$ )</small>
+                </th>
             </tr>
         </thead>
         <tbody>
@@ -61,26 +74,26 @@
                            [disabled]="disableField(purchase.reference_day)"
                            value="{{ purchase.quantity }}"/>
                 </td>
-                <td data-label="QUANTIDADE" class="values-result">{{ supplier.total_quantity }}</td>
-                <td data-label="VALOR" class="values-result">{{ getPriceTotal() | currency:'BRL':'symbol':'1.2-2' }} </td>
+                <td data-label="Quantidade" class="values-result">{{ supplier.total_quantity }}</td>
+                <td data-label="Valor" class="values-result">{{ getPriceTotal() | currency:'BRL':'symbol':'1.2-2' }} </td>
             </tr>
         </tbody>
     </table>
 
-    <div class="button-area">
+    <div class="button-area mt-2">
         <div>
-            <button type="button" (click)="back()" class="btn btn-light border me-2">
+            <button type="button" (click)="back()" class="btn btn-action back border me-2">
                 <span *ngIf="supplier.paid_supplier"><i class="fa-solid fa-rotate-left"></i> Voltar</span>
                 <span *ngIf="!supplier.paid_supplier">Cancelar</span>
             </button>
-            <button type="button" class="btn btn-light border me-2" *ngIf="supplier.paid_supplier" (click)="printReceipt()">
-                <i class="fa-solid fa-print"></i> Imprimir Comprovante
+            <button type="button" class="btn btn-action print me-2" *ngIf="supplier.paid_supplier" (click)="printReceipt()">
+                <i class="fa-solid fa-print"></i>
             </button>
-            <button *ngIf="path === 'purchases' && !supplier.paid_supplier" type="button" (click)="save()" class="btn btn-primary">
+            <button *ngIf="path === 'purchases' && !supplier.paid_supplier" type="button" (click)="save()" class="btn btn-action save">
                 <i class="fas fa-check"></i> Salvar
             </button>
-            <button *ngIf="path === 'payment' && !supplier.paid_supplier" type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#pay-supplier-modal">
-                <i class="fa-solid fa-money-check-dollar bg-success"></i> Pagar
+            <button *ngIf="path === 'payment' && !supplier.paid_supplier" type="button" class="btn btn-action payment" data-bs-toggle="modal" data-bs-target="#pay-supplier-modal">
+                <i class="fa-solid fa-dollar-sign"></i> Pagar
             </button>
         </div>
     </div>
@@ -156,9 +169,9 @@
         </main>
 
         <footer class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-            <button type="button" class="btn btn-dark" (click)="pay()" data-bs-dismiss="modal">
-                <i class="fa-solid fa-money-check-dollar bg-success"></i> Pagar
+            <button type="button" class="btn btn-action back" data-bs-dismiss="modal">Fechar</button>
+            <button type="button" class="btn btn-action payment" (click)="pay()" data-bs-dismiss="modal">
+                <i class="fa-solid fa-dollar-sign"></i> Pagar
             </button>
         </footer>
         </div>

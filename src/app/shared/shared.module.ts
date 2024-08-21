@@ -8,6 +8,7 @@ import { PaginatorComponent } from './components/paginator/paginator.component';
 import { EmptyListComponent } from './components/empty-list/empty-list.component';
 import { ToastComponent } from './components/toast/toast.component';
 import { SafeHtmlPipe } from './pipes/safe-html.pipe';
+import { FormatDateTimePipe } from './pipes/format-date-time.pipe';
 
 
 @NgModule({
@@ -18,6 +19,7 @@ import { SafeHtmlPipe } from './pipes/safe-html.pipe';
     EmptyListComponent,
     ToastComponent,
     SafeHtmlPipe,
+    FormatDateTimePipe
   ],
   imports: [
     CommonModule,
@@ -29,7 +31,8 @@ import { SafeHtmlPipe } from './pipes/safe-html.pipe';
     PaginatorComponent,
     EmptyListComponent,
     ToastComponent,
-    SafeHtmlPipe
+    SafeHtmlPipe,
+    FormatDateTimePipe
   ]
 })
 export class SharedModule { }
