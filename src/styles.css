@@ -103,6 +103,11 @@
     color: #07beb8;
 }
 
+.btn-action.edit.full {
+    background-color: #07beb8 !important;
+    color: #fff;
+}
+
 .active-column .fa-times-circle,
 .btn-action.delete {
     color: #f26a8d;
