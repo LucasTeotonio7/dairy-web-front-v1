@@ -82,7 +82,7 @@
 
     <div class="button-area mt-2">
         <div>
-            <button type="button" (click)="back()" class="btn btn-action back border me-2">
+            <button type="button" (click)="back()" class="btn btn-action back">
                 <span *ngIf="supplier.paid_supplier"><i class="fa-solid fa-rotate-left"></i> Voltar</span>
                 <span *ngIf="!supplier.paid_supplier">Cancelar</span>
             </button>
@@ -115,12 +115,14 @@
         </header>
 
         <main class="modal-body">
-            <small class="d-flex">#Fornecedor: {{ supplier.name }}</small>
+            <div class="d-flex">
+                <i class="fa-solid fa-dolly me-2 d-flex align-items-center"></i> {{ supplier.name }}
+            </div>
             <hr>
-            <form class="container" [formGroup]="priceProductSupplierForm">
+            <form [formGroup]="priceProductSupplierForm">
                 <div class="form-group">
                     <label for="price-product-supplier">Selecione a tabela</label>
-                    <select *ngIf="priceTables" class="form-control" id="price-product-supplier" name="price" formControlName="price" (change)="changePriceValue($event)">
+                    <select *ngIf="priceTables" class="form-select" id="price-product-supplier" name="price" formControlName="price" (change)="changePriceValue($event)">
                         <option *ngFor="let priceTable of priceTables" 
                                 value="{{ priceTable.id }}"
                                 [attr.unit-price]="priceTable.value"
@@ -131,8 +133,8 @@
         </main>
 
         <footer class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-            <button type="button" (click)="setPriceTable()" data-bs-dismiss="modal" class="btn btn-primary">Salvar</button>
+            <button type="button" class="btn btn-action back" data-bs-dismiss="modal">Fechar</button>
+            <button type="button" (click)="setPriceTable()" data-bs-dismiss="modal" class="btn btn-action save">Salvar</button>
         </footer>
         </div>
     </div>

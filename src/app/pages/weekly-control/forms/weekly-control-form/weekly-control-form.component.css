@@ -1,13 +1,3 @@
-.button-area {
-    float: right;
-}
-
-.button-area.update {
-    float: none;
-    display: flex;
-    justify-content: space-between;
-}
-
-.button-area .btn i {
-    font-size: 14px;
+.form-switch {
+    margin-left: 20px;
 }

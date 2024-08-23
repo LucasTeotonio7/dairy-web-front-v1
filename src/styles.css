@@ -66,8 +66,13 @@
 }
 
 .btn-action {
-    font-size: 14px;
+    font-size: 14px !important;
     margin: 2px;
+    height: 35px;
+}
+
+.btn-action i {
+    font-size: 12px;
 }
 
 .btn-action:hover {
@@ -81,23 +86,12 @@
 .btn-action.save,
 .btn-action.create {
     background: var(--purple-1);
-    color: var(--font-100);
-    margin-bottom: 10px;
+    color: #fff;
     border: none;
 }
 
 .btn-action.create:hover {
     filter: brightness(0.95);
-}
-
-.dark .btn-action.save,
-.dark .btn-action.create {
-    color: var(--font-1100);
-}
-
-.btn-action.save {
-    margin: 0;
-    font-size: 14px;
 }
 
 .active-column {
@@ -112,6 +106,11 @@
 .active-column .fa-times-circle,
 .btn-action.delete {
     color: #f26a8d;
+}
+
+.btn-action.delete.full {
+    background-color: #f26a8d !important;
+    color: #fff;
 }
 
 .btn-action.print,
@@ -129,6 +128,18 @@
 
 .btn-action.back {
     color: var(--font-1100);
+    border-color: var(--font-500);
+    margin-right: 5px;
+}
+
+.button-area {
+    float: right;
+}
+
+.button-area.update {
+    float: none;
+    display: flex;
+    justify-content: space-between;
 }
 
 .table {
@@ -214,6 +225,39 @@
 .modal-header,
 .modal-footer {
     border-color: var(--font-400);
+}
+
+.form-label,
+.form-check-label {
+    font-size: 14px;
+    color: var(--font-900);
+    font-weight: 600;
+}
+
+.form-control {
+    background: none !important;
+    border-color: var(--font-300);
+    color: var(--font-1000);
+    font-size: 14px;
+}
+
+.form-control:focus {
+    font-weight: 500;
+    color: var(--font-1000);
+}
+
+.form-select {
+    color: var(--font-1100) !important;
+    background: var(--background-primary) !important;
+    font-size: 14px;
+}
+
+.modal-content .form-select{
+    background: var(--dark-blue-1) !important;
+}
+
+.form-select option {
+    font-size: 16px !important;
 }
 
 @media (max-width: 767px) {
