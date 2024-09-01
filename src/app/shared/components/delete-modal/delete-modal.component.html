@@ -13,8 +13,8 @@
                 <strong>{{ confirmationMessage }}</strong>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="closeModal()">Cancelar</button>
-                <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="deleteAction()">
+                <button type="button" class="btn btn-action back" data-bs-dismiss="modal" (click)="closeModal()">Cancelar</button>
+                <button type="button" class="btn btn-action delete full" data-bs-dismiss="modal" (click)="deleteAction()">
                     <i class="fas fa-check me-1"></i> {{ confirmButtonText }}
                 </button>
             </div>

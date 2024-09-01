@@ -1,6 +1,4 @@
 .navbar {
-    background: #fff;
-    box-shadow: 5px 0px 10px #44444417;
     margin: 5px;
     border-radius: 5px;
 }
@@ -11,9 +9,10 @@
     justify-content: space-between;
     align-items: center;
     padding: 10px;
-    border: 1px solid var(--bs-gray-300);
+    border: 1px solid var(--font-300);
     border-radius: 10px;
-    color: var(--bs-dark);
+    color: var(--font-1100);
+    background: var(--dark-blue-1);
     font-size: 14px;
     font-weight: 600;
 }
@@ -38,7 +37,12 @@
 .expand-mobile-td {
     display: none;
     cursor: pointer;
-    background: var(--bs-gray-200);
+    border-bottom: 1px solid var(--dark-blue-1);
+}
+
+.expand-mobile-td i {
+    color: var(--purple-1);
+    font-weight: 800;
 }
 
 .table td:first-child {

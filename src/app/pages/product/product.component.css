@@ -11,7 +11,7 @@
     align-items: center;
     font-size: 14px;
     font-weight: 700;
-    color: var(--bs-dark);
+    color: var(--font-1100);
 }
 
 .product-info .description:hover {
@@ -35,7 +35,6 @@
 @media (max-width: 768px) {
     .product-info .description {
         font-size: 11px;
-        color: var(--bs-white);
     }
 
     .product-info .measure-unit {

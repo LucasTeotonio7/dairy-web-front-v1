@@ -30,12 +30,12 @@
     <hr>
 
     <div class="button-area" [ngClass]="{'update': priceId}">
-        <button *ngIf="priceId" [disabled]="price.has_spreadsheet" type="button" class="btn btn-danger btn-action" data-bs-toggle="modal" data-bs-target="#deletePriceModal"> 
+        <button *ngIf="priceId" [disabled]="price.has_spreadsheet" type="button" class="btn btn-action delete full" data-bs-toggle="modal" data-bs-target="#deletePriceModal"> 
             <i class="fas fa-trash"></i> <span> Excluir</span> 
         </button>
         <div>
-            <button type="button" (click)="back()" class="btn btn-light border me-2">Cancelar</button>
-            <button type="button" (click)="save()" class="btn btn-primary"><i class="fas fa-check"></i> Salvar</button>
+            <button type="button" (click)="back()" class="btn btn-action back border">Cancelar</button>
+            <button type="button" (click)="save()" class="btn btn-action save"><i class="fas fa-check"></i> Salvar</button>
         </div>
     </div>
 </form>

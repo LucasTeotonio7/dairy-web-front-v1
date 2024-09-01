@@ -1,5 +1,42 @@
 .paginator {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    margin-top: 10px;
+}
+
+.total-desc {
+    font-size: 12px;
+}
+
+.page-link {
+    padding: 5px 10px;
+    font-size: 14px;
+    background: var(--font-100);
+    color: var(--font-1100);
+}
+
+.page-item a {
+    background: var(--font-100);
+    color: var(--font-1100);
+    border-color: var(--font-300);
+}
+
+.page-item.active a {
+    background-color: var(--purple-1) !important;
+    border-color: var(--purple-1) !important;
+    color: #fff;
+}
+
+.page-item.disabled .page-link {
+    color: var(--font-400);
+}
+
+@media (max-width: 767px) {
+    .page-link {
+        font-size: 12px;
+    }
+
+    .total-desc {
+        font-size: 10px;
+    }
 }

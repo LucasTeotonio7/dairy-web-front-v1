@@ -50,6 +50,11 @@ export class WeeklyControlFormComponent extends FormBaseMixin {
 
     initFlatpickr(defaultDate?: any, noCalendar=false): void {
         let element = document.getElementById('range-date') as HTMLInputElement;
+        this.removeFlatpickrTheme();
+        const theme = document.documentElement.classList.contains('dark');
+        if (theme) {
+            this.loadFlatpickrDarkTheme();
+        }
         this.flatpickrOptions = {
             mode: "range",
             altFormat: "l d/m",
@@ -60,6 +65,21 @@ export class WeeklyControlFormComponent extends FormBaseMixin {
             noCalendar: noCalendar
         }
         flatpickr(element, this.flatpickrOptions);
+    }
+
+    loadFlatpickrDarkTheme(): void {
+        const linkElement = document.createElement('link');
+        linkElement.rel = 'stylesheet';
+        linkElement.href = 'https://cdn.jsdelivr.net/npm/flatpickr/dist/themes/dark.css';
+        linkElement.id = 'flatpickr-theme';
+        document.head.appendChild(linkElement);
+    }
+
+    removeFlatpickrTheme(): void {
+        const existingTheme = document.getElementById('flatpickr-theme');
+        if (existingTheme) {
+            existingTheme.remove();
+        }
     }
 
     setProducts(): void {

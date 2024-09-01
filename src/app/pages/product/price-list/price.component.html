@@ -2,6 +2,7 @@
 
     <div class="title">
         <h3>{{ product.description }}</h3>
+        <small>Gerencie as tabelas de preço desse produto</small>
     </div>
 
     <ul class="nav nav-tabs mb-3">
@@ -13,8 +14,8 @@
         </li>
     </ul>
 
-    <button class="btn btn-primary mb-2" routerLink="/products/{{ product.id }}/prices/create">
-        Nova
+    <button class="btn btn-action create mb-2" routerLink="/products/{{ product.id }}/prices/create">
+        <i class="fas fa-plus"></i> Nova tabela
     </button>
     <table *ngIf="paginator && paginator.count > 0 else emptyList" class="table mt-2">
         <thead>
@@ -35,16 +36,16 @@
                 </td>
                 <td data-label="Ações">
                     <div role="group">
-                        <button type="button" routerLink="/products/{{ product.id }}/prices/{{ price.id }}/update" class="btn btn-primary btn-action">
-                            <i class="far fa-edit"></i> <span> Editar</span> 
+                        <button type="button" routerLink="/products/{{ product.id }}/prices/{{ price.id }}/update" class="btn btn-action edit">
+                            <i class="far fa-edit"></i>
                         </button>
                         <button [disabled]="price.has_spreadsheet" id="{{ price.id }}" 
                                 type="button" 
-                                class="btn btn-danger btn-action" 
+                                class="btn btn-action delete" 
                                 data-bs-toggle="modal" 
                                 data-bs-target="#deletePriceModal"
                                 (click)="setPriceId($event)"> 
-                            <i class="fas fa-trash"></i> <span> Excluir</span> 
+                            <i class="fas fa-trash"></i>
                         </button>
                     </div>
                 </td>
