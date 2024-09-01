@@ -1,13 +1,5 @@
-.button-area {
-    float: right;
-}
-
-.button-area.update-product {
-    float: none;
-    display: flex;
-    justify-content: space-between;
-}
-
-.button-area .btn i {
-    font-size: 14px;
+.input-group-text {
+    color: var(--font-1100);
+    background: var(--font-300);
+    border: none;
 }

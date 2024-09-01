@@ -1,5 +1,10 @@
 <form class="container" [formGroup]="productForm">
-    <h5>Atualizar produto</h5>
+    <div class="title">
+        <h3 *ngIf="productId; else elseBlock">Atualizar produto</h3>
+        <ng-template #elseBlock>
+            <h5>Criar produto</h5>
+        </ng-template>
+    </div>
     <div class="field">
         <app-image-upload [image]="image" (imageFileChange)="onImageFileChange($event)"></app-image-upload>
     </div>
@@ -14,15 +19,15 @@
 
     <div class="row">
         <div class="form-group col-12 col-md-6">
-            <label for="brands">Marca</label>
+            <label class="form-label" for="brands">Marca</label>
             <select class="form-control" name="brand" id="brands" formControlName="brand">
                 <option *ngFor="let brand of brands" value="{{ brand.id }}">{{ brand.description }}</option>
             </select>
             <div class="invalid-feedback">Campo obrigatório</div>
         </div>
         <div class="form-group col-12 col-md-6">
-            <label for="brands">Categoria</label>
-            <select class="form-control" name="category" id="categories" formControlName="category">
+            <label class="form-label" for="brands">Categoria</label>
+            <select class="form-select" name="category" id="categories" formControlName="category">
                 <option *ngFor="let category of categories" value="{{ category.id }}">{{ category.description }}
                 </option>
             </select>
@@ -32,8 +37,8 @@
 
     <div class="row">
         <div class="form-group col-12 col-md-6">
-            <label>Unidade</label>
-            <select class="form-control" name="measure_unit" formControlName="measure_unit"
+            <label class="form-label">Unidade</label>
+            <select class="form-select" name="measure_unit" formControlName="measure_unit"
                 (change)="onOptionChange($event)">
                 <option *ngFor="let measureUnit of measureUnits" value="{{ measureUnit.id }}"
                     attr.data-abbreviation="{{ measureUnit.abbreviation }}">
@@ -43,9 +48,9 @@
             <div class="invalid-feedback">Campo obrigatório</div>
         </div>
         <div class="form-group col-12 col-md-6">
-            <label>Quantidade por unidade</label>
+            <label class="form-label">Quantidade por unidade</label>
             <div class="input-group">
-                <input type="text" class="form-control" type="text" name="unit_quantity" formControlName="unit_quantity">
+                <input type="text" class="form-select" type="text" name="unit_quantity" formControlName="unit_quantity">
                 <div class="input-group-append">
                     <span class="input-group-text" [textContent]="labelValue">Un</span>
                 </div>
@@ -60,7 +65,7 @@
     </div>
     <hr>
 
-    <div class="button-area" [ngClass]="{'update-product': productId}">
+    <div class="button-area" [ngClass]="{'update': productId}">
         <button *ngIf="productId" type="button" class="btn btn-action delete full" data-bs-toggle="modal" data-bs-target="#deleteProductModal"> 
             <i class="fas fa-trash"></i> <span> Excluir</span> 
         </button>
