@@ -1,5 +1,4 @@
 .container {
-    background: var(--bs-white);
     padding: 20px;
     border-radius: 10px;
 }
@@ -9,7 +8,14 @@
 }
 
 .nav-link {
-    color: var(--bs-dark);
+    color: var(--font-900);
+}
+
+.nav-link.active {
+    background: var(--font-100);
+    color: var(--font-1100);
+    font-weight: 600;
+    border-bottom-color: var(--font-100);
 }
 
 .img-container img {
