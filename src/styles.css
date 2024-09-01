@@ -255,6 +255,7 @@
     color: var(--font-1100) !important;
     background: var(--background-primary) !important;
     font-size: 14px;
+    border-color: var(--font-300);
 }
 
 .modal-content .form-select{
