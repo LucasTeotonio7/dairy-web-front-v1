@@ -53,11 +53,6 @@ span {
     font-weight: 700;
 }
 
-.nav-item:hover * {
-    color: var(--font-1100) !important;
-    font-weight: 800;
-}
-
 #sidebarToggleTop:hover {
     background: var(--font-200);
     color: var(--font-1100);
@@ -142,6 +137,19 @@ input[type="checkbox"]:checked+.theme-toggle:before {
     left: 22px;
     content: "\f185";
     color: var(--font-100);
+}
+
+.dropdown-menu {
+    background: var(--dark-blue-1);
+    border: none;
+}
+
+.dropdown-item {
+    color: var(--font-1100);
+}
+
+.dropdown-item:hover {
+    background: none;
 }
 
 @media (max-width: 768px) {
