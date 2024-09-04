@@ -25,9 +25,11 @@
         <div class="invalid-feedback">Campo obrigatório</div>
     </div>
 
-    <div *ngIf="weeklyControlId" class="form-check form-switch ms-6 col-12">
+    <div *ngIf="weeklyControlId && weeklyControl.purchase_exists" class="form-check form-switch ms-6 col-12">
         <input class="form-check-input me-6" type="checkbox" formControlName="is_closed" checked>
         <label class="form-check-label">Encerrar planilha</label>
+        <br>
+        <small *ngIf="weeklyControlForm.controls['is_closed'].value">Ao salvar, os fornecedores sem nenhum registro na semana serão excluídos da listagem</small>
     </div>
 
     <hr>
