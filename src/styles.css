@@ -266,6 +266,12 @@
     font-size: 16px !important;
 }
 
+select:disabled,
+input:disabled {
+    color: var(--font-500) !important;
+    cursor: not-allowed;
+}
+
 @media (max-width: 767px) {
 
     .title {
