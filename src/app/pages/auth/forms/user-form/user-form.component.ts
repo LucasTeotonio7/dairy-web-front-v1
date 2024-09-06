@@ -112,10 +112,14 @@ export class UserFormComponent extends FormBaseMixin {
   }
 
   setGroupPermissions(groups: Groups[], formData: FormData): void {
-    formData.delete('groups');
-      groups.forEach((group) => {
-        formData.append('groups', group.id.toString());
-    });
+    if(groups) {
+      formData.delete('groups');
+        groups.forEach((group) => {
+          formData.append('groups', group.id.toString());
+      });
+    } else {
+      formData.delete('groups');
+    }
   }
 
   save(): void {
