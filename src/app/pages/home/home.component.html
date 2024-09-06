@@ -1,4 +1,4 @@
-<div id="wrapper">
+<div *ngIf="user" id="wrapper">
 
     <!-- Sidebar -->
     <ul class="sidebar navbar-nav accordion" id="accordionSidebar">
@@ -9,55 +9,57 @@
             <div class="sidebar-brand-text mx-3">Gestão do leite</div>
         </a>
 
-        <!-- Divider -->
-        <hr class="sidebar-divider my-0">
-
-        <!-- Nav Item - Dashboard -->
-        <li class="nav-item active">
-            <a class="nav-link" routerLink="dashboard">
-                <i class="fas fa-chart-line"></i>
-                <span>Dashboard</span></a>
-        </li>
-
-        <!-- Divider -->
-        <hr class="sidebar-divider">
-
-        <!-- Heading -->
-        <div class="sidebar-heading">
-            Controle semanal
+        <!-- Dashboard -->
+        <div *ngIf="user.is_superuser || hasGroup('Dashboard')">
+            <hr class="sidebar-divider my-0">
+    
+            <li class="nav-item active">
+                <a class="nav-link" routerLink="dashboard">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Dashboard</span></a>
+            </li>
         </div>
 
-        <!-- Nav Item - Pages Collapse Menu -->
-        <li class="nav-item">
-            <a class="nav-link" routerLink="/weekly-control">
-                <i class="fas fa-table"></i>
-                <span>Planilhas</span>
-            </a>
-        </li>
+        <!-- Planilhas -->
+        <div *ngIf="user.is_superuser || hasGroup('Planilhas')">
+            <hr class="sidebar-divider">
 
-        <!-- Divider -->
-        <hr class="sidebar-divider">
+            <div class="sidebar-heading">
+                Controle semanal
+            </div>
+  
+            <li class="nav-item">
+                <a class="nav-link" routerLink="/weekly-control">
+                    <i class="fas fa-table"></i>
+                    <span>Planilhas</span>
+                </a>
+            </li>
+        </div>
 
-        <!-- Heading -->
-        <div class="sidebar-heading">
-            Cadastros
+        <div *ngIf="user.is_superuser || hasGroup('Usuários') || hasGroup('Produtos') || hasGroup('Fornecedores')">
+            <hr class="sidebar-divider">
+
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                Cadastros
+            </div>
         </div>
 
         <!-- Nav Item - Charts -->
-        <li class="nav-item">
+        <li *ngIf="user.is_superuser || hasGroup('Usuários')" class="nav-item">
             <a class="nav-link" routerLink="/users">
                 <i class="fa-solid fa-user"></i>
                 <span>Usuários</span></a>
         </li>
 
-        <li class="nav-item">
+        <li *ngIf="user.is_superuser || hasGroup('Produtos')" class="nav-item">
             <a class="nav-link" routerLink="/products">
                 <i class="fas fa-box"></i>
                 <span>Produtos</span></a>
         </li>
 
-        <!-- Nav Item - Tables -->
-        <li class="nav-item">
+
+        <li *ngIf="user.is_superuser || hasGroup('Fornecedores')" class="nav-item">
             <a class="nav-link" routerLink="/suppliers">
                 <i class="fa-solid fa-dolly"></i>
                 <span>Fornecedores</span></a>

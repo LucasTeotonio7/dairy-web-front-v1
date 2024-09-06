@@ -13,8 +13,6 @@ import { User } from '../auth/models/user';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent {
-
-
   user!: User;
   date: Date = new Date();
   FullYear = this.date.getFullYear();
@@ -39,6 +37,11 @@ export class HomeComponent {
       },
       error: (err: any) => {console.error(err);}
     });
+  }
+
+  hasGroup(name: string): boolean {
+    let groups = this.user.available_groups;
+    return groups.some(group => group.name === name && this.user.groups.includes(group.id));
   }
 
   logout(): void {
