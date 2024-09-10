@@ -1,8 +1,10 @@
 <form class="container" [formGroup]="priceForm">
-    <h5 *ngIf="priceId; else elseBlock">Atualizar planilha</h5>
-    <ng-template #elseBlock>
-        <h5>Criar tabela de preço</h5>
-    </ng-template>
+    <div class="title">
+        <h3 *ngIf="priceId; else elseBlock">Atualizar planilha</h3>
+        <ng-template #elseBlock>
+            <h3>Criar tabela de preço</h3>
+        </ng-template>
+    </div>
 
     <hr>
 
