@@ -1,0 +1,19 @@
+.card {
+    background: var(--dark-blue-1);
+    border: none;
+}
+
+.card .card-header {
+    background: var(--background-secondary);
+    border: none;
+    color: var(--font-1100);
+}
+
+.card .card-body {
+    padding: 0.85rem 0.75rem;
+}
+
+.big-numbers {
+    font-weight: bold;
+    color: var(--font-1100);
+}
