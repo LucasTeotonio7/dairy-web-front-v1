@@ -13,7 +13,7 @@
         <div *ngIf="user.is_superuser || hasGroup('Dashboard')">
             <hr class="sidebar-divider my-0">
     
-            <li class="nav-item active">
+            <li class="nav-item" routerLinkActive="active">
                 <a class="nav-link" routerLink="dashboard">
                     <i class="fas fa-chart-line"></i>
                     <span>Dashboard</span></a>
@@ -28,7 +28,7 @@
                 Controle semanal
             </div>
   
-            <li class="nav-item">
+            <li class="nav-item" routerLinkActive="active">
                 <a class="nav-link" routerLink="/weekly-control">
                     <i class="fas fa-table"></i>
                     <span>Planilhas</span>
@@ -46,20 +46,20 @@
         </div>
 
         <!-- Nav Item - Charts -->
-        <li *ngIf="user.is_superuser || hasGroup('Usuários')" class="nav-item">
+        <li *ngIf="user.is_superuser || hasGroup('Usuários')" class="nav-item" routerLinkActive="active">
             <a class="nav-link" routerLink="/users">
                 <i class="fa-solid fa-user"></i>
                 <span>Usuários</span></a>
         </li>
 
-        <li *ngIf="user.is_superuser || hasGroup('Produtos')" class="nav-item">
+        <li *ngIf="user.is_superuser || hasGroup('Produtos')" class="nav-item" routerLinkActive="active">
             <a class="nav-link" routerLink="/products">
                 <i class="fas fa-box"></i>
                 <span>Produtos</span></a>
         </li>
 
 
-        <li *ngIf="user.is_superuser || hasGroup('Fornecedores')" class="nav-item">
+        <li *ngIf="user.is_superuser || hasGroup('Fornecedores')" class="nav-item" routerLinkActive="active">
             <a class="nav-link" routerLink="/suppliers">
                 <i class="fa-solid fa-dolly"></i>
                 <span>Fornecedores</span></a>

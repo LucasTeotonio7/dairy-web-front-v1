@@ -48,6 +48,10 @@ span {
     height: 16px;
 }
 
+.nav-item.active {
+    background: var(--dark-blue-1);
+}
+
 .nav-item.active a * {
     color: var(--font-1100);
     font-weight: 700;
