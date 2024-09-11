@@ -5,6 +5,8 @@ import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { AuthService } from '../auth/services/auth.service';
 import { User } from '../auth/models/user';
+import { ThemeService } from 'src/app/shared/services/theme.service';
+
 
 
 @Component({
@@ -22,7 +24,8 @@ export class HomeComponent {
   constructor(
     private authService: AuthService, 
     private router: Router,
-    private userService: UserService
+    private userService: UserService,
+    private themeService: ThemeService
   ){}
 
   ngOnInit(): void {
@@ -70,6 +73,7 @@ export class HomeComponent {
 
   toggleDarkMode(event: any) {
     this.isDarkMode = event.target.checked;
+    this.themeService.toggleDarkMode(this.isDarkMode);
     const htmlElement = document.documentElement;
     if (this.isDarkMode) {
       htmlElement.classList.add('dark');
