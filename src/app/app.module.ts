@@ -16,6 +16,7 @@ import { UserFirstAccessFormComponent } from './pages/auth/forms/user-first-acce
 
 import { SharedModule } from './shared/shared.module';
 import { ServiceWorkerModule } from '@angular/service-worker';
+import { NgxEchartsModule } from 'ngx-echarts';
 
 
 registerLocaleData(ptBr)
@@ -37,6 +38,7 @@ registerLocaleData(ptBr)
     HttpClientModule,
     ReactiveFormsModule,
     SharedModule,
+    NgxEchartsModule.forRoot({ echarts: () => import('echarts') }),
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: !isDevMode(),
       // Register the ServiceWorker as soon as the application is stable
