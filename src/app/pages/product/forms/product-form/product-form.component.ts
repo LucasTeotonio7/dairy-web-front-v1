@@ -122,7 +122,7 @@ export class ProductFormComponent extends FormBaseMixin {
           this.toastService.showToastSuccess('Produto', 'Produto salvo com sucesso!');
         },
         error: (error: any) => {
-          console.log(error), 
+          console.error(error), 
           this.toastService.showToastDanger('Produto', 'Ocorreu um erro ao salvar o produto');
         },
         complete: () => {this.router.navigate(['/products'])}

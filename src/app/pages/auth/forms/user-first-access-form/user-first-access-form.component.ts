@@ -47,7 +47,6 @@ export class UserFirstAccessFormComponent extends FormBaseMixin {
 
       this.userService.getUserNoValidate(PARAMS).subscribe({
         next: (user: User) => {
-          console.log(user)
           this.user = user;
         },
         error: (error: any) => {

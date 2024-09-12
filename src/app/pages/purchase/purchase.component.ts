@@ -164,7 +164,7 @@ export class PurchaseComponent {
       formData.append('supplier', priceProductSupplierForm.supplier);
       formData.append('weekly_control_id', this.weeklyControl.id);
       this.priceProductSupplierService.post(formData).subscribe({
-        next: () => {console.log('ok')},
+        next: () => {},
         error: (error) => {console.error(error)}
       })
     }

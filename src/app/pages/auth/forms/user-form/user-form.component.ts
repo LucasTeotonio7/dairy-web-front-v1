@@ -137,7 +137,7 @@ export class UserFormComponent extends FormBaseMixin {
           this.toastService.showToastSuccess('Usuário', 'Usuário salvo com sucesso!');
         },
         error: (error: any) => {
-          console.log(error), 
+          console.error(error), 
           this.toastService.showToastDanger('Usuário', 'Ocorreu um erro ao salvar o usuário');
         },
         complete: () => {this.back()}
