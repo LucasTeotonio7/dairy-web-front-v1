@@ -6,6 +6,7 @@ import { Price } from '../models/price';
 import { PriceService } from '../services/price.service';
 import { Product } from '../models/product';
 import { ProductService } from '../services/product.service';
+import { ToastService } from 'src/app/shared/services/toast.service';
 
 
 @Component({
@@ -21,7 +22,8 @@ export class PriceComponent {
 
   constructor(
     private priceService: PriceService,
-    private productService: ProductService, 
+    private productService: ProductService,
+    private toastService: ToastService,
     private route: ActivatedRoute
   ) { }
 
@@ -65,7 +67,7 @@ export class PriceComponent {
   deletePrice() {
     this.priceService.delete(this.priceId).subscribe({
         next: (response) => {
-            alert('preço excluída!');
+          this.toastService.showToastSuccess('Tabela de preço', 'preço excluída!');
         },
         error: (error) => {
             console.error(error);

@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { FormBaseMixin } from 'src/app/shared/mixins/form-base.mixin';
 import { Supplier } from '../models/supplier';
 import { SupplierService } from '../services/supplier.service';
+import { ToastService } from 'src/app/shared/services/toast.service';
 
 
 @Component({
@@ -22,6 +23,7 @@ export class SupplierFormComponent extends FormBaseMixin {
         private formBuilder: FormBuilder,
         private router: Router,
         private route: ActivatedRoute,
+        private toastService: ToastService,
         renderer: Renderer2,
         el: ElementRef
     ) {
@@ -103,7 +105,7 @@ export class SupplierFormComponent extends FormBaseMixin {
     deleteSupplier() {
         this.supplierService.delete(this.supplierId).subscribe({
             next: (response) => {
-                alert('Fornecedor excluído!');
+                this.toastService.showToastSuccess('Fornecedor', 'Fornecedor excluído com sucesso!');
             },
             error: (error) => {
                 console.error(error);

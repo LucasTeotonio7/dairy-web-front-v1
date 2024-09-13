@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Paginator } from 'src/app/shared/models/paginator';
 import { WeeklyControl } from './models/weekly-control';
 import { WeeklyControlService } from './services/weekly-control.service';
+import { ToastService } from 'src/app/shared/services/toast.service';
 
 @Component({
   selector: 'app-weekly-control',
@@ -15,7 +16,11 @@ export class WeeklyControlComponent {
     weeklyControlId!: string;
     paginator!: Paginator<WeeklyControl>;
 
-    constructor(private weeklyControlService: WeeklyControlService, private route: ActivatedRoute) { }
+    constructor(
+      private weeklyControlService: WeeklyControlService, 
+      private route: ActivatedRoute,
+      private toastService: ToastService
+    ) { }
 
     ngOnInit(): void {
         this.route.queryParams.subscribe(params => {
@@ -39,7 +44,7 @@ export class WeeklyControlComponent {
     deleteWeeklyControl() {
         this.weeklyControlService.delete(this.weeklyControlId).subscribe({
           next: (response) => {
-            alert('Planilha excluída!');
+            this.toastService.showToastSuccess('Planilha', 'Planilha excluída com sucesso!');
           },
           error: (error) => {
             console.error(error);

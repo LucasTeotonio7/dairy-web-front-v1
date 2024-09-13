@@ -1,8 +1,11 @@
-import { SupplierService } from './services/supplier.service';
-import { Component } from '@angular/core';
-import { Supplier } from './models/supplier';
-import { Paginator } from 'src/app/shared/models/paginator';
 import { ActivatedRoute } from '@angular/router';
+import { Component } from '@angular/core';
+
+import { Paginator } from 'src/app/shared/models/paginator';
+import { SupplierService } from './services/supplier.service';
+import { Supplier } from './models/supplier';
+import { ToastService } from 'src/app/shared/services/toast.service';
+
 
 @Component({
   selector: 'app-supplier',
@@ -15,7 +18,11 @@ export class SupplierComponent {
     supplierId!: string;
     paginator!: Paginator<Supplier>;
 
-    constructor(private supplierService: SupplierService, private route: ActivatedRoute) { }
+    constructor(
+      private supplierService: SupplierService, 
+      private route: ActivatedRoute,
+      private toastService: ToastService
+    ) { }
 
     ngOnInit(): void {
         this.route.queryParams.subscribe(params => {
@@ -39,7 +46,7 @@ export class SupplierComponent {
     deleteSupplier() {
         this.supplierService.delete(this.supplierId).subscribe({
           next: (response) => {
-            alert('Fornecedor excluído!');
+            this.toastService.showToastSuccess('Fornecedor', 'Fornecedor excluído com sucesso!');
           },
           error: (error) => {
             console.error(error);

@@ -1,5 +1,8 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
+import { ToastService } from '../../services/toast.service';
+
+
 @Component({
   selector: 'app-image-upload',
   templateUrl: './image-upload.component.html',
@@ -8,6 +11,8 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 export class ImageUploadComponent {
   @Input() image: string = '';
   @Output() imageFileChange: EventEmitter<File> = new EventEmitter<File>();
+
+  constructor(private toastService: ToastService) {}
 
   displaySelectedImage(event: Event, elementId: string): void {
     const selectedImage = document.getElementById(elementId) as HTMLImageElement;
@@ -31,7 +36,7 @@ export class ImageUploadComponent {
     const availableTypes = ['image/jpeg', 'image/png', 'image/svg+xml', 'image/webp'];
     if (!(file && availableTypes.includes(file.type))) {
       inputFile.value = '';
-      alert('Por favor, selecione apenas arquivos de imagem (JPEG, PNG, SVG, WEBP).');
+      this.toastService.showToastWarning('Imagem', 'Por favor, selecione apenas arquivos de imagem (JPEG, PNG, SVG, WEBP).');
     }
   } 
 

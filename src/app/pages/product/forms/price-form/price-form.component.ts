@@ -6,8 +6,8 @@ import { FormBaseMixin } from 'src/app/shared/mixins/form-base.mixin';
 import { Price } from '../../models/price';
 import { PriceService } from '../../services/price.service';
 import { Product } from '../../models/product';
-import { WeeklyControlService } from 'src/app/pages/weekly-control/services/weekly-control.service';
 import { ProductService } from '../../services/product.service';
+import { ToastService } from './../../../../shared/services/toast.service';
 
 
 @Component({
@@ -24,8 +24,8 @@ export class PriceFormComponent extends FormBaseMixin {
   constructor(
     private priceService: PriceService,
     private productService: ProductService,
-    private weeklyControlService: WeeklyControlService,
     private formBuilder: FormBuilder,
+    private toastService: ToastService,
     private router: Router,
     private route: ActivatedRoute,
     renderer: Renderer2,
@@ -116,7 +116,7 @@ export class PriceFormComponent extends FormBaseMixin {
   deletePrice() {
       this.priceService.delete(this.priceId).subscribe({
           next: (response) => {
-              alert('preço excluída!');
+              this.toastService.showToastSuccess('Tabela de preço', 'preço excluída!');
           },
           error: (error) => {
               console.error(error);
