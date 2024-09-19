@@ -8,5 +8,6 @@ import { Component, Input } from '@angular/core';
 export class EmptyListComponent {
 
   @Input() listingName: string = 'itens';
+  @Input() isLoading: boolean = false;
 
 }

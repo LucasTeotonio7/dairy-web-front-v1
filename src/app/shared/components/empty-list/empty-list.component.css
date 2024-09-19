@@ -17,6 +17,40 @@
     font-size: 14px;
 }
 
+
+.card-loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 500px;
+}
+
+.spinner-border {
+    width: 3rem;
+    height: 3rem;
+    border: 0.4rem solid #5555552a;
+    border-top: 0.4rem solid var(--font-1100);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.loading-text {
+    color: var(--font-1100);
+    font-size: 12px;
+    margin-top: 10px;
+    text-align: center;
+}
+
 @media (max-width: 768px) {
     .card h4 {
         font-size: 14px;
@@ -24,5 +58,14 @@
 
     .card p {
         font-size: 11px;
+    }
+
+    .loading-text {
+        text-transform: capitalize;
+        font-size: 10px;
+    }
+
+    .card-loading {
+        height: 300px;
     }
 }
