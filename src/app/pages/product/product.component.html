@@ -54,7 +54,7 @@
         </tbody>
     </table>
     <ng-template #emptyList>
-        <app-empty-list [listingName]="'produtos'"></app-empty-list>
+        <app-empty-list [listingName]="'produtos'" [isLoading]="isLoading"></app-empty-list>
     </ng-template>
     <app-paginator [paginator]="paginator" [link]="'/products'" listingName="produtos"></app-paginator>
 </div>

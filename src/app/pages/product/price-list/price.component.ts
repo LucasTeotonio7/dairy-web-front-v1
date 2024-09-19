@@ -19,6 +19,7 @@ export class PriceComponent {
   paginator!: Paginator<Price>;
   priceId!: string;
   product!: Product;
+  isLoading = true;
 
   constructor(
     private priceService: PriceService,
@@ -56,6 +57,7 @@ export class PriceComponent {
     this.priceService.list(page, params).subscribe((paginator: Paginator<Price>) => {
         this.paginator = paginator;
         this.prices = paginator.results;
+        this.isLoading = false;
     });
   }
 

@@ -42,7 +42,7 @@
         </tbody>
     </table>
     <ng-template #emptyList>
-        <app-empty-list [listingName]="'fornecedores'"></app-empty-list>
+        <app-empty-list [listingName]="'fornecedores'" [isLoading]="isLoading"></app-empty-list>
     </ng-template>
     <app-paginator [paginator]="paginator" [link]="'/suppliers'" listingName="Fornecedores"></app-paginator>
 </div>

@@ -17,6 +17,7 @@ export class SupplierComponent {
     suppliers: Supplier[] = [];
     supplierId!: string;
     paginator!: Paginator<Supplier>;
+    isLoading = true;
 
     constructor(
       private supplierService: SupplierService, 
@@ -35,6 +36,7 @@ export class SupplierComponent {
         this.supplierService.list(page).subscribe((paginator: Paginator<Supplier>) => {
             this.paginator = paginator;
             this.suppliers = paginator.results;
+            this.isLoading = true;
         });
     }
 

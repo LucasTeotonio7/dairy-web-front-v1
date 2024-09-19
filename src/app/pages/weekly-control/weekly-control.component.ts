@@ -15,6 +15,7 @@ export class WeeklyControlComponent {
     weeklyControls: WeeklyControl[] = [];
     weeklyControlId!: string;
     paginator!: Paginator<WeeklyControl>;
+    isLoading = true;
 
     constructor(
       private weeklyControlService: WeeklyControlService, 
@@ -33,6 +34,7 @@ export class WeeklyControlComponent {
         this.weeklyControlService.list(page).subscribe((paginator: Paginator<WeeklyControl>) => {
             this.paginator = paginator;
             this.weeklyControls = paginator.results;
+            this.isLoading = false;
         });
     }
 

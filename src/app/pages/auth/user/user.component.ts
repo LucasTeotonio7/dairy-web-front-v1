@@ -17,6 +17,7 @@ export class UserComponent {
   users: User[] = [];
   userId!: string;
   paginator!: Paginator<User>;
+  isLoading = true;
 
   constructor(
     private userService: UserService, 
@@ -36,6 +37,7 @@ export class UserComponent {
       this.userService.list(page).subscribe((paginator: Paginator<User>) => {
           this.paginator = paginator;
           this.users = paginator.results;
+          this.isLoading = false;
       });
   }
 

@@ -16,6 +16,7 @@ export class ProductComponent {
   products: Product[] = [];
   productId!: string;
   paginator!: Paginator<Product>;
+  isLoading = true;
 
   constructor(
     private productService: ProductService, 
@@ -34,6 +35,7 @@ export class ProductComponent {
     this.productService.list(page).subscribe((paginator: Paginator<Product>) => {
         this.paginator = paginator;
         this.products = paginator.results;
+        this.isLoading = false;
     });
   }
 
