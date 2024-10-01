@@ -31,6 +31,10 @@
     color: var(--font-400);
 }
 
+.page-item .page-link.ellipsis {
+    border-color: var(--font-300);
+}
+
 @media (max-width: 767px) {
     .page-link {
         font-size: 12px;
