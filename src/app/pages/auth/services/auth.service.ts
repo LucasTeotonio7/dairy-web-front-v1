@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
 import { Observable, throwError } from 'rxjs';
 
+import { environment } from 'src/environments/environment';
 import { UserLogin } from '../models/user';
 import { TokenService } from './token.service';
 
@@ -22,7 +23,7 @@ export class AuthService {
 
   authenticate(user: UserLogin): Observable<any> {
 
-    return this.http.post<any>(`${this.apiUrl}/api-token-auth/`, user).pipe(
+    return this.http.post<any>(`${environment.BASE_URL}/api-token-auth/`, user).pipe(
       catchError((error) => {
         console.error('Erro na autenticação:', error);
         return throwError(() => error);

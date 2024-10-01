@@ -1,4 +1,5 @@
 export const environment = {
-    API : "http://192.168.0.103:8100/api/",
-    version: '0.8.15'
+    BASE_URL : "http://pc-01.local:8100",
+    API : "http://pc-01.local:8100/api/",
+    version: '0.9'
 };
